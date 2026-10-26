@@ -1,0 +1,196 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   Design tokens — Mulaim-ul-Furqan brand
+   ------------------------------------------------------------------ */
+@theme {
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-quran: 'Amiri Quran', 'Amiri', serif;
+  --font-naskh: 'Amiri', serif;
+  --font-diwani: 'Ruwudu', 'Amiri', serif;
+
+  --color-night: #0a2a24;
+  --color-night-2: #11332c;
+  --color-night-3: #1b4a40;
+  --color-deep: #061a16;
+  --color-brand: #0b5d4b;
+  --color-brand-dark: #08453a;
+  --color-gold: #e8cf94;
+  --color-gold-deep: #c9a24b;
+  --color-amber: #e0a82e;
+  --color-bronze: #8a5a14;
+  --color-earth: #6b4510;
+  --color-parchment: #fbf8f1;
+  --color-page: #fbf5e4;
+  --color-sand: #f6eedb;
+  --color-cream: #f6f1e6;
+  --color-line: #eee7d8;
+  --color-line-strong: #e2d9c6;
+  --color-ink: #0f1f1b;
+  --color-muted: #4a5752;
+  --color-mint: #e5f2ec;
+  --color-mist: #bcc9c3;
+  --color-sage: #cfe3da;
+  --color-live: #6fd3a8;
+  --color-rec: #e0605a;
+  --color-whatsapp: #1f8f5f;
+
+  --radius-card: 1.5rem;
+
+  --animate-fade-up: fade-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-float: floaty 6s ease-in-out infinite;
+  --animate-float-alt: floaty-alt 7s ease-in-out infinite;
+  --animate-spin-slow: spin 100s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.2s ease-out infinite;
+  --animate-blink: blink 1.4s ease-in-out infinite;
+  --animate-shimmer: shimmer 6s linear infinite;
+  --animate-grow-x: grow-x 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) both 0.3s;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(26px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes floaty {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes floaty-alt {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(9px);
+    }
+  }
+  @keyframes pulse-ring {
+    0% {
+      box-shadow: 0 0 0 0 rgb(31 143 95 / 0.5);
+    }
+    70% {
+      box-shadow: 0 0 0 12px rgb(31 143 95 / 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgb(31 143 95 / 0);
+    }
+  }
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.25;
+    }
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  @keyframes grow-x {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply text-ink bg-white font-sans text-[17px] leading-[1.65] antialiased;
+  }
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-night);
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-gold-deep);
+    outline-offset: 2px;
+  }
+  summary {
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Utilities
+   ------------------------------------------------------------------ */
+@utility text-gold-shimmer {
+  background: linear-gradient(90deg, var(--color-bronze), var(--color-gold-deep), var(--color-bronze));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: var(--animate-shimmer);
+}
+
+@utility lift {
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 28px 50px -28px rgb(10 42 36 / 0.35);
+    border-color: #d9c48f;
+  }
+}
+
+/* Scroll reveal (driven by the <Reveal> component) */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.origin-left-bar {
+  transform-origin: left center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
