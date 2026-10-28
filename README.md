@@ -16,15 +16,44 @@ cp .env.example .env      # fill in your WhatsApp number, Cal.com link, Meta Pix
 npm run dev               # http://localhost:5173
 ```
 
-| Script              | What it does                               |
-| ------------------- | ------------------------------------------ |
-| `npm run dev`       | Dev server with hot reload                 |
-| `npm run build`     | Type-check + production build into `dist/` |
-| `npm run preview`   | Serve the production build locally         |
-| `npm run test`      | Run unit + component tests                 |
-| `npm run lint`      | ESLint (TypeScript, React hooks, a11y)     |
-| `npm run typecheck` | TypeScript only                            |
-| `npm run format`    | Prettier (also sorts Tailwind classes)     |
+## Working with Claude Code
+
+Open this folder in Claude Code and it reads `CLAUDE.md` automatically (project rules, architecture, content
+rules). Further context lives in `docs/`:
+
+| File                    | Purpose                                                    |
+| ----------------------- | ---------------------------------------------------------- |
+| `CLAUDE.md`             | Rules every change must follow, commands, where things are |
+| `docs/ARCHITECTURE.md`  | Layers, import boundaries, feature anatomy, future backend |
+| `docs/DESIGN-SYSTEM.md` | Brand, colour/type tokens, motion, UI components           |
+| `docs/ROADMAP.md`       | Phased task list with status: where to pick up next        |
+| `docs/adr/`             | Architecture decision records                              |
+
+Project slash commands (`.claude/commands/`):
+
+| Command                    | What it does                                                   |
+| -------------------------- | -------------------------------------------------------------- |
+| `/next [item]`             | Implements the next roadmap item end to end and ticks it off   |
+| `/new-feature <name>`      | Scaffolds a new section with the correct folder structure      |
+| `/update-content <change>` | Edits text/prices/reviews in data files only                   |
+| `/check`                   | Runs full verification and fixes failures                      |
+| `/review`                  | Reviews uncommitted changes using the `code-reviewer` subagent |
+
+`.claude/settings.json` pre-approves safe commands (tests, lint, build, git read-only), blocks reading `.env`, and
+runs Prettier automatically on every file Claude edits.
+
+## Scripts
+
+| Script              | What it does                                           |
+| ------------------- | ------------------------------------------------------ |
+| `npm run check`     | Everything below in one go: run before every commit/PR |
+| `npm run dev`       | Dev server with hot reload                             |
+| `npm run build`     | Type-check + production build into `dist/`             |
+| `npm run preview`   | Serve the production build locally                     |
+| `npm run test`      | Run unit + component tests                             |
+| `npm run lint`      | ESLint (TypeScript, React hooks, a11y)                 |
+| `npm run typecheck` | TypeScript only                                        |
+| `npm run format`    | Prettier (also sorts Tailwind classes)                 |
 
 ## Environment variables
 
