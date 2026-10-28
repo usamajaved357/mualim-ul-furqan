@@ -1,11 +1,11 @@
 import { Container, Icon, Reveal, type IconName } from '@/components/ui';
 import { site } from '@/config/site';
 
-/** Replace the [placeholders] with real numbers as soon as you have them. */
+/** Numbers come from `site.teacher` in config/site.ts. */
 const stats: { icon: IconName; value: string; label: string }[] = [
   { icon: 'book', value: `${site.teacher.yearsTeaching} years`, label: 'teaching Quran' },
-  { icon: 'users', value: '[XXX]+', label: 'students taught' },
-  { icon: 'video', value: '[X,XXX]+', label: 'live classes taught' },
+  { icon: 'users', value: site.teacher.studentsTaught, label: 'students taught' },
+  { icon: 'video', value: site.teacher.lecturesDelivered, label: 'lectures delivered' },
   { icon: 'globe', value: 'UK · US · EU', label: 'time zones covered' },
 ];
 

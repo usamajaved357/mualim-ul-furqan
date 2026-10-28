@@ -48,12 +48,6 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <a
-            href={anchors.portal}
-            className="text-ink inline-flex min-h-11 items-center px-3 text-[15px] font-bold no-underline"
-          >
-            Student login
-          </a>
           <ButtonLink href={anchors.book} trackAs="Lead">
             Book free trial
           </ButtonLink>
@@ -88,9 +82,6 @@ export function Header() {
           <div className="mt-4 flex flex-col gap-2">
             <ButtonLink href={anchors.book} trackAs="Lead" size="lg" onClick={() => setOpen(false)}>
               Book free trial
-            </ButtonLink>
-            <ButtonLink href={anchors.portal} variant="soft" size="lg" onClick={() => setOpen(false)}>
-              Student login
             </ButtonLink>
           </div>
         </div>

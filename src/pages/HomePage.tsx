@@ -8,8 +8,6 @@ import { HowItWorks } from '@/features/how-it-works';
 import { PricingSection } from '@/features/pricing';
 import { ReviewsSection } from '@/features/reviews';
 import { StatsBar } from '@/features/stats';
-import { PortalSection } from '@/features/student-portal';
-import { TeachWithUs } from '@/features/teach-with-us';
 import { TeachersSection } from '@/features/teachers';
 import { WhyUsSection } from '@/features/why-us';
 import { site } from '@/config/site';
@@ -39,13 +37,11 @@ export function HomePage() {
       <CoursesSection />
       <WhyUsSection />
       <ClassroomSection />
-      <PortalSection />
       <HadithBand />
       <TeachersSection />
       <PricingSection />
       <ReviewsSection />
       <FaqSection />
-      <TeachWithUs />
       <BookingSection />
     </>
   );

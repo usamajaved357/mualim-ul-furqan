@@ -51,7 +51,7 @@ export default tseslint.config(
   },
   { files: ['src/pages/**/*.{ts,tsx}'], rules: restrict(noDeepFeatureImports, noPagesOrApp) },
   {
-    files: ['.claude/**/*.mjs', '*.config.{js,ts}'],
+    files: ['.claude/**/*.mjs', 'scripts/**/*.mjs', '*.config.{js,ts}'],
     languageOptions: { globals: globals.node },
   },
 );

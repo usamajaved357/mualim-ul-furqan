@@ -15,19 +15,14 @@ describe('HomePage', () => {
   it('renders the main headline and every key section', () => {
     renderHome();
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/learn the quran online/i);
-    for (const id of [
-      'how',
-      'courses',
-      'classroom',
-      'portal',
-      'teachers',
-      'pricing',
-      'reviews',
-      'faq',
-      'book',
-    ]) {
+    for (const id of ['how', 'courses', 'classroom', 'teachers', 'pricing', 'reviews', 'faq', 'book']) {
       expect(document.getElementById(id)).not.toBeNull();
     }
+  });
+
+  it('never shows placeholder text in the reviews section', () => {
+    renderHome();
+    expect(document.getElementById('reviews')?.textContent).not.toMatch(/\[[^\]]*\]/);
   });
 
   it('personalises the trial summary from the finder', async () => {

@@ -27,7 +27,7 @@ const styles = {
     on: 'bg-brand text-white font-bold',
     off: 'text-ink font-semibold hover:bg-cream',
   },
-  /** Vertical list on dark background (portal sidebar). */
+  /** Vertical list on dark background. */
   sidebar: {
     group: 'flex gap-1.5 overflow-x-auto lg:flex-col lg:overflow-visible',
     item: 'min-h-11 shrink-0 rounded-[10px] px-3 text-left text-sm whitespace-nowrap',

@@ -1,14 +1,15 @@
 import { Stars } from '@/components/ui';
 import { site } from '@/config/site';
+import type { Rating } from '@/types/domain';
 import { ratingDistribution } from '../data';
 
-export function RatingSummary() {
+export function RatingSummary({ rating }: { rating: Rating }) {
   return (
     <div className="border-line bg-parchment flex items-center gap-5.5 rounded-3xl border p-6.5">
       <div className="border-line flex flex-col items-center gap-1.5 border-r pr-5.5">
-        <p className="text-[54px] leading-none font-extrabold tracking-[-0.04em]">{site.rating.score}</p>
-        <Stars label={`Rated ${site.rating.score} out of 5`} />
-        <p className="text-muted text-[13px] font-semibold">{site.rating.count} reviews</p>
+        <p className="text-[54px] leading-none font-extrabold tracking-[-0.04em]">{rating.score}</p>
+        <Stars label={`Rated ${rating.score} out of 5`} />
+        <p className="text-muted text-[13px] font-semibold">{rating.count} reviews</p>
       </div>
       <div className="text-muted flex flex-1 flex-col gap-2 text-[13px] font-bold">
         {ratingDistribution.map((row) => (

@@ -1,3 +1,4 @@
+import type { Rating } from '@/types/domain';
 import { env } from './env';
 
 /**
@@ -13,9 +14,11 @@ export const site = {
   url: env.siteUrl,
 
   teacher: {
-    name: 'Qari [Your Name]',
+    name: 'Qari Abu Sufyan',
     role: 'Founder & lead teacher',
     yearsTeaching: 7,
+    studentsTaught: '100+',
+    lecturesDelivered: '2,000+',
     mosque: '[Your Mosque, City]',
     languages: '[English · Urdu]',
   },
@@ -26,7 +29,13 @@ export const site = {
     email: '[hello@yourdomain.com]',
   },
 
-  rating: { score: '[4.9]', count: '[N]' },
+  /** Shown as "loved by N families" in the hero. */
+  families: '20+',
+  /**
+   * Real average rating, e.g. from your Google Business profile: { score: '4.9', count: '12' }.
+   * Leave null until you have one; stars and review counts stay hidden while it is null.
+   */
+  rating: null as Rating | null,
 
   links: {
     googleReviews: '#reviews',
@@ -41,11 +50,11 @@ export const navLinks = [
   { label: 'Classroom', href: '/#classroom' },
   { label: 'Teachers', href: '/#teachers' },
   { label: 'Pricing', href: '/#pricing' },
-  { label: 'Reviews', href: '/#reviews' },
+  // Rename to 'Reviews' (here and in Footer) once real reviews are in features/reviews/data.ts.
+  { label: 'Track record', href: '/#reviews' },
 ] as const;
 
 /** In-page anchors used across sections. */
 export const anchors = {
   book: '/#book',
-  portal: '/#portal',
 } as const;

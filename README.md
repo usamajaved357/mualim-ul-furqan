@@ -44,25 +44,26 @@ runs Prettier automatically on every file Claude edits.
 
 ## Scripts
 
-| Script              | What it does                                           |
-| ------------------- | ------------------------------------------------------ |
-| `npm run check`     | Everything below in one go: run before every commit/PR |
-| `npm run dev`       | Dev server with hot reload                             |
-| `npm run build`     | Type-check + production build into `dist/`             |
-| `npm run preview`   | Serve the production build locally                     |
-| `npm run test`      | Run unit + component tests                             |
-| `npm run lint`      | ESLint (TypeScript, React hooks, a11y)                 |
-| `npm run typecheck` | TypeScript only                                        |
-| `npm run format`    | Prettier (also sorts Tailwind classes)                 |
+| Script              | What it does                                                                     |
+| ------------------- | -------------------------------------------------------------------------------- |
+| `npm run check`     | Format, types, lint, tests, build: run before every commit/PR                    |
+| `npm run dev`       | Dev server with hot reload                                                       |
+| `npm run build`     | Type-check + production build into `dist/`                                       |
+| `npm run preview`   | Serve the production build locally                                               |
+| `npm run test`      | Run unit + component tests                                                       |
+| `npm run lint`      | ESLint (TypeScript, React hooks, a11y)                                           |
+| `npm run typecheck` | TypeScript only                                                                  |
+| `npm run format`    | Prettier (also sorts Tailwind classes)                                           |
+| `npm run og:render` | Re-render the share card `public/og.jpg` from `scripts/og-image/` (needs Chrome) |
 
 ## Environment variables
 
-| Variable               | Example                  | Purpose                                                   |
-| ---------------------- | ------------------------ | --------------------------------------------------------- |
-| `VITE_WHATSAPP_NUMBER` | `447700900123`           | Every WhatsApp button (digits only, international format) |
-| `VITE_CAL_LINK`        | `your-name/free-trial`   | Cal.com booking calendar in the "Book" section            |
-| `VITE_META_PIXEL_ID`   | `1234567890`             | Facebook/Instagram ads conversion tracking (optional)     |
-| `VITE_SITE_URL`        | `https://yourdomain.com` | Canonical URL for SEO                                     |
+| Variable               | Example                  | Purpose                                                                |
+| ---------------------- | ------------------------ | ---------------------------------------------------------------------- |
+| `VITE_WHATSAPP_NUMBER` | `447700900123`           | Every WhatsApp button (digits only, international format)              |
+| `VITE_CAL_LINK`        | `your-name/free-trial`   | Cal.com booking calendar in the "Book" section                         |
+| `VITE_META_PIXEL_ID`   | `1234567890`             | Facebook/Instagram ads conversion tracking (optional)                  |
+| `VITE_SITE_URL`        | `https://yourdomain.com` | Canonical URL for SEO; makes the `og:image` link absolute for previews |
 
 Everything renders without them (placeholders are shown), so you can build the site before you have accounts.
 
@@ -89,11 +90,10 @@ src/
 │   │   ├── data.ts         Options & popular slots per region
 │   │   └── index.ts        Public API of the feature
 │   ├── stats/  how-it-works/  courses/  why-us/  classroom/
-│   ├── student-portal/     Interactive portal preview (panels/ per tab)
 │   ├── hadith/  teachers/
 │   ├── pricing/            Plans, currency switch (auto-detects GBP/EUR/USD), per-class maths
-│   ├── reviews/            Rating summary, filters, video slots, milestones
-│   ├── faq/  teach-with-us/
+│   ├── reviews/            Track record until real reviews exist; then cards, filters, rating
+│   ├── faq/
 │   └── booking/            Cal.com embed + WhatsApp fallback
 ├── components/
 │   ├── ui/                 Design-system primitives (ButtonLink, Section, SegmentedControl, Icon…)
@@ -125,7 +125,7 @@ src/
 | Name, teacher, contact, rating     | `src/config/site.ts`              |
 | Prices & plans                     | `src/features/pricing/data.ts`    |
 | Courses (kids / adults)            | `src/features/courses/data.ts`    |
-| Reviews, videos, milestones        | `src/features/reviews/data.ts`    |
+| Reviews, milestones                | `src/features/reviews/data.ts`    |
 | Teacher card (photo, availability) | `src/features/teachers/data.ts`   |
 | FAQ                                | `src/features/faq/data.ts`        |
 | Available time slots in the hero   | `src/features/hero/data.ts`       |
@@ -155,14 +155,15 @@ when no `404.html` exists.
 - [ ] `config/site.ts` filled in (name, mosque, languages, WhatsApp, email)
 - [ ] Cal.com event "Free trial · 30 min" created and `VITE_CAL_LINK` set
 - [ ] Real photo + 60-second recitation video
-- [ ] Placeholder stats/reviews removed or replaced with real ones
+- [ ] Real reviews added to `features/reviews/data.ts` and `site.rating` set (both stay hidden until then)
 - [ ] Privacy policy & terms completed
 - [ ] Meta Pixel ID set; test with the Meta Pixel Helper extension
-- [ ] An Open Graph image (1200×630) at `public/og.jpg` + `og:image` tag in `index.html`
+- [ ] `VITE_SITE_URL` set, then paste the live URL into the
+      [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) to check the share card preview
 
 ## Roadmap ideas
 
-- Real student portal (auth + database, e.g. Supabase) replacing the sample `student-portal/data.ts`
+- Real student portal (auth + database, e.g. Supabase) (schedule, homework, progress, certificates)
 - Stripe subscriptions for monthly plans
 - Blog / SEO landing pages per city (`/online-quran-classes-london`)
 - Female teacher profiles when available

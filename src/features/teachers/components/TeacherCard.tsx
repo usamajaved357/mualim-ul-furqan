@@ -46,10 +46,12 @@ export function TeacherCard({ teacher }: { teacher: Teacher }) {
         </div>
 
         <div className="flex flex-wrap gap-4 text-sm font-bold">
-          <span className="inline-flex items-center gap-1.5">
-            <Star />
-            {teacher.rating} · {teacher.reviews} reviews
-          </span>
+          {teacher.rating && (
+            <span className="inline-flex items-center gap-1.5">
+              <Star />
+              {teacher.rating.score} · {teacher.rating.count} reviews
+            </span>
+          )}
           <span className="text-muted">{teacher.years} yrs teaching</span>
           <span className="text-muted">{teacher.students} students</span>
         </div>

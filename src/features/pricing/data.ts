@@ -24,7 +24,7 @@ export const plans: Plan[] = [
     classesPerWeek: 2,
     classesPerMonth: 8,
     price: { USD: 34, GBP: 27, EUR: 31 },
-    perks: ['One-on-one with your teacher', 'Portal & monthly report', 'Steady weekly progress'],
+    perks: ['One-on-one with your teacher', 'Monthly progress report', 'Steady weekly progress'],
   },
   {
     id: 'regular',
@@ -32,7 +32,7 @@ export const plans: Plan[] = [
     classesPerWeek: 3,
     classesPerMonth: 12,
     price: { USD: 49, GBP: 39, EUR: 45 },
-    perks: ['One-on-one with your teacher', 'Portal & monthly report', 'The best pace for most children'],
+    perks: ['One-on-one with your teacher', 'Monthly progress report', 'The best pace for most children'],
     featured: true,
   },
   {
@@ -41,7 +41,7 @@ export const plans: Plan[] = [
     classesPerWeek: 5,
     classesPerMonth: 20,
     price: { USD: 72, GBP: 57, EUR: 66 },
-    perks: ['One-on-one with your teacher', 'Portal & monthly report', 'Fastest progress, best value'],
+    perks: ['One-on-one with your teacher', 'Monthly progress report', 'Fastest progress, best value'],
   },
 ];
 

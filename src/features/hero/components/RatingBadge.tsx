@@ -15,9 +15,10 @@ export function RatingBadge() {
           />
         ))}
       </span>
-      <Stars size={14} />
+      {site.rating && <Stars size={14} />}
       <span>
-        <strong>{site.rating.score}</strong> · loved by {site.rating.count} families
+        Loved by <strong>{site.families} families</strong>
+        {site.rating && <> · {site.rating.score}</>}
       </span>
     </a>
   );

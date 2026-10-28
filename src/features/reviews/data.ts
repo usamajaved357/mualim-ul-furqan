@@ -1,6 +1,11 @@
+import { site } from '@/config/site';
+
 /**
- * REVIEWS — publish only real, verifiable reviews from real families.
- * Every entry below is a placeholder to be replaced.
+ * REVIEWS: only real reviews from real families, in their own words and with their permission.
+ * While this list is empty the section shows the track record below instead. Example entry:
+ *
+ *   { id: 'r1', type: 'parent', course: 'Nazra', text: '<their words>', name: '<first name>',
+ *     detail: 'Parent of <child>, age <X>', region: 'UK' }
  */
 export type ReviewerType = 'parent' | 'adult';
 
@@ -14,62 +19,7 @@ export interface Review {
   region: string;
 }
 
-export const reviews: Review[] = [
-  {
-    id: 'r1',
-    type: 'parent',
-    course: 'Nazra',
-    text: "[Real review from a parent: how their child's reading has improved]",
-    name: '[Parent name]',
-    detail: 'Parent of [child], age [X]',
-    region: '[UK]',
-  },
-  {
-    id: 'r2',
-    type: 'parent',
-    course: 'Tajweed',
-    text: "[Real review: the timings, the teacher and the progress they've seen]",
-    name: '[Parent name]',
-    detail: 'Parent of two',
-    region: '[USA]',
-  },
-  {
-    id: 'r3',
-    type: 'adult',
-    course: 'Tajweed',
-    text: '[Real review from an adult who started Tajweed later in life]',
-    name: '[Student name]',
-    detail: 'Adult student',
-    region: '[CA]',
-  },
-  {
-    id: 'r4',
-    type: 'parent',
-    course: 'Duas',
-    text: '[Real review about the duas their child now recites at home]',
-    name: '[Parent name]',
-    detail: 'Parent of [child], age [X]',
-    region: '[DE]',
-  },
-  {
-    id: 'r5',
-    type: 'adult',
-    course: 'Nazra',
-    text: '[Real review from a revert or adult beginner learning to read]',
-    name: '[Student name]',
-    detail: 'Adult beginner',
-    region: '[UK]',
-  },
-  {
-    id: 'r6',
-    type: 'parent',
-    course: 'Nazra',
-    text: '[Real review about the progress report and parent sit-in]',
-    name: '[Parent name]',
-    detail: 'Parent of [child], age [X]',
-    region: '[USA]',
-  },
-];
+export const reviews: Review[] = [];
 
 export const reviewFilters = [
   { value: 'all', label: 'All' },
@@ -79,22 +29,29 @@ export const reviewFilters = [
 
 export type ReviewFilter = (typeof reviewFilters)[number]['value'];
 
-/** Star distribution for the rating summary (fractions of total). Update from your real reviews. */
-export const ratingDistribution = [
-  { stars: 5, share: 0.92 },
-  { stars: 4, share: 0.06 },
-  { stars: 3, share: 0.02 },
+/** Star distribution for the rating summary (fractions of total), from your real reviews. */
+export const ratingDistribution: { stars: number; share: number }[] = [];
+
+export interface Milestone {
+  name: string;
+  milestone: string;
+}
+
+/** Real student achievements, e.g. { name: 'Yusuf, age 8', milestone: 'Completed Noorani Qaida' }. Hidden while empty. */
+export const milestones: Milestone[] = [];
+
+/** Shown instead of review cards until real reviews are added. Numbers live in config/site.ts. */
+export const trackRecord = [
+  { value: `${site.teacher.yearsTeaching} years`, label: 'teaching the Quran' },
+  { value: site.teacher.studentsTaught, label: 'students taught' },
+  { value: site.teacher.lecturesDelivered, label: 'lectures delivered' },
+  { value: site.families, label: 'families who trust us' },
 ];
 
-export const videoTestimonials = [
-  { id: 'v1', title: '[Video review from a parent]', meta: '[City]', tone: 'bg-night' },
-  { id: 'v2', title: '[Student recitation: before & after]', meta: '[Age]', tone: 'bg-brand' },
-  { id: 'v3', title: '[Video review from an adult student]', meta: '', tone: 'bg-earth' },
-];
-
-export const milestones = [
-  { name: '[Student], age [X]', milestone: '[Completed Noorani Qaida]' },
-  { name: '[Student], age [X]', milestone: '[Finished first juz]' },
-  { name: '[Student], age [X]', milestone: '[Memorised 20 duas]' },
-  { name: '[Adult student]', milestone: '[Reading with Tajweed]' },
+/** What a parent can check for themselves in the free trial. Only promises the site already makes. */
+export const trialChecks = [
+  'One-on-one and live on Zoom: just your child and the teacher',
+  'Patient correction of pronunciation (makharij) from the first lesson',
+  'Parents are welcome to sit in and watch',
+  'No card needed. You only pay if you choose a plan',
 ];

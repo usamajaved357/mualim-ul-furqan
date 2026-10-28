@@ -18,8 +18,7 @@ const columns = [
     links: [
       { label: 'Teachers', href: '/#teachers' },
       { label: 'Pricing', href: '/#pricing' },
-      { label: 'Reviews', href: '/#reviews' },
-      { label: 'Student login', href: '/#portal' },
+      { label: 'Track record', href: '/#reviews' },
     ],
   },
 ];
