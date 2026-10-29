@@ -1,4 +1,5 @@
-import { Reveal, Section, SectionHeading } from '@/components/ui';
+import { GirihPattern } from '@/components/decor/GirihPattern';
+import { Container, Reveal, SectionHeading } from '@/components/ui';
 import { ClassroomWindow } from './components/ClassroomWindow';
 import { FeatureTile } from './components/FeatureTile';
 import { SetupCheck } from './components/SetupCheck';
@@ -6,29 +7,46 @@ import { leftFeatures, rightFeatures } from './data';
 
 export function ClassroomSection() {
   return (
-    <Section id="classroom" tone="night" pattern containerClassName="flex flex-col gap-14">
-      <SectionHeading
-        tone="dark"
-        eyebrow="The classroom"
-        title="Like sitting right next to your teacher"
-        description="The mushaf is shared on screen, every word is followed and corrected live, and you can watch it all."
-      />
-      <div className="flex flex-wrap items-center gap-5">
-        <div className="flex min-w-0 flex-[1_1_230px] flex-col gap-5">
-          {leftFeatures.map((f, i) => (
-            <FeatureTile key={f.title} feature={f} delay={i * 100} />
-          ))}
+    <section id="classroom" className="bg-white py-6 sm:py-10">
+      <Container>
+        <div className="bg-night text-cream relative flex flex-col gap-14 overflow-hidden rounded-[40px] px-5 py-16 sm:px-10 sm:py-24">
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgb(25_162_122/0.35),transparent_60%)]"
+          />
+          <GirihPattern
+            tone="dark"
+            className="[mask-image:linear-gradient(to_bottom,black,transparent_60%)] opacity-50"
+          />
+          <SectionHeading
+            tone="dark"
+            eyebrow="Inside a lesson"
+            title={
+              <>
+                A real classroom, <em>right on Google Meet</em>
+              </>
+            }
+            description="The mushaf is shared on screen, each ayah is highlighted as it's read, and every correction happens live: gently, clearly, and in front of you."
+            className="relative"
+          />
+          <div className="relative grid items-center gap-5 lg:grid-cols-[1fr_2.6fr_1fr]">
+            <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+              {leftFeatures.map((f, i) => (
+                <FeatureTile key={f.title} feature={f} delay={i * 100} />
+              ))}
+            </div>
+            <Reveal className="min-w-0">
+              <ClassroomWindow />
+            </Reveal>
+            <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+              {rightFeatures.map((f, i) => (
+                <FeatureTile key={f.title} feature={f} delay={i * 100} />
+              ))}
+            </div>
+          </div>
+          <SetupCheck />
         </div>
-        <Reveal className="min-w-0 flex-[999_1_520px]">
-          <ClassroomWindow />
-        </Reveal>
-        <div className="flex min-w-0 flex-[1_1_230px] flex-col gap-5">
-          {rightFeatures.map((f, i) => (
-            <FeatureTile key={f.title} feature={f} delay={i * 100} />
-          ))}
-        </div>
-      </div>
-      <SetupCheck />
-    </Section>
+      </Container>
+    </section>
   );
 }

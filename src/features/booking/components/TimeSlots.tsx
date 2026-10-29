@@ -23,7 +23,7 @@ export function TimeSlots({ day, timeZone, onSelect }: TimeSlotsProps) {
                   <button
                     type="button"
                     onClick={() => onSelect(s)}
-                    className="border-line-strong text-ink hover:border-brand hover:bg-mint hover:text-brand min-h-11 w-full cursor-pointer rounded-xl border-[1.5px] bg-white px-2 text-[15px] font-bold transition-colors"
+                    className="border-line-strong text-ink hover:border-brand hover:bg-mint hover:text-brand min-h-11 w-full cursor-pointer rounded-full border-[1.5px] bg-white px-2 text-[15px] font-bold transition-colors"
                   >
                     {formatTime(s, timeZone)}
                   </button>

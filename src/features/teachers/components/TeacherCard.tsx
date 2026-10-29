@@ -4,34 +4,66 @@ import { anchors } from '@/config/site';
 import { buildWhatsAppLink, whatsappMessages } from '@/lib/whatsapp';
 import type { Teacher } from '../data';
 
-/** Portrait in a mihrab-arch frame. */
+const ARCH = 'rounded-t-[999px] rounded-b-[30px]';
+
+/**
+ * Cut-out portrait set into a mihrab arch: mint-to-emerald backdrop with a soft halo behind the head and an offset
+ * sand arch behind for depth. The cut-out is tilted slightly toward the profile text and sits fully inside the
+ * arch with headroom; it runs past the arch bottom so the photo's chest crop is never visible.
+ */
 function Portrait({ teacher }: { teacher: Teacher }) {
   return (
-    <div className="relative mx-auto w-full max-w-[360px]">
-      <div className="bg-night relative aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-[28px] p-2.5 shadow-[0_40px_80px_-40px_rgb(10_42_36/0.8)]">
-        <GirihPattern tone="dark" />
-        <div className="border-gold/60 relative size-full overflow-hidden rounded-t-[999px] rounded-b-[20px] border-2">
-          {teacher.photo ? (
+    <div className="relative mx-auto w-full max-w-[380px] pr-4 pb-8">
+      <div aria-hidden className={`bg-sand absolute inset-0 top-5 bottom-3 left-5 ${ARCH}`} />
+
+      <div className="relative aspect-[4/5]">
+        <div
+          className={`via-brand-light to-brand absolute inset-0 overflow-hidden bg-gradient-to-b from-[#bfe8d6] shadow-[0_44px_80px_-36px_rgb(10_42_36/0.85)] ${ARCH}`}
+        >
+          <GirihPattern tone="dark" className="opacity-60" />
+          <div
+            aria-hidden
+            className="absolute top-[10%] left-1/2 aspect-square w-[90%] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgb(255_255_255/0.6)_0%,rgb(255_255_255/0.2)_40%,transparent_66%)]"
+          />
+          <div aria-hidden className={`absolute inset-2.5 border border-white/40 ${ARCH}`} />
+        </div>
+
+        {teacher.photo ? (
+          <div className={`absolute inset-0 overflow-hidden ${ARCH}`}>
             <img
               src={teacher.photo}
               alt={`Portrait of ${teacher.name}`}
-              className="size-full object-cover object-[50%_20%]"
+              width={1000}
+              height={1165}
+              loading="lazy"
+              className="absolute -bottom-[6%] left-1/2 w-[86%] max-w-none origin-bottom -translate-x-1/2 rotate-[3deg] drop-shadow-[0_22px_28px_rgb(10_42_36/0.45)]"
             />
-          ) : (
-            <span className="bg-sand text-earth flex size-full items-center justify-center text-sm font-bold">
-              [Your photo]
-            </span>
-          )}
-          <div className="from-night/80 absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t to-transparent" />
-        </div>
+            <div
+              aria-hidden
+              className="from-brand-dark/55 absolute inset-x-0 bottom-0 h-[12%] bg-gradient-to-t to-transparent"
+            />
+          </div>
+        ) : (
+          <span className="text-gold absolute inset-0 flex items-center justify-center text-sm font-bold">
+            [Your photo]
+          </span>
+        )}
       </div>
+      <p
+        lang="ar"
+        dir="rtl"
+        className="font-naskh text-brand border-line shadow-card absolute bottom-0 left-[calc(50%-0.5rem)] -translate-x-1/2 rounded-full border bg-white px-6 text-[19px] leading-[2] font-bold whitespace-nowrap shadow-[0_14px_30px_-14px_rgb(10_42_36/0.8)]"
+      >
+        قارئ ومعلّم القرآن
+      </p>
+
       {teacher.acceptingStudents && (
-        <span className="text-ink absolute top-[14%] -left-3 inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-2 text-xs font-extrabold shadow-[0_14px_30px_-14px_rgb(10_42_36/0.6)] sm:-left-6">
+        <span className="text-ink absolute top-[16%] -left-3 inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-2 text-xs font-extrabold shadow-[0_14px_30px_-14px_rgb(10_42_36/0.6)] sm:-left-7">
           <span className="animate-pulse-ring bg-whatsapp size-2 rounded-full" />
           Taking new students
         </span>
       )}
-      <span className="bg-gold text-night absolute -right-2 bottom-[18%] flex flex-col items-center rounded-2xl px-4 py-2.5 text-center shadow-[0_14px_30px_-14px_rgb(10_42_36/0.6)] sm:-right-5">
+      <span className="bg-gold-deep absolute right-0 bottom-[24%] flex flex-col items-center rounded-2xl px-4 py-2.5 text-center text-white shadow-[0_14px_30px_-14px_rgb(10_42_36/0.6)] sm:-right-3">
         <span className="text-[26px] leading-none font-extrabold">{teacher.years}</span>
         <span className="text-[11px] font-extrabold tracking-[0.08em] uppercase">years</span>
       </span>
@@ -41,7 +73,7 @@ function Portrait({ teacher }: { teacher: Teacher }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Play a recitation sample by ${teacher.name}`}
-          className="bg-gold text-night absolute bottom-6 left-1/2 flex size-14 -translate-x-1/2 items-center justify-center rounded-full transition hover:scale-105"
+          className="bg-gold text-night absolute bottom-16 left-[calc(50%-1rem)] flex size-14 -translate-x-1/2 items-center justify-center rounded-full transition hover:scale-105"
         >
           <PlayGlyph />
         </a>
@@ -52,15 +84,13 @@ function Portrait({ teacher }: { teacher: Teacher }) {
 
 export function TeacherCard({ teacher }: { teacher: Teacher }) {
   return (
-    <article className="border-line grid items-center gap-10 rounded-[34px] border bg-white p-6 shadow-[0_40px_80px_-60px_rgb(10_42_36/0.5)] sm:p-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14">
+    <article className="border-line shadow-card grid items-center gap-10 rounded-[36px] border bg-white p-6 sm:p-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14">
       <Portrait teacher={teacher} />
 
       <div className="flex min-w-0 flex-col gap-5">
         <div className="flex flex-col gap-1.5">
-          <p className="text-bronze text-[13px] font-extrabold tracking-[0.12em] uppercase">{teacher.role}</p>
-          <h3 className="text-[clamp(30px,3vw,40px)] leading-tight font-extrabold tracking-[-0.03em]">
-            {teacher.name}
-          </h3>
+          <p className="text-brand text-sm font-bold">{teacher.role}</p>
+          <h3 className="text-[clamp(32px,3.4vw,46px)] leading-tight">{teacher.name}</h3>
         </div>
         <p className="text-muted text-[17px]">{teacher.bio}</p>
 
@@ -72,9 +102,9 @@ export function TeacherCard({ teacher }: { teacher: Teacher }) {
               ? [{ label: `${teacher.rating.count} reviews`, value: teacher.rating.score }]
               : [{ label: 'Lesson length', value: '30 min' }]),
           ].map((s) => (
-            <div key={s.label} className="bg-parchment border-line rounded-2xl border px-4 py-3.5">
+            <div key={s.label} className="bg-parchment rounded-[20px] px-4 py-3.5">
               <dt className="text-muted text-xs font-bold">{s.label}</dt>
-              <dd className="m-0 inline-flex items-center gap-1.5 text-[22px] font-extrabold tracking-[-0.02em]">
+              <dd className="font-display text-brand m-0 inline-flex items-center gap-1.5 text-[26px] font-bold tracking-[-0.03em]">
                 {teacher.rating && s.value === teacher.rating.score && <Star />}
                 {s.value}
               </dd>
@@ -84,11 +114,11 @@ export function TeacherCard({ teacher }: { teacher: Teacher }) {
 
         <ul className="flex flex-wrap gap-2" aria-label="Subjects">
           {teacher.subjects.map((s) => (
-            <li key={s} className="bg-mint text-brand rounded-lg px-3 py-1.5 text-[13px] font-bold">
+            <li key={s} className="bg-mint text-brand rounded-full px-3.5 py-1.5 text-[13px] font-bold">
               {s}
             </li>
           ))}
-          <li className="bg-cream text-muted rounded-lg px-3 py-1.5 text-[13px] font-bold">
+          <li className="bg-cream text-muted rounded-full px-3.5 py-1.5 text-[13px] font-bold">
             {teacher.languages}
           </li>
         </ul>
@@ -100,7 +130,7 @@ export function TeacherCard({ teacher }: { teacher: Teacher }) {
           </span>
           <div className="flex flex-wrap gap-2 text-sm font-bold">
             {teacher.availability.map((a) => (
-              <span key={a} className="border-line rounded-xl border bg-white px-3 py-1.5">
+              <span key={a} className="border-line rounded-full border bg-white px-3.5 py-1.5">
                 {a}
               </span>
             ))}

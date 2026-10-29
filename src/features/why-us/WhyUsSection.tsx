@@ -1,94 +1,116 @@
-import { GirihPattern } from '@/components/decor/GirihPattern';
 import { Icon, Reveal, Section, SectionHeading, type IconName } from '@/components/ui';
 import { site } from '@/config/site';
+import { cn } from '@/lib/cn';
 
-const tiles: { icon: IconName; title: string; body: string }[] = [
+const tiles: { icon: IconName; title: string; body: string; tint: string }[] = [
   {
     icon: 'eye',
-    title: 'Parents can sit in',
-    body: 'Join or watch any class, any time. Nothing behind closed doors.',
-  },
-  {
-    icon: 'message',
-    title: 'Taught in your language',
-    body: `Lessons explained in ${site.teacher.languages}, so nothing gets lost.`,
-  },
-  {
-    icon: 'shield',
-    title: 'Safe & private',
-    body: 'Private Google Meet links for each family, no public chat, recordings only if you ask.',
+    title: 'Watch any lesson',
+    body: 'Join the call from work or the next room. Nothing ever happens behind closed doors.',
+    tint: 'bg-sky text-sky-ink',
   },
   {
     icon: 'award',
-    title: 'Monthly progress report',
-    body: "What was covered, what's improving and what to practise at home.",
+    title: 'A progress report every month',
+    body: "What was covered, what's improving, and exactly what to practise at home.",
+    tint: 'bg-lilac text-lilac-ink',
   },
   {
-    icon: 'phone',
-    title: 'Any device',
-    body: 'Phone, tablet or laptop. Google Meet runs in the browser or the free app.',
+    icon: 'shield',
+    title: 'Safe and private',
+    body: 'A private Google Meet link for your family only. No public chat, no strangers, recordings only if you ask.',
+    tint: 'bg-rose text-rose-ink',
+  },
+  {
+    icon: 'message',
+    title: 'Explained in your language',
+    body: `Lessons explained in ${site.teacher.languages}, so your child understands, not just repeats.`,
+    tint: 'bg-sand text-bronze',
   },
 ];
 
 /** Example class time shown in three cities (illustrative). */
 const clocks = [
-  { city: 'London', time: '5:30 PM' },
-  { city: 'New York', time: '12:30 PM' },
-  { city: 'Berlin', time: '6:30 PM' },
+  { city: 'London', time: '5:30 PM', flag: '🇬🇧' },
+  { city: 'Berlin', time: '6:30 PM', flag: '🇪🇺' },
+  { city: 'New York', time: '12:30 PM', flag: '🇺🇸' },
 ];
 
-const tileClass = 'lift flex flex-col gap-2.5 rounded-[26px] border border-line bg-white p-7';
+const card = 'lift border-line flex flex-col rounded-[28px] border bg-white p-7';
 
 export function WhyUsSection() {
   return (
-    <Section containerClassName="flex flex-col gap-12">
-      <SectionHeading eyebrow="Why families choose us" title="Personal, safe and built around your family" />
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-5">
-        <Reveal className="bg-brand relative col-span-full flex flex-wrap items-center gap-6 overflow-hidden rounded-[26px] p-8 text-white">
-          <GirihPattern tone="dark" />
-          <div className="relative flex flex-[999_1_280px] flex-col gap-2.5">
-            <h3 className="text-[26px] font-extrabold tracking-[-0.02em]">
-              The same teacher, every single week
+    <Section tone="parchment" containerClassName="flex flex-col gap-14">
+      <SectionHeading
+        eyebrow="Why families choose us"
+        title={
+          <>
+            Everything you wish your local Quran class <em>already did</em>
+          </>
+        }
+        description="Busy families need more than a teacher on a screen. Here is what comes with every single lesson."
+      />
+
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <Reveal className="from-brand to-brand-dark relative flex flex-col justify-between gap-8 overflow-hidden rounded-[28px] bg-gradient-to-br p-8 text-white md:col-span-2 lg:row-span-2 lg:p-10">
+          <span
+            aria-hidden
+            className="bg-brand-light/40 absolute -top-24 -right-24 size-80 rounded-full blur-3xl"
+          />
+          <div className="relative flex flex-col gap-4">
+            <span className="flex size-13 items-center justify-center rounded-full bg-white/15">
+              <Icon name="user" size={26} strokeWidth={1.7} />
+            </span>
+            <h3 className="max-w-[460px] text-[clamp(30px,3.4vw,44px)] leading-[1.05]">
+              One teacher who <em className="text-gold">really knows</em> your child
             </h3>
-            <p className="text-sage">
-              No rotating tutors or call-centre academies. One Qari who knows your child's level, strengths
-              and what they find hard.
+            <p className="text-sage max-w-[480px] text-[17px]">
+              No rotating tutors and no call-centre academy. The same Qari every week, who remembers exactly
+              where your child left off, what they find tricky, and how to keep them motivated.
             </p>
           </div>
-          <div className="border-gold/35 relative flex flex-[1_1_200px] items-center gap-3 rounded-[18px] border bg-white/10 p-3.5">
-            <span className="bg-gold flex size-14 shrink-0 items-center justify-center rounded-full p-0.5">
-              <img
-                src={site.teacher.photo}
-                alt=""
-                className="size-full rounded-full object-cover object-top"
-              />
+          <div className="relative flex flex-wrap items-center gap-3">
+            <span className="inline-flex items-center gap-3 rounded-full bg-white/12 py-2 pr-4 pl-2 backdrop-blur">
+              <span className="bg-gold text-night flex size-9 items-center justify-center rounded-full font-bold">
+                {site.teacher.name.charAt(0)}
+              </span>
+              <span className="text-sm leading-tight">
+                <span className="block font-bold">{site.teacher.name}</span>
+                <span className="text-sage">{site.teacher.yearsTeaching} years teaching</span>
+              </span>
             </span>
-            <span className="flex flex-col leading-snug">
-              <span className="font-extrabold">{site.teacher.name}</span>
-              <span className="text-sage text-[13px]">Your teacher · {site.teacher.yearsTeaching} yrs</span>
+            <span className="rounded-full bg-white/12 px-4 py-2 text-sm font-semibold">
+              Same time every week
             </span>
           </div>
         </Reveal>
 
-        <Reveal className={tileClass}>
-          <h3 className="text-[19px] font-extrabold">Times that fit school</h3>
-          <ul className="flex flex-col gap-2 text-sm" aria-label="Example class time in three cities">
+        <Reveal className={cn(card, 'gap-4 md:col-span-2 lg:col-span-1')}>
+          <span className="bg-sand text-bronze flex size-12 items-center justify-center rounded-full">
+            <Icon name="globe" size={22} strokeWidth={1.9} />
+          </span>
+          <h3 className="text-[22px] leading-tight">Times that fit around school</h3>
+          <ul className="flex flex-col gap-1.5 text-sm" aria-label="Example class time in three cities">
             {clocks.map((c) => (
-              <li key={c.city} className="bg-parchment flex justify-between rounded-[10px] px-3 py-2">
-                <span className="font-semibold">{c.city}</span>
-                <span className="font-extrabold">{c.time}</span>
+              <li
+                key={c.city}
+                className="bg-parchment flex items-center justify-between rounded-full px-4 py-2"
+              >
+                <span className="font-semibold">
+                  <span aria-hidden>{c.flag}</span> {c.city}
+                </span>
+                <span className="font-bold">{c.time}</span>
               </li>
             ))}
           </ul>
-          <p className="text-muted text-sm">After school &amp; weekends, in your local time.</p>
         </Reveal>
 
         {tiles.map((t, i) => (
-          <Reveal key={t.title} delay={(i % 3) * 80} className={tileClass}>
-            <span className="bg-sand text-bronze flex size-12 items-center justify-center rounded-[14px]">
-              <Icon name={t.icon} size={24} strokeWidth={1.8} />
+          <Reveal key={t.title} delay={(i % 3) * 80} className={cn(card, 'gap-3')}>
+            <span className={cn('flex size-12 items-center justify-center rounded-full', t.tint)}>
+              <Icon name={t.icon} size={22} strokeWidth={1.9} />
             </span>
-            <h3 className="text-[19px] font-extrabold">{t.title}</h3>
+            <h3 className="mt-1 text-[22px] leading-tight">{t.title}</h3>
             <p className="text-muted text-[15px]">{t.body}</p>
           </Reveal>
         ))}

@@ -4,19 +4,20 @@ import { track, type TrackedEvent } from '@/lib/analytics';
 import { Icon, type IconName } from './Icon';
 
 const variants = {
-  primary: 'bg-brand text-white hover:bg-brand-dark hover:shadow-[0_14px_26px_-12px_rgb(11_93_75/0.55)]',
-  gold: 'bg-gold text-night hover:shadow-[0_14px_26px_-12px_rgb(201_162_75/0.7)]',
-  dark: 'bg-night text-gold hover:shadow-[0_14px_26px_-12px_rgb(10_42_36/0.6)]',
-  outline: 'border-[1.5px] border-brand text-brand hover:bg-mint',
-  soft: 'border-[1.5px] border-sage text-brand hover:bg-mint',
-  ghostDark: 'border-[1.5px] border-white/35 text-cream hover:bg-white/5',
-  whatsapp: 'bg-whatsapp text-white hover:shadow-[0_14px_26px_-12px_rgb(31_143_95/0.6)]',
+  primary:
+    'bg-brand text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.18),0_10px_24px_-12px_rgb(12_122_91/0.7)] hover:bg-brand-dark',
+  dark: 'bg-ink text-white shadow-[0_10px_24px_-12px_rgb(15_31_26/0.6)] hover:bg-night',
+  gold: 'bg-gold-deep text-white shadow-[0_10px_24px_-12px_rgb(229_154_31/0.8)] hover:bg-[#d48a12]',
+  outline: 'border border-ink/15 bg-white text-ink hover:border-ink/30',
+  soft: 'bg-mint text-brand hover:bg-sage',
+  ghostDark: 'border border-white/25 text-white hover:bg-white/10',
+  whatsapp: 'bg-whatsapp text-white shadow-[0_10px_24px_-12px_rgb(31_143_95/0.7)] hover:brightness-110',
 } as const;
 
 const sizes = {
-  sm: 'min-h-10 px-4 text-sm',
-  md: 'min-h-12 px-5 text-[15px]',
-  lg: 'min-h-[52px] px-6 text-base',
+  sm: 'min-h-10 px-4.5 text-sm',
+  md: 'min-h-12 px-5.5 text-[15px]',
+  lg: 'min-h-14 px-7 text-base',
 } as const;
 
 export interface ButtonLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -53,7 +54,7 @@ export function ButtonLink({
         onClick?.(event);
       }}
       className={cn(
-        'inline-flex items-center justify-center gap-2.5 rounded-xl font-bold no-underline transition duration-200 hover:-translate-y-0.5',
+        'inline-flex items-center justify-center gap-2 rounded-full font-bold whitespace-nowrap no-underline transition duration-200 hover:-translate-y-0.5',
         variants[variant],
         sizes[size],
         className,

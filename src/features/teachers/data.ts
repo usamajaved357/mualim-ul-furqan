@@ -22,7 +22,7 @@ export interface Teacher {
 export const leadTeacher: Teacher = {
   name: site.teacher.name,
   role: site.teacher.role,
-  bio: `Teaches children at ${site.teacher.mosque}. Patient with young beginners and focused on correct makharij from day one.`,
+  bio: `${site.teacher.name} has spent ${site.teacher.yearsTeaching} years teaching the Quran to children and adults, and also teaches at ${site.teacher.mosque}. Families love his calm, patient style: he never rushes, celebrates every small win, and makes sure each letter is pronounced correctly from day one.`,
   rating: site.rating,
   years: site.teacher.yearsTeaching,
   students: site.teacher.studentsTaught,
@@ -30,5 +30,5 @@ export const leadTeacher: Teacher = {
   languages: site.teacher.languages,
   availability: ['Mon–Fri · 4–9 PM', 'Sat–Sun · 10 AM–6 PM'],
   acceptingStudents: true,
-  photo: site.teacher.photo,
+  photo: '/teachers/qari-abu-sufyan.webp',
 };

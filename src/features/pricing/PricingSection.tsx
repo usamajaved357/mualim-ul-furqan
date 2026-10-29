@@ -7,12 +7,16 @@ import { useCurrency } from './hooks/useCurrency';
 export function PricingSection() {
   const [currency, setCurrency] = useCurrency();
   return (
-    <Section id="pricing" tone="parchment" containerClassName="flex flex-col gap-11">
+    <Section id="pricing" tone="white" containerClassName="flex flex-col gap-14">
       <div className="flex flex-col items-center gap-5">
         <SectionHeading
           eyebrow="Pricing"
-          title="Simple, honest monthly plans"
-          description="Every class is 30 minutes, live and one-on-one. The first class is always free."
+          title={
+            <>
+              Simple monthly plans. <em>First class free.</em>
+            </>
+          }
+          description="Every lesson is 30 minutes, live and one-on-one. You only choose a plan after your free class."
         />
         <SegmentedControl
           label="Currency"
@@ -23,7 +27,7 @@ export function PricingSection() {
         />
       </div>
 
-      <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,290px),1fr))] items-center gap-5.5">
+      <ul className="grid items-stretch gap-5 lg:grid-cols-3">
         {plans.map((plan, i) => (
           <Reveal as="li" key={plan.id} delay={i * 100} className="flex flex-col">
             <PlanCard plan={plan} currency={currency} />
@@ -35,13 +39,13 @@ export function PricingSection() {
         {pricingPerks.map((perk) => (
           <li
             key={perk.text}
-            className="border-line flex items-center gap-3 rounded-2xl border bg-white px-4.5 py-4 text-[15px] font-semibold"
+            className="bg-parchment flex items-center gap-3 rounded-full px-5 py-3.5 text-[15px] font-semibold"
           >
             <Icon name={perk.icon} size={22} strokeWidth={2} className="text-brand" />
             {perk.text}
           </li>
         ))}
-        <li className="border-line flex items-center gap-3 rounded-2xl border bg-white px-4.5 py-4 text-[15px] font-semibold">
+        <li className="bg-parchment flex items-center gap-3 rounded-full px-5 py-3.5 text-[15px] font-semibold">
           <Icon name="whatsapp" size={22} strokeWidth={2} className="text-brand" />
           <span>
             Need 1 class a week?{' '}

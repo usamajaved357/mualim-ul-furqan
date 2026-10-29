@@ -47,7 +47,7 @@ export function ClassroomWindow() {
               </p>
             </div>
             <div className="grid min-w-0 flex-[1_1_170px] grid-cols-3 content-start gap-2.5 sm:grid-cols-1">
-              <VideoTile label={site.teacher.name} photo={site.teacher.photo} ratio="standard" speaking />
+              <VideoTile label={site.teacher.name} ratio="standard" avatarClassName="bg-brand" speaking />
               <VideoTile label={classroomCall.student} ratio="standard" avatarClassName="bg-[#c58af9]" />
               <VideoTile label={classroomCall.parent} ratio="standard" avatarClassName="bg-[#e37400]" muted />
             </div>

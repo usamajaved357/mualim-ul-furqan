@@ -1,5 +1,4 @@
-import { GirihPattern } from '@/components/decor/GirihPattern';
-import { ButtonLink } from '@/components/ui';
+import { ButtonLink, Icon } from '@/components/ui';
 import { anchors } from '@/config/site';
 import { cn } from '@/lib/cn';
 import type { CurrencyCode } from '@/types/domain';
@@ -11,55 +10,59 @@ export function PlanCard({ plan, currency }: { plan: Plan; currency: CurrencyCod
   return (
     <article
       className={cn(
-        'lift relative flex flex-col gap-5 overflow-hidden rounded-[26px] p-8.5',
+        'lift relative flex flex-1 flex-col gap-6 overflow-hidden rounded-[32px] p-8',
         featured
-          ? 'border-gold-deep bg-night text-cream border-2 py-10.5 shadow-[0_40px_70px_-34px_rgb(10_42_36/0.7)]'
+          ? 'from-brand to-brand-dark bg-gradient-to-br text-white shadow-[0_40px_80px_-30px_rgb(12_122_91/0.6)] lg:-my-4 lg:py-12'
           : 'border-line border bg-white',
       )}
     >
-      {featured && <GirihPattern tone="dark" />}
+      {featured && (
+        <span
+          aria-hidden
+          className="bg-brand-light/50 absolute -top-20 -right-16 size-60 rounded-full blur-3xl"
+        />
+      )}
       <div className="relative flex items-start justify-between gap-3">
         <div>
-          <h3 className="text-[22px] font-extrabold">{plan.name}</h3>
-          <p className={cn('text-[15px]', featured ? 'text-mist' : 'text-muted')}>
+          <h3 className="text-[26px] leading-tight">{plan.name}</h3>
+          <p className={cn('text-[15px] font-semibold', featured ? 'text-sage' : 'text-muted')}>
             {plan.classesPerWeek} classes a week
           </p>
         </div>
         {featured && (
-          <span className="bg-gold text-night rounded-full px-3 py-1.5 text-xs font-extrabold tracking-[0.06em] uppercase">
+          <span className="bg-gold-deep rounded-full px-3 py-1.5 text-xs font-bold whitespace-nowrap text-white">
             Most popular
           </span>
         )}
       </div>
       <div className="relative">
-        <p
-          className={cn(
-            'text-[52px] leading-none font-extrabold tracking-[-0.035em]',
-            featured && 'text-gold',
-          )}
-        >
-          {formatPrice(plan.price[currency], currency)}
-          <span
-            className={cn('text-base font-semibold tracking-normal', featured ? 'text-mist' : 'text-muted')}
-          >
-            {' '}
-            /month
+        <p className="font-display flex items-baseline gap-1.5 leading-none">
+          <span className="text-[60px] font-bold tracking-[-0.045em]">
+            {formatPrice(plan.price[currency], currency)}
+          </span>
+          <span className={cn('text-base font-semibold', featured ? 'text-sage' : 'text-muted')}>
+            / month
           </span>
         </p>
-        <p className={cn('pt-2.5 text-sm', featured ? 'text-mist' : 'text-muted')}>
+        <p
+          className={cn(
+            'mt-3 inline-flex rounded-full px-3 py-1 text-[13px] font-bold',
+            featured ? 'bg-white/15 text-white' : 'bg-mint text-brand',
+          )}
+        >
           {plan.classesPerMonth} classes · about {pricePerClass(plan, currency)} each
         </p>
       </div>
-      <ul
-        className={cn(
-          'relative flex flex-col gap-3 border-t pt-5 text-[15px]',
-          featured ? 'border-gold/25' : 'border-[#f0eadd]',
-        )}
-      >
+      <ul className="relative flex flex-col gap-3 text-[15px]">
         {plan.perks.map((perk) => (
-          <li key={perk} className="flex gap-2.5">
-            <span aria-hidden className={cn('font-extrabold', featured ? 'text-gold' : 'text-brand')}>
-              ✓
+          <li key={perk} className="flex items-start gap-2.5">
+            <span
+              className={cn(
+                'mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full',
+                featured ? 'bg-white/20 text-white' : 'bg-mint text-brand',
+              )}
+            >
+              <Icon name="check" size={12} strokeWidth={3} />
             </span>
             {perk}
           </li>
@@ -73,7 +76,7 @@ export function PlanCard({ plan, currency }: { plan: Plan; currency: CurrencyCod
         className="relative mt-auto"
         aria-label={`Start a free trial, then choose the ${plan.name} plan`}
       >
-        Start free trial
+        Start with a free class
       </ButtonLink>
     </article>
   );

@@ -24,9 +24,9 @@ export function DetailsForm({ booking }: { booking: BookingState }) {
         void booking.submit();
       }}
     >
-      <div className="bg-mint flex flex-wrap items-center justify-between gap-3 rounded-2xl px-4 py-3.5">
+      <div className="bg-mint flex flex-wrap items-center justify-between gap-3 rounded-[22px] px-4 py-3.5">
         <span className="flex items-center gap-3">
-          <span className="bg-brand flex size-10 items-center justify-center rounded-xl text-white">
+          <span className="bg-brand flex size-10 items-center justify-center rounded-full text-white">
             <Icon name="calendar" size={20} />
           </span>
           <span className="flex flex-col leading-tight">
@@ -144,7 +144,7 @@ export function DetailsForm({ booking }: { booking: BookingState }) {
         <button
           type="submit"
           disabled={submitting}
-          className="bg-brand hover:bg-brand-dark inline-flex min-h-[52px] cursor-pointer items-center justify-center gap-2.5 rounded-xl px-6 font-bold text-white transition hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-70"
+          className="bg-brand hover:bg-brand-dark inline-flex min-h-14 cursor-pointer items-center justify-center gap-2.5 rounded-full px-7 font-bold text-white transition hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-70"
         >
           {submitting ? (
             <>

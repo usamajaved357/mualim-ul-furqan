@@ -150,8 +150,9 @@ src/
 
 Search the project for `[` to find every remaining placeholder. **Only publish real reviews and real numbers.**
 
-The teacher photo is `public/teachers/qari-abu-sufyan.jpg` (set as `site.teacher.photo` in `config/site.ts`); it
-is used in the teacher profile and the Google Meet mockups.
+The teacher photo is `public/teachers/qari-abu-sufyan.webp`, a transparent cut-out (set as `photo` in
+`features/teachers/data.ts`). It is shown only in the teacher profile; the frame and background come from CSS. To
+replace it, export a head-and-shoulders PNG/WebP with a transparent background at about 1000px wide.
 
 ---
 

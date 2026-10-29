@@ -7,7 +7,7 @@ import { milestones, reviews } from './data';
 /** Real reviews once there are any; until then, the track record and the free-trial offer. */
 export function ReviewsSection() {
   return (
-    <Section id="reviews" containerClassName="flex flex-col gap-10">
+    <Section id="reviews" tone="parchment" containerClassName="flex flex-col gap-12">
       {reviews.length > 0 ? <ReviewList /> : <TrackRecord />}
       {milestones.length > 0 && <Milestones />}
     </Section>

@@ -66,7 +66,7 @@ export function BookingConfirmed({ result, email, timeZone, onReset }: BookingCo
         <button
           type="button"
           onClick={onReset}
-          className="border-sage text-brand hover:bg-mint min-h-[52px] cursor-pointer rounded-xl border-[1.5px] px-5 font-bold"
+          className="border-sage text-brand hover:bg-mint min-h-14 cursor-pointer rounded-full border-[1.5px] px-6 font-bold"
         >
           Book another time
         </button>

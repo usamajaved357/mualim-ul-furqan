@@ -5,8 +5,8 @@ import { Container } from './Container';
 
 const tones = {
   white: 'bg-white text-ink',
-  parchment: 'bg-parchment text-ink border-y border-line',
-  sand: 'bg-sand text-ink border-y border-[#eadfc5]',
+  parchment: 'bg-parchment text-ink',
+  sand: 'bg-sand text-ink',
   night: 'bg-night text-cream',
 } as const;
 
@@ -23,7 +23,7 @@ interface SectionProps {
 /** Page section with consistent vertical rhythm, background tone and optional Islamic pattern. */
 export function Section({
   id,
-  tone = 'white',
+  tone = 'parchment',
   pattern = false,
   className,
   containerClassName,

@@ -14,7 +14,9 @@ function renderHome() {
 describe('HomePage', () => {
   it('renders the main headline and every key section', () => {
     renderHome();
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/learn the quran online/i);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+      /quran lessons your child will look forward/i,
+    );
     for (const id of ['how', 'courses', 'classroom', 'teachers', 'pricing', 'reviews', 'faq', 'book']) {
       expect(document.getElementById(id)).not.toBeNull();
     }

@@ -2,7 +2,7 @@ import type { InputHTMLAttributes, ReactNode, TextareaHTMLAttributes } from 'rea
 import { cn } from '@/lib/cn';
 
 const control =
-  'border-line-strong text-ink placeholder:text-[#9aa5a1] focus:border-brand w-full rounded-xl border-[1.5px] bg-white px-3.5 text-[15px] outline-none transition-colors focus:shadow-[0_0_0_4px_rgb(11_93_75/0.12)] aria-[invalid=true]:border-[#c2413b]';
+  'border-line-strong text-ink placeholder:text-[#9aa5a1] focus:border-brand w-full rounded-2xl border-[1.5px] bg-white px-4 text-[15px] outline-none transition-colors focus:shadow-[0_0_0_4px_rgb(11_93_75/0.12)] aria-[invalid=true]:border-[#c2413b]';
 
 interface FieldShellProps {
   id: string;

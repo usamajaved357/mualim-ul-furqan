@@ -5,11 +5,13 @@ export function FeatureTile({ feature, delay = 0 }: { feature: ClassroomFeature;
   return (
     <Reveal
       delay={delay}
-      className="border-gold/25 flex flex-col gap-2 rounded-[20px] border bg-white/[0.04] p-5.5"
+      className="flex flex-col gap-2 rounded-[22px] border border-white/10 bg-white/[0.06] p-5 backdrop-blur"
     >
-      <Icon name={feature.icon} size={26} strokeWidth={1.7} className="text-gold" />
-      <h3 className="font-extrabold">{feature.title}</h3>
-      <p className="text-mist text-[15px]">{feature.body}</p>
+      <span className="bg-gold/15 text-gold flex size-10 items-center justify-center rounded-full">
+        <Icon name={feature.icon} size={20} strokeWidth={1.8} />
+      </span>
+      <h3 className="font-display text-[17px] font-semibold text-white">{feature.title}</h3>
+      <p className="text-mist text-[14px] leading-snug">{feature.body}</p>
     </Reveal>
   );
 }

@@ -24,7 +24,6 @@ export const site = {
     lecturesDelivered: '2,000+',
     mosque: '[Your Mosque, City]',
     languages: '[English · Urdu]',
-    photo: '/teachers/qari-abu-sufyan.jpg',
   },
 
   contact: {

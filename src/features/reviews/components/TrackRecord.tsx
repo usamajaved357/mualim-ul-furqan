@@ -9,51 +9,59 @@ export function TrackRecord() {
     <>
       <SectionHeading
         eyebrow="Track record"
-        title="Don't just take our word for it"
-        description={`${site.teacher.name} has been teaching the Quran for ${site.teacher.yearsTeaching} years. Here is what that looks like, and how you can see it for yourself.`}
+        title={
+          <>
+            Don't take our word for it. <em>Try a class.</em>
+          </>
+        }
+        description={`${site.teacher.name} has taught the Quran for ${site.teacher.yearsTeaching} years. The best way to see the difference is to watch one lesson yourself.`}
       />
 
-      <Reveal as="ul" className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-        {trackRecord.map((item) => (
-          <li key={item.label} className="bg-night flex flex-col gap-1 rounded-[22px] p-5 sm:p-7">
-            <span className="text-gold text-[30px] leading-tight font-extrabold tracking-[-0.03em] sm:text-[44px]">
-              {item.value}
-            </span>
-            <span className="text-mist text-sm font-semibold sm:text-[15px]">{item.label}</span>
-          </li>
-        ))}
-      </Reveal>
+      <div className="grid gap-5 lg:grid-cols-[1fr_1.15fr]">
+        <Reveal as="ul" className="grid grid-cols-2 gap-4">
+          {trackRecord.map((item, i) => (
+            <li
+              key={item.label}
+              className={`flex flex-col justify-end gap-1 rounded-[28px] p-6 sm:p-7 ${['bg-mint', 'bg-sand', 'bg-sky', 'bg-lilac'][i]}`}
+            >
+              <span className="font-display text-[clamp(34px,4vw,52px)] leading-none font-bold tracking-[-0.04em]">
+                {item.value}
+              </span>
+              <span className="text-muted text-sm font-semibold sm:text-[15px]">{item.label}</span>
+            </li>
+          ))}
+        </Reveal>
 
-      <Reveal className="border-line bg-parchment flex flex-wrap items-center justify-between gap-7 rounded-3xl border p-6.5 sm:p-9">
-        <div className="flex min-w-0 flex-[999_1_420px] flex-col gap-4">
-          <h3 className="text-[clamp(24px,2.6vw,32px)] leading-tight font-extrabold tracking-[-0.025em]">
-            Your first class is free. Judge for yourself.
+        <Reveal className="border-line shadow-card flex flex-col gap-5 rounded-[28px] border bg-white p-7 sm:p-9">
+          <h3 className="text-[clamp(26px,2.8vw,34px)] leading-tight">
+            In your free 30-minute class, <em className="text-brand">you'll see:</em>
           </h3>
-          <p className="text-muted">In the 30-minute trial you'll see:</p>
-          <ul className="flex flex-col gap-2.5">
+          <ul className="flex flex-col gap-3">
             {trialChecks.map((check) => (
-              <li key={check} className="flex items-start gap-2.5">
-                <Icon name="check" size={20} strokeWidth={2.4} className="text-brand mt-0.5 shrink-0" />
+              <li key={check} className="flex items-start gap-3">
+                <span className="bg-brand mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full text-white">
+                  <Icon name="check" size={13} strokeWidth={3} />
+                </span>
                 {check}
               </li>
             ))}
           </ul>
-        </div>
-        <div className="flex min-w-0 flex-[1_1_240px] flex-col gap-3">
-          <ButtonLink href={anchors.book} trackAs="Lead" size="lg">
-            Book a free trial
-          </ButtonLink>
-          <ButtonLink
-            href={buildWhatsAppLink(whatsappMessages.trial)}
-            variant="whatsapp"
-            iconLeft="whatsapp"
-            trackAs="Contact"
-            size="lg"
-          >
-            Ask on WhatsApp
-          </ButtonLink>
-        </div>
-      </Reveal>
+          <div className="mt-auto flex flex-wrap gap-2.5 pt-2">
+            <ButtonLink href={anchors.book} trackAs="Lead" size="lg" iconRight="arrow-right">
+              Book a free class
+            </ButtonLink>
+            <ButtonLink
+              href={buildWhatsAppLink(whatsappMessages.trial)}
+              variant="soft"
+              iconLeft="whatsapp"
+              trackAs="Contact"
+              size="lg"
+            >
+              Ask a question
+            </ButtonLink>
+          </div>
+        </Reveal>
+      </div>
     </>
   );
 }

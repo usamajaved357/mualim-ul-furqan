@@ -44,7 +44,7 @@ export function DayPicker({ weeks, selected, onSelect }: DayPickerProps) {
                     aria-label={`${formatDayShort(day.key)}${open ? `, ${day.slots.length} times available` : ', unavailable'}`}
                     onClick={() => onSelect(day.key)}
                     className={cn(
-                      'relative flex aspect-square w-full cursor-pointer flex-col items-center justify-center rounded-xl text-[15px] font-bold transition-colors',
+                      'relative flex aspect-square w-full cursor-pointer flex-col items-center justify-center rounded-full text-[15px] font-bold transition-colors',
                       isSelected
                         ? 'bg-brand text-white shadow-[0_10px_20px_-10px_rgb(11_93_75/0.8)]'
                         : open

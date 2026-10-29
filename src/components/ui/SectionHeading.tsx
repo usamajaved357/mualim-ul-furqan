@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/cn';
-import { Ornament } from '@/components/decor/Ornament';
 import { Eyebrow } from './Eyebrow';
 import { Reveal } from './Reveal';
 
 interface SectionHeadingProps {
   eyebrow?: string;
+  /** Wrap the accent words in <em> to set them in the italic serif. */
   title: ReactNode;
   description?: ReactNode;
   align?: 'center' | 'left';
@@ -27,25 +27,27 @@ export function SectionHeading({
   return (
     <Reveal
       className={cn(
-        'flex flex-col gap-3.5',
+        'flex flex-col gap-4',
         align === 'center' ? 'items-center text-center' : 'items-start text-left',
         className,
       )}
     >
-      {eyebrow && (
-        <Eyebrow
-          tone={tone === 'dark' ? 'dark' : 'mint'}
-          className={align === 'center' ? 'self-center' : undefined}
-        >
-          {eyebrow}
-        </Eyebrow>
-      )}
-      <Tag className="max-w-[780px] text-[clamp(32px,3.8vw,52px)] leading-[1.08] font-extrabold tracking-[-0.035em] text-balance">
+      {eyebrow && <Eyebrow tone={tone === 'dark' ? 'dark' : 'mint'}>{eyebrow}</Eyebrow>}
+      <Tag
+        className={cn(
+          'max-w-[820px] text-[clamp(34px,4.4vw,58px)] leading-[1.04] text-balance',
+          tone === 'dark' ? '[&_em]:text-gold' : '[&_em]:text-brand',
+        )}
+      >
         {title}
       </Tag>
-      <Ornament tone={tone} className={align === 'center' ? 'self-center' : 'self-start'} />
       {description && (
-        <p className={cn('max-w-[620px] text-[18px]', tone === 'dark' ? 'text-mist' : 'text-muted')}>
+        <p
+          className={cn(
+            'max-w-[640px] text-[18px] text-pretty',
+            tone === 'dark' ? 'text-mist' : 'text-muted',
+          )}
+        >
           {description}
         </p>
       )}

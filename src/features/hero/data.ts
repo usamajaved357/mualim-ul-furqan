@@ -15,13 +15,13 @@ export const learnerOptions: SegmentOption<Learner>[] = [
 
 export const regionOptions: SegmentOption<Region>[] = [
   { value: 'uk', label: 'UK' },
-  { value: 'us', label: 'USA' },
+  { value: 'us', label: 'US' },
   { value: 'eu', label: 'Europe' },
 ];
 
-/** Typical teaching hours by region. Replace with your real availability. */
+/** Open teaching hours by region, matching server/schedule.ts (UK 4–9 PM weekdays, 10 AM–6 PM weekends). */
 export const popularSlots: Record<Region, string> = {
-  uk: 'Popular slots: weekdays 4–8 PM, weekends 10 AM–6 PM (UK time)',
-  us: 'Popular slots: weekdays 4–8 PM Eastern, weekend mornings',
-  eu: 'Popular slots: weekdays 5–9 PM CET, weekends 11 AM–7 PM',
+  uk: 'Open: weekdays 4–9 PM, weekends 10 AM–6 PM (UK time)',
+  us: 'Open: weekdays 11 AM–4 PM, weekends 5 AM–1 PM (Eastern)',
+  eu: 'Open: weekdays 5–10 PM, weekends 11 AM–7 PM (CET)',
 };

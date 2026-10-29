@@ -12,12 +12,17 @@ const audienceOptions = [
 export function CoursesSection() {
   const [audience, setAudience] = useState<Audience>('kids');
   return (
-    <Section id="courses" tone="parchment" containerClassName="flex flex-col gap-12">
+    <Section id="courses" tone="white" containerClassName="flex flex-col gap-12">
       <div className="flex flex-wrap items-end justify-between gap-6">
         <SectionHeading
           align="left"
           eyebrow="Courses"
-          title="A clear path from the first letter to beautiful recitation"
+          title={
+            <>
+              From the first letter to <em>beautiful recitation</em>
+            </>
+          }
+          description="Four clear courses. In the free class your teacher listens, then recommends exactly where to start."
         />
         <SegmentedControl
           label="Show courses for"
@@ -27,7 +32,7 @@ export function CoursesSection() {
           onChange={setAudience}
         />
       </div>
-      <ul className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5.5">
+      <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-5">
         {courses[audience].map((course, i) => (
           <Reveal as="li" key={`${audience}-${course.id}`} delay={i * 80} className="flex">
             <CourseCard course={course} />

@@ -9,22 +9,22 @@ const styles = {
   /** Separate pill buttons (course chips, review filters). */
   chips: {
     group: 'flex flex-wrap gap-2',
-    item: 'min-h-11 rounded-[10px] border-[1.5px] px-3.5 text-sm',
-    on: 'border-brand bg-brand text-white font-bold',
-    off: 'border-line-strong bg-white text-ink font-semibold hover:border-brand/50',
+    item: 'min-h-10 rounded-full border px-4 text-sm',
+    on: 'border-brand bg-brand text-white font-bold shadow-[0_6px_14px_-8px_rgb(12_122_91/0.8)]',
+    off: 'border-line-strong bg-white text-ink font-semibold hover:border-brand/40',
   },
   /** Joined track (learner / region / currency). */
   track: {
-    group: 'flex gap-1.5 rounded-xl bg-cream p-1',
-    item: 'min-h-10 flex-1 rounded-[9px] px-3 text-sm',
+    group: 'flex gap-1 rounded-full bg-cream p-1',
+    item: 'min-h-9 flex-1 rounded-full px-3 text-sm',
     on: 'bg-white text-ink font-bold shadow-[0_2px_6px_rgb(10_42_36/0.12)]',
     off: 'text-muted font-semibold hover:text-ink',
   },
   /** Track with a solid selected state. */
   solid: {
-    group: 'inline-flex gap-1 rounded-[14px] border border-line bg-white p-1',
-    item: 'min-h-11 rounded-[10px] px-5 text-[15px]',
-    on: 'bg-brand text-white font-bold',
+    group: 'inline-flex gap-1 rounded-full border border-line bg-white p-1 shadow-card',
+    item: 'min-h-10 rounded-full px-5 text-[15px]',
+    on: 'bg-ink text-white font-bold',
     off: 'text-ink font-semibold hover:bg-cream',
   },
   /** Vertical list on dark background. */

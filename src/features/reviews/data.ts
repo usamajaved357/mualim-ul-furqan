@@ -44,14 +44,14 @@ export const milestones: Milestone[] = [];
 export const trackRecord = [
   { value: `${site.teacher.yearsTeaching} years`, label: 'teaching the Quran' },
   { value: site.teacher.studentsTaught, label: 'students taught' },
-  { value: site.teacher.lecturesDelivered, label: 'lectures delivered' },
+  { value: site.teacher.lecturesDelivered, label: 'lessons delivered' },
   { value: site.families, label: 'families who trust us' },
 ];
 
 /** What a parent can check for themselves in the free trial. Only promises the site already makes. */
 export const trialChecks = [
-  'One-on-one and live on Google Meet: just your child and the teacher',
-  'Patient correction of pronunciation (makharij) from the first lesson',
-  'Parents are welcome to sit in and watch',
-  'No card needed. You only pay if you choose a plan',
+  'A live, one-on-one lesson on Google Meet: just your child and the teacher',
+  'Patient, encouraging correction of pronunciation (makharij) from minute one',
+  'A clear starting level and a plan for the weeks ahead',
+  'No card needed. You only pay if you decide to continue',
 ];

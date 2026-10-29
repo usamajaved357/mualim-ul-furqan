@@ -4,11 +4,15 @@ import { leadTeacher } from './data';
 
 export function TeachersSection() {
   return (
-    <Section id="teachers" containerClassName="flex flex-col gap-12">
+    <Section id="teachers" tone="parchment" containerClassName="flex flex-col gap-12">
       <SectionHeading
         eyebrow="Your teacher"
-        title="Meet your teacher before you pay"
-        description="One teacher, every week. Your free trial is with the same Qari who will teach you."
+        title={
+          <>
+            Learn with <em>{leadTeacher.name}</em>
+          </>
+        }
+        description="The teacher in your free class is the teacher you keep. No hand-offs, no surprises."
       />
       <Reveal className="mx-auto w-full max-w-[1080px]">
         <TeacherCard teacher={leadTeacher} />

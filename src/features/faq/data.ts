@@ -1,19 +1,19 @@
 export const faqs = [
   {
     q: 'How old does my child need to be?',
-    a: 'Children can start from age 5. Adults of any age are welcome too.',
+    a: 'Children usually start from age 5. Adults of any age are very welcome, including complete beginners.',
   },
   {
     q: 'What do we need for the classes?',
-    a: 'A phone, tablet or laptop with a camera, headphones if possible and a stable internet connection. Classes run on Google Meet: open the link in your browser or the free Meet app, no account needed.',
+    a: 'A phone, tablet or laptop with a camera, headphones if possible, and a stable internet connection. Classes run on Google Meet: open the link in your browser or the free Meet app, no account needed.',
   },
   {
-    q: 'Which timings are available?',
-    a: 'After-school evenings and weekends in UK, US and European time. The booking calendar shows open slots in your own time zone, and the Google Meet link is emailed to you as soon as you book.',
+    q: 'Which times are available?',
+    a: 'After-school evenings and weekends in UK and European time, plus daytime and weekend-morning slots for the US. The booking calendar shows every open slot in your own time zone, and your Google Meet link is emailed as soon as you book.',
   },
   {
     q: "Can I sit in on my child's class?",
-    a: 'Yes. Parents are always welcome to join or watch any class.',
+    a: 'Yes, always. Join the same Google Meet link from anywhere, or sit beside your child. Nothing happens behind closed doors.',
   },
   {
     q: 'Are classes recorded?',
@@ -25,6 +25,6 @@ export const faqs = [
   },
   {
     q: 'How do I pay?',
-    a: "Monthly, in advance, by [card / PayPal]. You only pay after the free trial, once you've chosen a plan.",
+    a: "Monthly, in advance, by [card / PayPal]. You only pay after the free class, once you've chosen a plan.",
   },
 ] as const;

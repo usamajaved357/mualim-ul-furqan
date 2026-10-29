@@ -1,50 +1,74 @@
 import type { ComponentType } from 'react';
-import { Reveal, Section, SectionHeading } from '@/components/ui';
+import { ButtonLink, Reveal, Section, SectionHeading } from '@/components/ui';
+import { anchors, site } from '@/config/site';
 import { CallIllustration, ProgressIllustration, SlotsIllustration } from './illustrations';
 
-const steps: { title: string; body: string; Illustration: ComponentType }[] = [
+const steps: { title: string; body: string; Illustration: ComponentType; tint: string }[] = [
   {
-    title: 'Book a free trial',
-    body: 'Choose a time that suits you. The calendar shows open slots in your own time zone.',
+    title: 'Pick a time',
+    body: 'Choose a free 30-minute slot in the calendar. Times are shown in your own time zone.',
     Illustration: SlotsIllustration,
+    tint: 'bg-mint',
   },
   {
     title: 'Meet your teacher',
-    body: 'A relaxed 30-minute class on Google Meet. We hear your child read and find the right starting point.',
+    body: `Join on Google Meet. ${site.teacher.name} listens, gently assesses and finds the right starting point.`,
     Illustration: CallIllustration,
+    tint: 'bg-sky',
   },
   {
-    title: 'Learn & track progress',
-    body: "Choose a monthly plan only if you're happy. Same teacher, fixed weekly times, a report every month.",
+    title: 'Continue only if you love it',
+    body: 'Pick a monthly plan if you are happy. Same teacher, fixed weekly times, a report every month.',
     Illustration: ProgressIllustration,
+    tint: 'bg-sand',
   },
 ];
 
 export function HowItWorks() {
   return (
-    <Section id="how" containerClassName="flex flex-col gap-13">
-      <SectionHeading eyebrow="How it works" title="Start learning in three simple steps" />
-      <ol className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6.5">
-        {steps.map(({ title, body, Illustration }, i) => (
+    <Section id="how" tone="parchment" containerClassName="flex flex-col gap-14">
+      <SectionHeading
+        eyebrow="How it works"
+        title={
+          <>
+            Your first lesson, <em>in three easy steps</em>
+          </>
+        }
+        description="No forms to wait on and no sales calls. Book a time, get your Google Meet link by email, and join."
+      />
+      <ol className="relative grid gap-5 md:grid-cols-3">
+        <span
+          aria-hidden
+          className="border-line-strong absolute top-[118px] right-[16%] left-[16%] hidden border-t-2 border-dashed md:block"
+        />
+        {steps.map(({ title, body, Illustration, tint }, i) => (
           <Reveal
             as="li"
             key={title}
             delay={i * 100}
-            className="lift border-line flex flex-col overflow-hidden rounded-[26px] border bg-white"
+            className="lift border-line relative flex flex-col overflow-hidden rounded-[28px] border bg-white p-3"
           >
-            <div className="bg-parchment flex h-[210px] items-center justify-center p-6.5" aria-hidden>
+            <div
+              className={`flex h-[220px] items-center justify-center rounded-[22px] p-6 ${tint}`}
+              aria-hidden
+            >
               <Illustration />
             </div>
-            <div className="flex flex-col gap-2.5 p-7">
-              <span className="text-bronze text-[13px] font-extrabold tracking-[0.1em]">
-                STEP {String(i + 1).padStart(2, '0')}
+            <div className="flex flex-col gap-2.5 px-4 pt-5 pb-4">
+              <span className="bg-ink font-display flex size-9 items-center justify-center rounded-full text-sm font-bold text-white">
+                {i + 1}
               </span>
-              <h3 className="text-[22px] font-extrabold tracking-[-0.02em]">{title}</h3>
-              <p className="text-muted">{body}</p>
+              <h3 className="text-[24px] leading-tight">{title}</h3>
+              <p className="text-muted text-[15px]">{body}</p>
             </div>
           </Reveal>
         ))}
       </ol>
+      <div className="flex justify-center">
+        <ButtonLink href={anchors.book} size="lg" iconRight="arrow-right" trackAs="Lead">
+          Book your free class
+        </ButtonLink>
+      </div>
     </Section>
   );
 }

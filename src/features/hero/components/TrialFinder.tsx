@@ -1,24 +1,16 @@
 import { anchors } from '@/config/site';
-import { setBookingIntent } from '@/lib/bookingIntent';
 import { ButtonLink, SegmentedControl } from '@/components/ui';
+import { setBookingIntent } from '@/lib/bookingIntent';
 import { courseOptions, learnerOptions, regionOptions } from '../data';
 import { useTrialFinder } from '../hooks/useTrialFinder';
-
-function StepLabel({ n, children }: { n: number; children: string }) {
-  return (
-    <p className="text-muted text-[13px] font-bold tracking-[0.08em] uppercase">
-      {n} · {children}
-    </p>
-  );
-}
 
 /** Three quick choices that personalise the free-trial call to action. */
 export function TrialFinder() {
   const finder = useTrialFinder();
   return (
-    <div className="border-line flex max-w-[640px] flex-col gap-4 rounded-[22px] border bg-white p-5 shadow-[0_30px_60px_-36px_rgb(10_42_36/0.45)]">
+    <div className="border-line shadow-float flex max-w-[620px] flex-col gap-4 rounded-[28px] border bg-white/90 p-4 backdrop-blur sm:p-5">
       <div className="flex flex-col gap-2">
-        <StepLabel n={1}>Choose a course</StepLabel>
+        <p className="text-muted text-[13px] font-bold">What would you like to learn?</p>
         <SegmentedControl
           label="Course"
           options={courseOptions}
@@ -26,10 +18,9 @@ export function TrialFinder() {
           onChange={finder.setCourse}
         />
       </div>
-
-      <div className="flex flex-wrap gap-4">
-        <div className="flex min-w-[200px] flex-1 flex-col gap-2">
-          <StepLabel n={2}>Who is learning?</StepLabel>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div className="flex flex-col gap-2">
+          <p className="text-muted text-[13px] font-bold">Who is learning?</p>
           <SegmentedControl
             label="Learner"
             variant="track"
@@ -38,8 +29,8 @@ export function TrialFinder() {
             onChange={finder.setLearner}
           />
         </div>
-        <div className="flex min-w-[220px] flex-1 flex-col gap-2">
-          <StepLabel n={3}>Where are you?</StepLabel>
+        <div className="flex flex-col gap-2">
+          <p className="text-muted text-[13px] font-bold">Where are you?</p>
           <SegmentedControl
             label="Region"
             variant="track"
@@ -49,25 +40,24 @@ export function TrialFinder() {
           />
         </div>
       </div>
-
-      <div className="flex flex-wrap items-center justify-between gap-3.5 border-t border-[#f0eadd] pt-4">
-        <div className="flex flex-col leading-snug" aria-live="polite">
-          <span className="text-[15px] font-bold">{finder.summary}</span>
+      <div className="bg-mint flex flex-wrap items-center justify-between gap-3 rounded-[20px] p-2 pl-4">
+        <div className="flex min-w-0 flex-col leading-snug" aria-live="polite">
+          <span className="text-brand text-[15px] font-bold">{finder.summary}</span>
           <span className="text-muted text-[13px]">{finder.slots}</span>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex gap-1.5">
           <ButtonLink
             href={finder.whatsappHref}
-            variant="soft"
+            variant="outline"
             iconLeft="whatsapp"
             trackAs="Contact"
             aria-label="Ask on WhatsApp"
+            className="px-4"
           >
-            Ask
+            <span className="sr-only">Ask</span>
           </ButtonLink>
           <ButtonLink
             href={anchors.book}
-            size="lg"
             iconRight="arrow-right"
             trackAs="Lead"
             onClick={() => setBookingIntent(finder.selection)}
