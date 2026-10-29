@@ -5,3 +5,8 @@ dist
 *.log
 .DS_Store
 coverage
+
+# Project notes and Claude Code setup: kept on this machine only
+docs/
+CLAUDE.md
+.claude/

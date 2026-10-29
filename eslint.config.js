@@ -6,7 +6,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
 import tseslint from 'typescript-eslint';
 
 /* ------------------------------------------------------------------
-   Architecture boundaries (see docs/ARCHITECTURE.md)
+   Architecture boundaries
    pages → features → components · lib · hooks · config · types
    ------------------------------------------------------------------ */
 const noFeatures = {
