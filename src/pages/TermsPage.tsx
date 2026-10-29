@@ -4,7 +4,11 @@ import { LegalPage } from './LegalPage';
 /** Template only: fill in your real policies before launch. */
 export function TermsPage() {
   return (
-    <LegalPage title="Terms of service" updated="[Date]">
+    <LegalPage
+      title="Terms of service"
+      updated="[Date]"
+      intro="The simple rules for free trials, payments, rescheduling and keeping children safe online."
+    >
       <p>These terms apply to classes booked with {site.name}.</p>
       <h2>Free trial</h2>
       <p>Your first 30-minute class is free and you are under no obligation to continue.</p>

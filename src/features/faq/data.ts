@@ -5,11 +5,11 @@ export const faqs = [
   },
   {
     q: 'What do we need for the classes?',
-    a: 'A phone, tablet or laptop with a camera, headphones if possible and a stable internet connection. Classes run on Zoom.',
+    a: 'A phone, tablet or laptop with a camera, headphones if possible and a stable internet connection. Classes run on Google Meet: open the link in your browser or the free Meet app, no account needed.',
   },
   {
     q: 'Which timings are available?',
-    a: 'After-school evenings and weekends in UK, US and European time. The booking calendar shows open slots in your own time zone.',
+    a: 'After-school evenings and weekends in UK, US and European time. The booking calendar shows open slots in your own time zone, and the Google Meet link is emailed to you as soon as you book.',
   },
   {
     q: "Can I sit in on my child's class?",

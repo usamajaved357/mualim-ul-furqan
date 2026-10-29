@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 /* ------------------------------------------------------------------
-   Design tokens — Mulaim-ul-Furqan brand
+   Design tokens — Mualim Ul Furqan brand
    ------------------------------------------------------------------ */
 @theme {
   --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
@@ -34,6 +34,13 @@
   --color-live: #6fd3a8;
   --color-rec: #e0605a;
   --color-whatsapp: #1f8f5f;
+
+  /* Video-call UI (classroom mockups) */
+  --color-call: #1f2124;
+  --color-call-2: #2b2d31;
+  --color-call-3: #3c4043;
+  --color-call-blue: #8ab4f8;
+  --color-hangup: #ea4335;
 
   --radius-card: 1.5rem;
 
@@ -131,6 +138,17 @@
     outline: 3px solid var(--color-gold-deep);
     outline-offset: 2px;
   }
+  /* Arabic: tracking breaks cursive joins, so it is always reset; ligatures and kerning stay on. */
+  :where([lang='ar']) {
+    letter-spacing: 0;
+    font-kerning: normal;
+    font-feature-settings:
+      'kern' 1,
+      'liga' 1,
+      'calt' 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: auto;
+  }
   summary {
     list-style: none;
   }
@@ -149,6 +167,22 @@
   background-clip: text;
   color: transparent;
   animation: var(--animate-shimmer);
+}
+
+/* Quranic text: Uthmani script needs generous leading for the stacked harakat and pause marks. */
+@utility text-quran {
+  font-family: var(--font-quran);
+  line-height: 2.15;
+  word-spacing: 0.06em;
+  text-wrap: balance;
+}
+
+/* End-of-ayah ornament: U+06DD followed by the ayah number, which Amiri Quran draws as one enclosed mark. */
+@utility ayah-mark {
+  font-family: var(--font-quran);
+  color: var(--color-bronze);
+  margin-inline: 0.18em;
+  white-space: nowrap;
 }
 
 @utility lift {

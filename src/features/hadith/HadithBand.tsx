@@ -7,7 +7,11 @@ export function HadithBand() {
         as="figure"
         className="m-0 mx-auto flex max-w-[880px] flex-col items-center gap-4.5 text-center"
       >
-        <p lang="ar" className="font-quran text-brand text-[clamp(30px,4vw,50px)] leading-[1.7]">
+        <p
+          lang="ar"
+          dir="rtl"
+          className="font-naskh text-brand text-[clamp(30px,4vw,50px)] leading-[1.9] font-bold"
+        >
           خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ
         </p>
         <blockquote className="m-0 text-[clamp(21px,2.4vw,28px)] leading-snug font-bold tracking-[-0.015em]">

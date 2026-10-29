@@ -4,7 +4,11 @@ import { LegalPage } from './LegalPage';
 /** Template only: have it reviewed for UK GDPR / EU GDPR / US requirements before launch. */
 export function PrivacyPage() {
   return (
-    <LegalPage title="Privacy policy" updated="[Date]">
+    <LegalPage
+      title="Privacy policy"
+      updated="[Date]"
+      intro="What we collect when you book or study with us, why, and how to have it deleted."
+    >
       <p>
         {site.name} ("we") provides online Quran classes. This page explains what personal information we
         collect and how we use it.
@@ -18,6 +22,12 @@ export function PrivacyPage() {
       <p>
         To schedule and teach classes, send progress reports and reply to your messages. We never sell your
         data.
+      </p>
+      <h2>Bookings &amp; Google Meet</h2>
+      <p>
+        When you book a class, your name, email and chosen time are added to our Google Calendar so a private
+        Google Meet link can be created, and a confirmation email is sent to you. Google processes this
+        information under its own privacy policy.
       </p>
       <h2>Recordings</h2>
       <p>Classes are only recorded if you ask, and recordings are shared privately with you.</p>

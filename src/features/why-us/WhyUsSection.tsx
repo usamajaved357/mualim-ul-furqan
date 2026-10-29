@@ -16,14 +16,18 @@ const tiles: { icon: IconName; title: string; body: string }[] = [
   {
     icon: 'shield',
     title: 'Safe & private',
-    body: 'Private Zoom links, no public chat, recordings only if you ask.',
+    body: 'Private Google Meet links for each family, no public chat, recordings only if you ask.',
   },
   {
     icon: 'award',
     title: 'Monthly progress report',
     body: "What was covered, what's improving and what to practise at home.",
   },
-  { icon: 'phone', title: 'Any device', body: 'Phone, tablet or laptop. Just the free Zoom app.' },
+  {
+    icon: 'phone',
+    title: 'Any device',
+    body: 'Phone, tablet or laptop. Google Meet runs in the browser or the free app.',
+  },
 ];
 
 /** Example class time shown in three cities (illustrative). */
@@ -52,8 +56,12 @@ export function WhyUsSection() {
             </p>
           </div>
           <div className="border-gold/35 relative flex flex-[1_1_200px] items-center gap-3 rounded-[18px] border bg-white/10 p-3.5">
-            <span className="bg-gold text-night flex size-13.5 shrink-0 items-center justify-center rounded-full">
-              <Icon name="user" size={26} strokeWidth={1.6} />
+            <span className="bg-gold flex size-14 shrink-0 items-center justify-center rounded-full p-0.5">
+              <img
+                src={site.teacher.photo}
+                alt=""
+                className="size-full rounded-full object-cover object-top"
+              />
             </span>
             <span className="flex flex-col leading-snug">
               <span className="font-extrabold">{site.teacher.name}</span>

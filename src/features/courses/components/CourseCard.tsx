@@ -8,7 +8,11 @@ export function CourseCard({ course }: { course: Course }) {
     <article className="lift border-line flex flex-col gap-3.5 rounded-3xl border bg-white p-6.5">
       <div className="bg-night relative flex h-32 items-center justify-center overflow-hidden rounded-[18px]">
         <GirihPattern tone="dark" />
-        <span lang="ar" className="font-naskh text-gold relative text-[44px] leading-snug font-bold">
+        <span
+          lang="ar"
+          dir="rtl"
+          className="font-naskh text-gold relative px-4 text-center text-[clamp(32px,3vw,42px)] leading-[1.7] font-bold"
+        >
           {course.arabic}
         </span>
         <span className="absolute top-2.5 right-2.5 rounded-full bg-white/12 px-2.5 py-1 text-[11px] font-extrabold tracking-[0.06em] text-white uppercase">

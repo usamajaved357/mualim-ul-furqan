@@ -6,8 +6,11 @@ import { env } from './env';
  * Replace every value in [brackets] before going live.
  */
 export const site = {
-  name: 'Mulaim-ul-Furqan',
-  arabicName: 'معلم الفرقان',
+  name: 'Mualim Ul Furqan',
+  /** Logo lockup: shadda only, so the Diwani letterforms stay clean at small sizes. */
+  arabicName: 'معلّم الفرقان',
+  /** Fully vocalised name for large display (booking card, footer). */
+  arabicNameFull: 'مُعَلِّمُ الْفُرْقَانِ',
   tagline: 'Online Quran Academy',
   description:
     'Live one-on-one Noorani Qaida, Nazra, Tajweed and Duas classes for kids and adults in the UK, US and Europe.',
@@ -21,6 +24,7 @@ export const site = {
     lecturesDelivered: '2,000+',
     mosque: '[Your Mosque, City]',
     languages: '[English · Urdu]',
+    photo: '/teachers/qari-abu-sufyan.jpg',
   },
 
   contact: {
@@ -40,7 +44,8 @@ export const site = {
   links: {
     googleReviews: '#reviews',
     trustpilot: '#reviews',
-    zoomTest: 'https://zoom.us/test',
+    /** Google Meet's green room lets families check camera and mic before joining. */
+    meetTest: 'https://meet.google.com/',
   },
 } as const;
 

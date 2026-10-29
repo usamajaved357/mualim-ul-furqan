@@ -1,4 +1,5 @@
 import { anchors } from '@/config/site';
+import { setBookingIntent } from '@/lib/bookingIntent';
 import { ButtonLink, SegmentedControl } from '@/components/ui';
 import { courseOptions, learnerOptions, regionOptions } from '../data';
 import { useTrialFinder } from '../hooks/useTrialFinder';
@@ -64,7 +65,13 @@ export function TrialFinder() {
           >
             Ask
           </ButtonLink>
-          <ButtonLink href={anchors.book} size="lg" iconRight="arrow-right" trackAs="Lead">
+          <ButtonLink
+            href={anchors.book}
+            size="lg"
+            iconRight="arrow-right"
+            trackAs="Lead"
+            onClick={() => setBookingIntent(finder.selection)}
+          >
             Book free trial
           </ButtonLink>
         </div>

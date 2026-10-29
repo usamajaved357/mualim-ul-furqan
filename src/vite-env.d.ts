@@ -2,7 +2,6 @@
 
 interface ImportMetaEnv {
   readonly VITE_WHATSAPP_NUMBER?: string;
-  readonly VITE_CAL_LINK?: string;
   readonly VITE_META_PIXEL_ID?: string;
   readonly VITE_SITE_URL?: string;
 }

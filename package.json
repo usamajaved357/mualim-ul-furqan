@@ -1,9 +1,9 @@
 {
-  "name": "mulaim-ul-furqan",
+  "name": "mualim-ul-furqan",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Mulaim-ul-Furqan – online one-on-one Quran classes (Noorani Qaida, Nazra, Tajweed, Duas).",
+  "description": "Mualim Ul Furqan – online one-on-one Quran classes (Noorani Qaida, Nazra, Tajweed, Duas).",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -15,7 +15,8 @@
     "test:watch": "vitest",
     "format:check": "prettier --check .",
     "og:render": "node scripts/og-image/render.mjs",
-    "check": "npm run format:check && npm run typecheck && npm run lint && npm run test && npm run build"
+    "check": "npm run format:check && npm run typecheck && npm run lint && npm run test && npm run build",
+    "google:auth": "node scripts/google-auth/get-refresh-token.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

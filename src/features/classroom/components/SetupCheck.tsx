@@ -19,7 +19,7 @@ export function SetupCheck() {
             </li>
           ))}
         </ul>
-        <ButtonLink href={site.links.zoomTest} variant="gold" size="sm" className="min-h-11">
+        <ButtonLink href={site.links.meetTest} variant="gold" size="sm" className="min-h-11">
           Test your setup
         </ButtonLink>
       </div>

@@ -8,12 +8,18 @@ export interface ClassroomFeature {
 
 export const leftFeatures: ClassroomFeature[] = [
   { icon: 'book', title: 'Shared mushaf', body: "Each ayah highlighted as it's read." },
-  { icon: 'pen', title: 'Tajweed whiteboard', body: 'Makharij and rules drawn out, colour-coded.' },
+  {
+    icon: 'pen',
+    title: 'Tajweed rules, colour-coded',
+    body: 'Makharij and rules marked on the shared page.',
+  },
+  { icon: 'captions', title: 'Live captions', body: 'Every correction written on screen as it is said.' },
 ];
 
 export const rightFeatures: ClassroomFeature[] = [
-  { icon: 'record', title: 'Lesson recordings', body: 'On request, to practise along at home.' },
+  { icon: 'video', title: 'Private Google Meet', body: 'Your own link for every class, sent by email.' },
   { icon: 'whatsapp', title: 'Homework on WhatsApp', body: 'Practice notes and audio after each class.' },
+  { icon: 'record', title: 'Lesson recordings', body: 'On request, to practise along at home.' },
 ];
 
 export const tajweedTags = [
@@ -22,4 +28,13 @@ export const tajweedTags = [
   { label: 'Qalqalah', className: 'bg-[#fbe7e5] text-[#8e2f2b]' },
 ] as const;
 
-export const setupChecklist = ['Camera', 'Microphone', 'Zoom app'] as const;
+/** Example call shown in the classroom mockup (illustrative names and code). */
+export const classroomCall = {
+  code: 'mqf-tjwd-nun',
+  time: '5:30 PM',
+  student: 'Aisha · student',
+  parent: 'Mum · watching',
+  caption: 'Beautiful! Now hold the ghunnah for two counts on the noon.',
+} as const;
+
+export const setupChecklist = ['Camera', 'Microphone', 'Google Meet'] as const;

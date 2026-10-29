@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/cn';
+import { Ornament } from '@/components/decor/Ornament';
 import { Eyebrow } from './Eyebrow';
 import { Reveal } from './Reveal';
 
@@ -39,11 +40,14 @@ export function SectionHeading({
           {eyebrow}
         </Eyebrow>
       )}
-      <Tag className="max-w-[780px] text-[clamp(32px,3.8vw,52px)] leading-[1.08] font-extrabold tracking-[-0.035em]">
+      <Tag className="max-w-[780px] text-[clamp(32px,3.8vw,52px)] leading-[1.08] font-extrabold tracking-[-0.035em] text-balance">
         {title}
       </Tag>
+      <Ornament tone={tone} className={align === 'center' ? 'self-center' : 'self-start'} />
       {description && (
-        <p className={cn('max-w-[620px]', tone === 'dark' ? 'text-mist' : 'text-muted')}>{description}</p>
+        <p className={cn('max-w-[620px] text-[18px]', tone === 'dark' ? 'text-mist' : 'text-muted')}>
+          {description}
+        </p>
       )}
     </Reveal>
   );

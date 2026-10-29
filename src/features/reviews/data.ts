@@ -50,7 +50,7 @@ export const trackRecord = [
 
 /** What a parent can check for themselves in the free trial. Only promises the site already makes. */
 export const trialChecks = [
-  'One-on-one and live on Zoom: just your child and the teacher',
+  'One-on-one and live on Google Meet: just your child and the teacher',
   'Patient correction of pronunciation (makharij) from the first lesson',
   'Parents are welcome to sit in and watch',
   'No card needed. You only pay if you choose a plan',

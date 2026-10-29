@@ -19,8 +19,12 @@ export function Hero() {
       />
 
       <Container className="relative flex flex-wrap items-center gap-14 pt-14 pb-20 lg:pt-16 lg:pb-24">
-        <div className="flex min-w-0 flex-[999_1_540px] flex-col gap-5.5">
-          <p lang="ar" className="animate-fade-up font-quran text-bronze text-[26px] leading-relaxed">
+        <div className="flex min-w-0 flex-[1.15_1_540px] flex-col gap-5.5">
+          <p
+            lang="ar"
+            dir="rtl"
+            className="animate-fade-up font-quran text-bronze self-start text-[30px] leading-[1.9]"
+          >
             بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
           </p>
           <div className="animate-fade-up [animation-delay:80ms]">
@@ -47,7 +51,7 @@ export function Hero() {
           </ul>
         </div>
 
-        <div className="animate-fade-up min-w-0 flex-[1_1_400px] [animation-delay:320ms]">
+        <div className="animate-fade-up min-w-0 flex-[1_1_440px] [animation-delay:320ms]">
           <HeroVisual />
         </div>
       </Container>

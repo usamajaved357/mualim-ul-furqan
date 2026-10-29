@@ -15,6 +15,8 @@ export interface Teacher {
   acceptingStudents: boolean;
   /** Path to a photo in /public, e.g. "/teachers/qari.jpg". */
   photo?: string;
+  /** Recitation sample (audio/video URL). The play button stays hidden until this is set. */
+  recitation?: string;
 }
 
 export const leadTeacher: Teacher = {
@@ -28,4 +30,5 @@ export const leadTeacher: Teacher = {
   languages: site.teacher.languages,
   availability: ['Mon–Fri · 4–9 PM', 'Sat–Sun · 10 AM–6 PM'],
   acceptingStudents: true,
+  photo: site.teacher.photo,
 };

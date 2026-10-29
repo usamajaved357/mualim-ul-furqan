@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { cn } from '@/lib/cn';
-import { anchors, navLinks } from '@/config/site';
+import { anchors, navLinks, site } from '@/config/site';
 import { Logo } from '@/components/brand/Logo';
 import { ButtonLink, Icon } from '@/components/ui';
 
@@ -31,7 +31,7 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex max-w-[1260px] items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link to="/" aria-label="Mulaim-ul-Furqan home" className="no-underline">
+        <Link to="/" aria-label={`${site.name} home`} className="no-underline">
           <Logo />
         </Link>
 

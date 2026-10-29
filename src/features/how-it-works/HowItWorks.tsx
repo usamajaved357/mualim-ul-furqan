@@ -10,7 +10,7 @@ const steps: { title: string; body: string; Illustration: ComponentType }[] = [
   },
   {
     title: 'Meet your teacher',
-    body: 'A relaxed 30-minute class on Zoom. We hear your child read and find the right starting point.',
+    body: 'A relaxed 30-minute class on Google Meet. We hear your child read and find the right starting point.',
     Illustration: CallIllustration,
   },
   {
