@@ -1,4 +1,5 @@
-import { plans } from '../data';
+import type { CurrencyCode } from '@/types/domain';
+import { hifzPlan, plans, type Plan } from '../data';
 import { detectCurrency, formatPrice, pricePerClass } from './pricing';
 
 const [starter, regular, intensive] = plans;
@@ -27,5 +28,19 @@ describe('pricing', () => {
     expect(detectCurrency('en-US')).toBe('USD');
     expect(detectCurrency('ur')).toBe('USD');
     expect(detectCurrency(undefined)).toBe('USD');
+  });
+});
+
+describe('Hifz plan', () => {
+  it('prices each 45-minute lesson', () => {
+    expect(pricePerClass(hifzPlan, 'GBP')).toBe('£3.95');
+    expect(pricePerClass(hifzPlan, 'USD')).toBe('$4.95');
+  });
+
+  it('costs no more per minute than the Intensive plan', () => {
+    const perMinute = (p: Plan, c: CurrencyCode) => p.price[c] / (p.classesPerMonth * p.minutes);
+    for (const c of ['USD', 'GBP', 'EUR'] as const) {
+      expect(perMinute(hifzPlan, c)).toBeLessThanOrEqual(perMinute(intensive!, c));
+    }
   });
 });

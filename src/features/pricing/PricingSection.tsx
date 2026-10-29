@@ -1,7 +1,8 @@
 import { Icon, Reveal, Section, SectionHeading, SegmentedControl } from '@/components/ui';
 import { buildWhatsAppLink, whatsappMessages } from '@/lib/whatsapp';
+import { HifzPlanCard } from './components/HifzPlanCard';
 import { PlanCard } from './components/PlanCard';
-import { currencies, plans, pricingPerks } from './data';
+import { currencies, hifzPlan, plans, pricingPerks } from './data';
 import { useCurrency } from './hooks/useCurrency';
 
 export function PricingSection() {
@@ -16,7 +17,7 @@ export function PricingSection() {
               Simple monthly plans. <em>First class free.</em>
             </>
           }
-          description="Every lesson is 30 minutes, live and one-on-one. You only choose a plan after your free class."
+          description="Lessons are 30 minutes (45 for Hifz), live and one-on-one. You only choose a plan after your free class."
         />
         <SegmentedControl
           label="Currency"
@@ -34,6 +35,10 @@ export function PricingSection() {
           </Reveal>
         ))}
       </ul>
+
+      <Reveal>
+        <HifzPlanCard plan={hifzPlan} currency={currency} />
+      </Reveal>
 
       <Reveal as="ul" className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-3.5">
         {pricingPerks.map((perk) => (

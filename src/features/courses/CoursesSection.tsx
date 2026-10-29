@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Reveal, Section, SectionHeading, SegmentedControl } from '@/components/ui';
 import type { Audience } from '@/types/domain';
 import { CourseCard } from './components/CourseCard';
+import { HifzTeaser } from './components/HifzTeaser';
 import { courses } from './data';
 
 const audienceOptions = [
@@ -22,7 +23,7 @@ export function CoursesSection() {
               From the first letter to <em>beautiful recitation</em>
             </>
           }
-          description="Four clear courses. In the free class your teacher listens, then recommends exactly where to start."
+          description="Four core courses, plus a full Hifz programme. In the free class your teacher listens, then recommends exactly where to start."
         />
         <SegmentedControl
           label="Show courses for"
@@ -39,6 +40,9 @@ export function CoursesSection() {
           </Reveal>
         ))}
       </ul>
+      <Reveal>
+        <HifzTeaser />
+      </Reveal>
     </Section>
   );
 }

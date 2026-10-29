@@ -15,4 +15,5 @@ export const whatsappMessages = {
   general: 'Assalamu alaikum, I would like to know more about your Quran classes.',
   trial: 'Assalamu alaikum, I would like to book a free trial class.',
   customPlan: 'Assalamu alaikum, I need a custom plan (1 class a week / siblings).',
+  hifz: 'Assalamu alaikum, I would like to know more about your Hifz programme.',
 } as const;

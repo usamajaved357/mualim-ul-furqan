@@ -1,6 +1,6 @@
 import { isValidTimeZone } from './time';
 
-export const COURSES = ['Noorani Qaida', 'Nazra', 'Tajweed', 'Duas'] as const;
+export const COURSES = ['Noorani Qaida', 'Nazra', 'Tajweed', 'Hifz', 'Duas'] as const;
 export const LEARNERS = ['child', 'adult'] as const;
 
 export interface BookingRequest {

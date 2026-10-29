@@ -4,6 +4,7 @@ import { CoursesSection } from '@/features/courses';
 import { FaqSection, faqs } from '@/features/faq';
 import { HadithBand } from '@/features/hadith';
 import { Hero } from '@/features/hero';
+import { HifzSection } from '@/features/hifz';
 import { HowItWorks } from '@/features/how-it-works';
 import { PricingSection } from '@/features/pricing';
 import { ReviewsSection } from '@/features/reviews';
@@ -35,6 +36,7 @@ export function HomePage() {
       <StatsBar />
       <HowItWorks />
       <CoursesSection />
+      <HifzSection />
       <WhyUsSection />
       <ClassroomSection />
       <HadithBand />

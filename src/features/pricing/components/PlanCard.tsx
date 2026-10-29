@@ -26,7 +26,7 @@ export function PlanCard({ plan, currency }: { plan: Plan; currency: CurrencyCod
         <div>
           <h3 className="text-[26px] leading-tight">{plan.name}</h3>
           <p className={cn('text-[15px] font-semibold', featured ? 'text-sage' : 'text-muted')}>
-            {plan.classesPerWeek} classes a week
+            {plan.classesPerWeek} classes a week · {plan.minutes} min
           </p>
         </div>
         {featured && (

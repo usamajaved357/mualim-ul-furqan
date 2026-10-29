@@ -16,6 +16,10 @@ export const faqs = [
     a: 'Yes, always. Join the same Google Meet link from anywhere, or sit beside your child. Nothing happens behind closed doors.',
   },
   {
+    q: 'Do you offer Hifz (Quran memorisation) classes?',
+    a: 'Yes. Hifz runs five days a week in 45-minute one-on-one lessons, each with new memorisation (sabaq), recent revision (sabqi) and long-term revision (manzil). Students need to read the Quran fluently first; if they are not there yet, we start with Nazra. Book a free assessment to agree a realistic pace.',
+  },
+  {
     q: 'Are classes recorded?',
     a: 'Only if you ask. A recording can be shared with you privately so your child can practise along at home.',
   },

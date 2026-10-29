@@ -5,7 +5,7 @@ import { Reveal } from './Reveal';
 
 interface SectionHeadingProps {
   eyebrow?: string;
-  /** Wrap the accent words in <em> to set them in the italic serif. */
+  /** Wrap the accent words in <em> to colour them (brand green, or gold on dark). */
   title: ReactNode;
   description?: ReactNode;
   align?: 'center' | 'left';

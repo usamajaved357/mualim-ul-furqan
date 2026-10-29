@@ -13,7 +13,7 @@ export const site = {
   arabicNameFull: 'مُعَلِّمُ الْفُرْقَانِ',
   tagline: 'Online Quran Academy',
   description:
-    'Live one-on-one Noorani Qaida, Nazra, Tajweed and Duas classes for kids and adults in the UK, US and Europe.',
+    'Live one-on-one Noorani Qaida, Nazra, Tajweed, Hifz and Duas classes for kids and adults in the UK, US and Europe.',
   url: env.siteUrl,
 
   teacher: {
@@ -50,6 +50,7 @@ export const site = {
 
 export const navLinks = [
   { label: 'Courses', href: '/#courses' },
+  { label: 'Hifz', href: '/#hifz' },
   { label: 'How it works', href: '/#how' },
   { label: 'Classroom', href: '/#classroom' },
   { label: 'Teachers', href: '/#teachers' },
@@ -61,4 +62,6 @@ export const navLinks = [
 /** In-page anchors used across sections. */
 export const anchors = {
   book: '/#book',
+  hifz: '/#hifz',
+  pricing: '/#pricing',
 } as const;

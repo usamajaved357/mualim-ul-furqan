@@ -26,9 +26,9 @@ export const leadTeacher: Teacher = {
   rating: site.rating,
   years: site.teacher.yearsTeaching,
   students: site.teacher.studentsTaught,
-  subjects: ['Tajweed', 'Nazra', 'Noorani Qaida', 'Duas'],
+  subjects: ['Tajweed', 'Nazra', 'Hifz', 'Noorani Qaida', 'Duas'],
   languages: site.teacher.languages,
   availability: ['Mon–Fri · 4–9 PM', 'Sat–Sun · 10 AM–6 PM'],
   acceptingStudents: true,
-  photo: '/teachers/qari-abu-sufyan.webp',
+  photo: '/teachers/qari-abu-sufyan-v2.webp',
 };

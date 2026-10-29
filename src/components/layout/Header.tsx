@@ -37,19 +37,19 @@ export function Header() {
           <Logo />
         </Link>
 
-        <nav aria-label="Main" className="hidden items-center gap-1 text-[15px] font-semibold lg:flex">
+        <nav aria-label="Main" className="hidden items-center gap-1 text-[15px] font-semibold xl:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-ink/80 hover:text-ink hover:bg-cream rounded-full px-3.5 py-2 no-underline transition-colors"
+              className="text-ink/80 hover:text-ink hover:bg-cream rounded-full px-3.5 py-2 whitespace-nowrap no-underline transition-colors"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="ml-auto hidden items-center gap-2 md:flex xl:ml-0">
           <a
             href={buildWhatsAppLink(whatsappMessages.general)}
             aria-label="Chat on WhatsApp"
@@ -64,7 +64,7 @@ export function Header() {
 
         <button
           type="button"
-          className="bg-ink inline-flex size-11 items-center justify-center rounded-full text-white lg:hidden"
+          className="bg-ink inline-flex size-11 shrink-0 items-center justify-center rounded-full text-white xl:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? 'Close menu' : 'Open menu'}
@@ -77,7 +77,7 @@ export function Header() {
       {open && (
         <div
           id="mobile-menu"
-          className="border-line shadow-float mx-auto mt-2 max-w-[1260px] rounded-[28px] border bg-white p-3 lg:hidden"
+          className="border-line shadow-float mx-auto mt-2 max-w-[1260px] rounded-[28px] border bg-white p-3 xl:hidden"
         >
           <nav aria-label="Mobile" className="flex flex-col">
             {navLinks.map((link) => (

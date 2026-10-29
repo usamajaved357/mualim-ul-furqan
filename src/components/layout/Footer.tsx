@@ -11,6 +11,7 @@ const columns = [
       { label: 'Noorani Qaida', href: '/#courses' },
       { label: 'Nazra', href: '/#courses' },
       { label: 'Tajweed', href: '/#courses' },
+      { label: 'Hifz', href: '/#hifz' },
       { label: 'Daily Duas', href: '/#courses' },
     ],
   },

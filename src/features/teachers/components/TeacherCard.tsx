@@ -8,8 +8,8 @@ const ARCH = 'rounded-t-[999px] rounded-b-[30px]';
 
 /**
  * Cut-out portrait set into a mihrab arch: mint-to-emerald backdrop with a soft halo behind the head and an offset
- * sand arch behind for depth. The cut-out is tilted slightly toward the profile text and sits fully inside the
- * arch with headroom; it runs past the arch bottom so the photo's chest crop is never visible.
+ * sand arch behind for depth. The cut-out stands upright inside the arch with headroom; it runs past the arch bottom
+ * and its sides fade out, so the photo's shoulder and chest crop is never visible.
  */
 function Portrait({ teacher }: { teacher: Teacher }) {
   return (
@@ -34,13 +34,13 @@ function Portrait({ teacher }: { teacher: Teacher }) {
               src={teacher.photo}
               alt={`Portrait of ${teacher.name}`}
               width={1000}
-              height={1165}
+              height={1236}
               loading="lazy"
-              className="absolute -bottom-[6%] left-1/2 w-[86%] max-w-none origin-bottom -translate-x-1/2 rotate-[3deg] drop-shadow-[0_22px_28px_rgb(10_42_36/0.45)]"
+              className="absolute -bottom-[4%] left-1/2 w-[92%] max-w-none -translate-x-1/2 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)] drop-shadow-[0_22px_28px_rgb(10_42_36/0.35)]"
             />
             <div
               aria-hidden
-              className="from-brand-dark/55 absolute inset-x-0 bottom-0 h-[12%] bg-gradient-to-t to-transparent"
+              className="from-brand-dark/30 absolute inset-x-0 bottom-0 h-[10%] bg-gradient-to-t to-transparent"
             />
           </div>
         ) : (
@@ -100,11 +100,11 @@ export function TeacherCard({ teacher }: { teacher: Teacher }) {
             { label: 'Students', value: teacher.students },
             ...(teacher.rating
               ? [{ label: `${teacher.rating.count} reviews`, value: teacher.rating.score }]
-              : [{ label: 'Lesson length', value: '30 min' }]),
+              : [{ label: 'Lesson minutes', value: '30–45' }]),
           ].map((s) => (
             <div key={s.label} className="bg-parchment rounded-[20px] px-4 py-3.5">
               <dt className="text-muted text-xs font-bold">{s.label}</dt>
-              <dd className="font-display text-brand m-0 inline-flex items-center gap-1.5 text-[26px] font-bold tracking-[-0.03em]">
+              <dd className="font-display text-brand m-0 inline-flex items-center gap-1.5 text-[22px] font-bold tracking-[-0.03em] whitespace-nowrap sm:text-[26px]">
                 {teacher.rating && s.value === teacher.rating.score && <Star />}
                 {s.value}
               </dd>

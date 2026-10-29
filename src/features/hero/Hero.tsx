@@ -9,13 +9,16 @@ const promises = ['First class free', 'No card needed', 'Parents can watch every
 
 export function Hero() {
   return (
-    <section className="relative -mt-[76px] overflow-hidden pt-[76px]">
-      <Glow color="mint" className="-top-40 -right-40 size-[760px]" />
-      <Glow color="saffron" className="top-[45%] -left-60 size-[620px]" />
+    <section className="relative -mt-[76px] overflow-x-clip pt-[76px]">
+      {/* Runs past the hero and fades out, so it blends into the stats row instead of ending in a hard line. */}
       <div
         aria-hidden
-        className="absolute inset-0 [background-image:radial-gradient(rgb(15_31_26/0.07)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)] [background-size:22px_22px]"
-      />
+        className="pointer-events-none absolute inset-x-0 top-0 -bottom-44 overflow-hidden [mask-image:linear-gradient(to_bottom,black_62%,transparent)]"
+      >
+        <Glow color="mint" className="-top-40 -right-40 size-[760px]" />
+        <Glow color="saffron" className="top-[42%] -left-60 size-[620px]" />
+        <div className="absolute inset-0 [background-image:radial-gradient(rgb(15_31_26/0.07)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)] [background-size:22px_22px]" />
+      </div>
 
       <Container className="relative grid items-center gap-12 pt-12 pb-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-10 lg:pt-16 lg:pb-24">
         <div className="flex min-w-0 flex-col gap-6">
@@ -30,7 +33,7 @@ export function Hero() {
           </h1>
           <p className="animate-fade-up text-muted max-w-[560px] text-[19px] text-pretty [animation-delay:200ms]">
             Gentle, one-on-one classes with {site.teacher.name}, from the very first letter to beautiful
-            Tajweed. After-school and weekend times for families in the UK, US and Europe.
+            Tajweed and Hifz. After-school and weekend times for families in the UK, US and Europe.
           </p>
           <div className="animate-fade-up [animation-delay:300ms]">
             <TrialFinder />

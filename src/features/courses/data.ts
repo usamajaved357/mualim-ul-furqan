@@ -16,8 +16,20 @@ export const courseTints: Record<CourseId, { panel: string; ink: string }> = {
   qaida: { panel: 'bg-mint', ink: 'text-brand' },
   nazra: { panel: 'bg-sand', ink: 'text-bronze' },
   tajweed: { panel: 'bg-sky', ink: 'text-sky-ink' },
+  hifz: { panel: 'bg-rose', ink: 'text-rose-ink' },
   duas: { panel: 'bg-lilac', ink: 'text-lilac-ink' },
 };
+
+/** Wide card under the course grid that leads to the Hifz programme section. */
+export const hifzTeaser = {
+  arabic: 'حِفْظُ الْقُرْآنِ',
+  eyebrow: 'Ready for the next step?',
+  title: 'Hifz programme',
+  description:
+    'Memorise the Quran in daily one-on-one lessons, with revision built into every class so it stays memorised.',
+  facts: ['5 lessons a week', '45 minutes each', 'Ages 7+ and adults'],
+  cta: 'See the Hifz plan',
+} as const;
 
 export const courses: Record<Audience, Course[]> = {
   kids: [

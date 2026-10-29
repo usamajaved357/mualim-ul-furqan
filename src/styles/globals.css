@@ -5,8 +5,9 @@
    ------------------------------------------------------------------ */
 @theme {
   --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Bricolage Grotesque', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-display: 'Outfit', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  /* System serif, only for decorative quote marks (no web font download). */
+  --font-serif: Georgia, 'Times New Roman', ui-serif, serif;
   --font-quran: 'Amiri Quran', 'Amiri', serif;
   --font-naskh: 'Amiri', serif;
   --font-diwani: 'Ruwudu', 'Amiri', serif;
@@ -153,14 +154,12 @@
   :where(h1, h2, h3) {
     font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.025em;
   }
-  /* Accent words in headings: <em> is set in an elegant italic serif. */
+  /* Accent words in headings: same font, upright, in brand colour (SectionHeading switches to gold on dark). */
   :where(h1, h2, h3) em {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: -0.01em;
+    font-style: normal;
+    color: var(--color-brand);
   }
   ::selection {
     background: var(--color-gold);
