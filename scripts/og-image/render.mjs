@@ -21,7 +21,7 @@ const chromePath = process.env.CHROME_PATH ?? '/Applications/Google Chrome.app/C
 
 /** Resolves true only if both brand fonts actually loaded (an empty FontFace list means a fallback font). */
 const FONTS_READY = `Promise.all([
-  document.fonts.load('700 60px Ruwudu', 'معلم الفرقان'),
+  document.fonts.load('700 60px Marhey', 'معلم الفرقان'),
   document.fonts.load('800 66px "Plus Jakarta Sans"'),
 ]).then((sets) => document.fonts.ready.then(() => sets.every((faces) => faces.length > 0)))`;
 

@@ -8,7 +8,7 @@ interface LogoProps {
   className?: string;
 }
 
-/** Horizontal lockup: mark + Diwani Arabic name over the Latin name, both set to the same width. */
+/** Horizontal lockup: mark + Arabic wordmark over the Latin name, both set to the same width. */
 export function Logo({ tone = 'light', size = 'md', className }: LogoProps) {
   const dark = tone === 'dark';
   return (
@@ -19,7 +19,7 @@ export function Logo({ tone = 'light', size = 'md', className }: LogoProps) {
           lang="ar"
           dir="rtl"
           className={cn(
-            'font-diwani -mb-1 text-center leading-[1.45] font-bold',
+            'font-logo -mb-1 text-center leading-[1.45] font-bold',
             size === 'lg' ? 'text-[29px]' : 'text-[26px]',
             dark ? 'text-gold' : 'text-brand',
           )}

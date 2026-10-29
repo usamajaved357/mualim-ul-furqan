@@ -25,7 +25,7 @@ export function BookingSection() {
             <span
               lang="ar"
               dir="rtl"
-              className="font-diwani text-brand self-start text-[42px] leading-[1.6] font-bold"
+              className="font-logo text-brand self-start text-[42px] leading-[1.6] font-bold"
             >
               {site.arabicNameFull}
             </span>

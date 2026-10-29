@@ -7,7 +7,7 @@ import { env } from './env';
  */
 export const site = {
   name: 'Mualim Ul Furqan',
-  /** Logo lockup: shadda only, so the Diwani letterforms stay clean at small sizes. */
+  /** Logo lockup: shadda only, so the wordmark stays clean at small sizes. */
   arabicName: 'معلّم الفرقان',
   /** Fully vocalised name for large display (booking card, footer). */
   arabicNameFull: 'مُعَلِّمُ الْفُرْقَانِ',

@@ -10,7 +10,8 @@
   --font-serif: Georgia, 'Times New Roman', ui-serif, serif;
   --font-quran: 'Amiri Quran', 'Amiri', serif;
   --font-naskh: 'Amiri', serif;
-  --font-diwani: 'Ruwudu', 'Amiri', serif;
+  /* Brand wordmark: bold, rounded Arabic display (logo, footer, booking card). */
+  --font-logo: 'Marhey', 'Amiri', serif;
 
   /* Dark surfaces (classroom panel, footer) */
   --color-night: #0b2a23;
@@ -157,7 +158,7 @@
     letter-spacing: -0.025em;
   }
   /* Accent words in headings: same font, upright, in brand colour (SectionHeading switches to gold on dark). */
-  :where(h1, h2, h3) em {
+  :where(h1, h2, h3, blockquote) em {
     font-style: normal;
     color: var(--color-brand);
   }
