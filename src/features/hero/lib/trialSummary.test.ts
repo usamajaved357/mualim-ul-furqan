@@ -14,12 +14,8 @@ describe('trial finder helpers', () => {
   });
 
   it("shows opening hours in the visitor's time zone", () => {
-    expect(trialSlots('Europe/London', winter)).toBe(
-      'Open in your time: weekdays 4 – 9 PM, weekends 10 AM – 6 PM',
-    );
-    expect(trialSlots('Asia/Karachi', winter)).toBe(
-      'Open in your time: weekdays 9 PM – 2 AM, weekends 3 – 11 PM',
-    );
+    expect(trialSlots('Asia/Karachi', winter)).toBe('Open every day, 9 AM – 9 PM (your time)');
+    expect(trialSlots('Europe/London', winter)).toBe('Open every day, 4 AM – 4 PM (your time)');
   });
 
   it('builds a WhatsApp message with the time zone', () => {

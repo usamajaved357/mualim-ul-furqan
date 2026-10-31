@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { ButtonLink, Icon } from '@/components/ui';
 import { buildWhatsAppLink, whatsappMessages } from '@/lib/whatsapp';
 import { useBooking } from '../hooks/useBooking';
-import { timeZoneLabel } from '@/lib/timezone';
+import { AvailabilityNote } from './AvailabilityNote';
 import { BookingConfirmed } from './BookingConfirmed';
 import { DayPicker } from './DayPicker';
 import { DetailsForm } from './DetailsForm';
@@ -110,10 +110,7 @@ export function BookingWidget() {
               {booking.formError}
             </p>
           )}
-          <p className="bg-mint text-brand inline-flex w-fit items-center gap-2 rounded-full px-3.5 py-2 text-[13px] font-bold">
-            <Icon name="globe" size={15} strokeWidth={2.2} />
-            Times shown in your time zone: {timeZoneLabel(booking.timeZone, new Date())}
-          </p>
+          <AvailabilityNote timeZone={booking.timeZone} />
           <div className="grid gap-7 sm:grid-cols-[1.1fr_1fr]">
             <DayPicker
               weeks={booking.weeks}

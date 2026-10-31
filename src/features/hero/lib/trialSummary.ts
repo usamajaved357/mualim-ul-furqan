@@ -1,5 +1,5 @@
 import { openingHours } from '@/config/hours';
-import { hoursIn, timeZoneCity } from '@/lib/timezone';
+import { describeHours, timeZoneCity } from '@/lib/timezone';
 import { COURSE_LABELS, type CourseId, type Learner } from '@/types/domain';
 
 export interface TrialSelection {
@@ -14,8 +14,7 @@ export function trialSummary({ course, learner }: TrialSelection): string {
 
 /** The teacher's opening hours converted to the visitor's own time zone. */
 export function trialSlots(timeZone: string, now: Date): string {
-  const { weekdays, weekends } = hoursIn(openingHours, timeZone, now);
-  return `Open in your time: weekdays ${weekdays}, weekends ${weekends}`;
+  return `Open ${describeHours(openingHours, timeZone, now)} (your time)`;
 }
 
 /** Pre-filled WhatsApp message so the teacher knows what the family chose and their time zone. */

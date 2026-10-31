@@ -1,8 +1,17 @@
-import { schedule } from './schedule';
+import { schedule as liveSchedule, type Schedule } from './schedule';
 import { availableSlots, isBookable } from './slots';
 import { formatInZone, zonedTimeToUtc } from './time';
 
 const day = (iso: string) => ({ from: new Date(`${iso}T00:00:00Z`), to: new Date(`${iso}T23:59:59Z`) });
+
+/** Fixed hours in a zone with summer time, so these tests don't change when the real hours do. */
+const weekday: [string, string][] = [['16:00', '21:00']];
+const weekend: [string, string][] = [['10:00', '18:00']];
+const schedule: Schedule = {
+  ...liveSchedule,
+  timeZone: 'Europe/London',
+  weekly: { 0: weekend, 1: weekday, 2: weekday, 3: weekday, 4: weekday, 5: weekday, 6: weekend },
+};
 
 describe('zonedTimeToUtc', () => {
   it('handles GMT and BST', () => {
@@ -48,6 +57,16 @@ describe('availableSlots', () => {
 
   it('never offers more than daysAhead into the future', () => {
     expect(availableSlots(schedule, { ...day('2026-03-01'), now })).toEqual([]);
+  });
+
+  it('offers the live hours: 9 AM to 9 PM Pakistan time, every day', () => {
+    // Pakistan is GMT+5 all year: 09:00–21:00 → 04:00–16:00 UTC, 24 slots.
+    for (const date of ['2026-01-15', '2026-01-17']) {
+      const slots = availableSlots(liveSchedule, { ...day(date), now });
+      expect(slots).toHaveLength(24);
+      expect(slots[0]!.start.toISOString()).toBe(`${date}T04:00:00.000Z`);
+      expect(slots.at(-1)!.end.toISOString()).toBe(`${date}T16:00:00.000Z`);
+    }
   });
 });
 

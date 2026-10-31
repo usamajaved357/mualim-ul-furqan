@@ -90,3 +90,25 @@ export function hoursIn(hours: Hours, timeZone: string, now: Date): { weekdays: 
     );
   return { weekdays: range(hours.weekdays), weekends: range(hours.weekends) };
 }
+
+/** The hours as labelled rows: one "Every day" row when weekdays and weekends match. */
+export function hoursList(hours: Hours, timeZone: string, now: Date): { days: string; time: string }[] {
+  const { weekdays, weekends } = hoursIn(hours, timeZone, now);
+  return weekdays === weekends
+    ? [{ days: 'Every day', time: weekdays }]
+    : [
+        { days: 'Mon–Fri', time: weekdays },
+        { days: 'Sat–Sun', time: weekends },
+      ];
+}
+
+/** The hours in a sentence: "every day, 9 AM – 9 PM" or "weekdays 4 – 9 PM, weekends 10 AM – 6 PM". */
+export function describeHours(hours: Hours, timeZone: string, now: Date): string {
+  const { weekdays, weekends } = hoursIn(hours, timeZone, now);
+  return weekdays === weekends ? `every day, ${weekdays}` : `weekdays ${weekdays}, weekends ${weekends}`;
+}
+
+/** True when two time zones show the same clock time at `at`. */
+export function sameClock(a: string, b: string, at: Date): boolean {
+  return timeZoneOffset(a, at) === timeZoneOffset(b, at);
+}

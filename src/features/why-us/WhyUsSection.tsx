@@ -1,6 +1,8 @@
 import { Icon, Reveal, Section, SectionHeading, type IconName } from '@/components/ui';
+import { openingHours } from '@/config/hours';
 import { site } from '@/config/site';
 import { cn } from '@/lib/cn';
+import { dateKeyIn, formatClock, wallTimeToDate } from '@/lib/timezone';
 
 const tiles: { icon: IconName; title: string; body: string; tint: string }[] = [
   {
@@ -29,12 +31,17 @@ const tiles: { icon: IconName; title: string; body: string; tint: string }[] = [
   },
 ];
 
-/** Example class time shown in three cities (illustrative). */
+/** One example class, 8:30 PM for the teacher, shown in three cities (today's offsets, so summer time is right). */
+const exampleClass = wallTimeToDate(
+  dateKeyIn(new Date(), openingHours.timeZone),
+  '20:30',
+  openingHours.timeZone,
+);
 const clocks = [
-  { city: 'London', time: '5:30 PM', flag: '🇬🇧' },
-  { city: 'Berlin', time: '6:30 PM', flag: '🇪🇺' },
-  { city: 'New York', time: '12:30 PM', flag: '🇺🇸' },
-];
+  { city: 'London', zone: 'Europe/London', flag: '🇬🇧' },
+  { city: 'Berlin', zone: 'Europe/Berlin', flag: '🇪🇺' },
+  { city: 'New York', zone: 'America/New_York', flag: '🇺🇸' },
+].map((c) => ({ ...c, time: formatClock(exampleClass, c.zone) }));
 
 const card = 'lift border-line flex flex-col rounded-[28px] border bg-white p-7';
 
@@ -89,7 +96,7 @@ export function WhyUsSection() {
           <span className="bg-sand text-bronze flex size-12 items-center justify-center rounded-full">
             <Icon name="globe" size={22} strokeWidth={1.9} />
           </span>
-          <h3 className="text-[22px] leading-tight">Times that fit around school</h3>
+          <h3 className="text-[22px] leading-tight">One class time, wherever you live</h3>
           <ul className="flex flex-col gap-1.5 text-sm" aria-label="Example class time in three cities">
             {clocks.map((c) => (
               <li

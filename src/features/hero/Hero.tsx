@@ -33,7 +33,7 @@ export function Hero() {
           </h1>
           <p className="animate-fade-up text-muted max-w-[560px] text-[19px] text-pretty [animation-delay:200ms]">
             Gentle, one-on-one classes with {site.teacher.name}, from the very first letter to beautiful
-            Tajweed and Hifz. After-school and weekend times for families in the UK, US and Europe.
+            Tajweed and Hifz. Classes every day for families in the UK, US and Europe, in your own time zone.
           </p>
           <div className="animate-fade-up [animation-delay:300ms]">
             <TrialFinder />

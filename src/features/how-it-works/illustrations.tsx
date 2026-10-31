@@ -85,7 +85,7 @@ export function SlotsIllustration() {
         meta={
           <>
             <Icon name="globe" size={12} strokeWidth={2.2} />
-            London
+            Your time
           </>
         }
       />

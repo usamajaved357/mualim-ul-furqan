@@ -1,6 +1,8 @@
 import { GirihPattern } from '@/components/decor/GirihPattern';
 import { ButtonLink, Icon, PlayGlyph, Star } from '@/components/ui';
+import { openingHours } from '@/config/hours';
 import { anchors } from '@/config/site';
+import { hoursList, visitorTimeZone } from '@/lib/timezone';
 import { buildWhatsAppLink, whatsappMessages } from '@/lib/whatsapp';
 import type { Teacher } from '../data';
 
@@ -126,12 +128,12 @@ export function TeacherCard({ teacher }: { teacher: Teacher }) {
         <div className="flex flex-col gap-2">
           <span className="text-muted inline-flex items-center gap-1.5 text-xs font-extrabold tracking-[0.08em] uppercase">
             <Icon name="clock" size={14} strokeWidth={2.2} />
-            Usual availability (UK time)
+            Availability (your time)
           </span>
           <div className="flex flex-wrap gap-2 text-sm font-bold">
-            {teacher.availability.map((a) => (
-              <span key={a} className="border-line rounded-full border bg-white px-3.5 py-1.5">
-                {a}
+            {hoursList(openingHours, visitorTimeZone(), new Date()).map((h) => (
+              <span key={h.days} className="border-line rounded-full border bg-white px-3.5 py-1.5">
+                {h.days} · {h.time}
               </span>
             ))}
           </div>

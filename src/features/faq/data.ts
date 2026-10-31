@@ -1,3 +1,6 @@
+import { openingHours } from '@/config/hours';
+import { describeHours } from '@/lib/timezone';
+
 export const faqs = [
   {
     q: 'How old does my child need to be?',
@@ -9,7 +12,7 @@ export const faqs = [
   },
   {
     q: 'Which times are available?',
-    a: 'After-school evenings and weekends in UK and European time, plus daytime and weekend-morning slots for the US. The booking calendar shows every open slot in your own time zone, and your Google Meet link is emailed as soon as you book.',
+    a: `Classes run ${describeHours(openingHours, openingHours.timeZone, new Date())} ${openingHours.place} time. The booking calendar converts this to your own time zone and shows every open slot, and your Google Meet link is emailed as soon as you book.`,
   },
   {
     q: "Can I sit in on my child's class?",

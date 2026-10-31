@@ -12,8 +12,11 @@ export function TimeSlots({ day, timeZone, onSelect }: TimeSlotsProps) {
   }
   return (
     <div className="flex flex-col gap-4">
-      <p className="font-extrabold">{formatDayShort(day.key)}</p>
-      <div className="flex max-h-[340px] flex-col gap-4 overflow-y-auto pr-1">
+      <p className="flex items-baseline justify-between gap-3">
+        <span className="font-extrabold">{formatDayShort(day.key)}</span>
+        <span className="text-muted text-[13px] font-semibold">{day.slots.length} times open</span>
+      </p>
+      <div className="flex flex-col gap-4">
         {groupByPartOfDay(day.slots, timeZone).map((group) => (
           <div key={group.label} className="flex flex-col gap-2">
             <p className="text-muted text-[11px] font-extrabold tracking-[0.1em] uppercase">{group.label}</p>

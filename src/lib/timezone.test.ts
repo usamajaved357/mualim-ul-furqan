@@ -1,7 +1,10 @@
 import { openingHours } from '@/config/hours';
 import {
+  describeHours,
   formatClockRange,
   hoursIn,
+  hoursList,
+  sameClock,
   timeZoneCity,
   timeZoneLabel,
   timeZoneOffset,
@@ -11,6 +14,13 @@ import {
 // A Monday after UK clocks go back (GMT), and one in summer (BST).
 const winter = new Date('2026-11-02T12:00:00Z');
 const summer = new Date('2026-07-06T12:00:00Z');
+
+/** Fixed hours with different weekday and weekend times, in a zone with summer time. */
+const london = {
+  timeZone: 'Europe/London',
+  weekdays: ['16:00', '21:00'],
+  weekends: ['10:00', '18:00'],
+} as const;
 
 describe('timezone', () => {
   it('names time zones', () => {
@@ -41,19 +51,38 @@ describe('timezone', () => {
   });
 
   it("shows the teacher's hours in the visitor's time zone", () => {
-    expect(hoursIn(openingHours, 'Europe/London', winter)).toEqual({
+    expect(hoursIn(london, 'Europe/London', winter)).toEqual({
       weekdays: '4 – 9 PM',
       weekends: '10 AM – 6 PM',
     });
-    expect(hoursIn(openingHours, 'Asia/Karachi', winter)).toEqual({
+    expect(hoursIn(london, 'Asia/Karachi', winter)).toEqual({
       weekdays: '9 PM – 2 AM',
       weekends: '3 – 11 PM',
     });
-    expect(hoursIn(openingHours, 'America/New_York', winter)).toEqual({
+    expect(hoursIn(london, 'America/New_York', winter)).toEqual({
       weekdays: '11 AM – 4 PM',
       weekends: '5 AM – 1 PM',
     });
     // Summer: London is GMT+1, so Karachi is only four hours ahead.
-    expect(hoursIn(openingHours, 'Asia/Karachi', summer).weekdays).toBe('8 PM – 1 AM');
+    expect(hoursIn(london, 'Asia/Karachi', summer).weekdays).toBe('8 PM – 1 AM');
+  });
+
+  it('collapses matching weekday and weekend hours into "every day"', () => {
+    expect(describeHours(london, 'Europe/London', winter)).toBe('weekdays 4 – 9 PM, weekends 10 AM – 6 PM');
+    expect(hoursList(london, 'Europe/London', winter)).toEqual([
+      { days: 'Mon–Fri', time: '4 – 9 PM' },
+      { days: 'Sat–Sun', time: '10 AM – 6 PM' },
+    ]);
+    expect(describeHours(openingHours, 'Asia/Karachi', winter)).toBe('every day, 9 AM – 9 PM');
+    expect(hoursList(openingHours, 'Europe/London', winter)).toEqual([
+      { days: 'Every day', time: '4 AM – 4 PM' },
+    ]);
+    expect(describeHours(openingHours, 'Europe/London', summer)).toBe('every day, 5 AM – 5 PM');
+  });
+
+  it('knows when two zones share a clock', () => {
+    expect(sameClock('Asia/Karachi', 'Asia/Karachi', winter)).toBe(true);
+    expect(sameClock('Europe/London', 'Africa/Accra', winter)).toBe(true);
+    expect(sameClock('Europe/London', 'Africa/Accra', summer)).toBe(false);
   });
 });

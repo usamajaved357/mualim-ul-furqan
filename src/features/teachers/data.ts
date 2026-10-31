@@ -11,7 +11,6 @@ export interface Teacher {
   students: string;
   subjects: string[];
   languages: string;
-  availability: string[];
   acceptingStudents: boolean;
   /** Path to a photo in /public, e.g. "/teachers/qari.jpg". */
   photo?: string;
@@ -28,7 +27,6 @@ export const leadTeacher: Teacher = {
   students: site.teacher.studentsTaught,
   subjects: ['Tajweed', 'Nazra', 'Hifz', 'Noorani Qaida', 'Duas'],
   languages: site.teacher.languages,
-  availability: ['Mon–Fri · 4–9 PM', 'Sat–Sun · 10 AM–6 PM'],
   acceptingStudents: true,
   photo: site.teacher.photo,
 };

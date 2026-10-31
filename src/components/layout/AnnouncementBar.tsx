@@ -6,7 +6,7 @@ export function AnnouncementBar() {
       <span className="bg-gold-deep mr-2 rounded-full px-2 py-0.5 text-[11px] font-extrabold tracking-wide text-white uppercase">
         New
       </span>
-      Evening &amp; weekend slots open for UK, US and Europe.{' '}
+      Classes every day, shown in your own time zone.{' '}
       <a
         href={anchors.book}
         className="hover:text-gold font-bold whitespace-nowrap text-white underline-offset-2"
