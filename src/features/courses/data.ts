@@ -22,7 +22,7 @@ export const courseTints: Record<CourseId, { panel: string; ink: string }> = {
 
 /** Wide card under the course grid that leads to the Hifz programme section. */
 export const hifzTeaser = {
-  arabic: 'حِفْظُ الْقُرْآنِ',
+  arabic: 'حِفْظُ الْقُرْآن',
   eyebrow: 'Ready for the next step?',
   title: 'Hifz programme',
   description:

@@ -42,7 +42,7 @@ export const milestones: Milestone[] = [];
 
 /** Shown instead of review cards until real reviews are added. Numbers live in config/site.ts. */
 export const trackRecord = [
-  { value: `${site.teacher.yearsTeaching} years`, label: 'teaching the Quran' },
+  { value: `${site.teacher.yearsTeaching} years`, label: 'of teaching experience' },
   { value: site.teacher.studentsTaught, label: 'students taught' },
   { value: site.teacher.lecturesDelivered, label: 'lessons delivered' },
   { value: site.families, label: 'families who trust us' },

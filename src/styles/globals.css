@@ -10,8 +10,8 @@
   --font-serif: Georgia, 'Times New Roman', ui-serif, serif;
   --font-quran: 'Amiri Quran', 'Amiri', serif;
   --font-naskh: 'Amiri', serif;
-  /* Brand wordmark: bold, rounded Arabic display (logo, footer, booking card). */
-  --font-logo: 'Marhey', 'Amiri', serif;
+  /* Brand wordmark: classic calligraphic Naskh (logo, footer, booking card). */
+  --font-logo: 'Scheherazade New', 'Amiri', serif;
 
   /* Dark surfaces (classroom panel, footer) */
   --color-night: #0b2a23;

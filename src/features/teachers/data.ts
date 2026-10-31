@@ -22,7 +22,7 @@ export interface Teacher {
 export const leadTeacher: Teacher = {
   name: site.teacher.name,
   role: site.teacher.role,
-  bio: `${site.teacher.name} has spent ${site.teacher.yearsTeaching} years teaching the Quran to children and adults, and also teaches at ${site.teacher.mosque}. Families love his calm, patient style: he never rushes, celebrates every small win, and makes sure each letter is pronounced correctly from day one.`,
+  bio: `${site.teacher.name} brings ${site.teacher.yearsTeaching} years of teaching experience with children and adults, and also teaches at ${site.teacher.mosque}. Families love his calm, patient style: he never rushes, celebrates every small win, and makes sure each letter is pronounced correctly from day one.`,
   rating: site.rating,
   years: site.teacher.yearsTeaching,
   students: site.teacher.studentsTaught,

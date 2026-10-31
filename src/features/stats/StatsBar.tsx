@@ -3,7 +3,7 @@ import { site } from '@/config/site';
 
 /** Numbers come from `site.teacher` in config/site.ts. */
 const stats = [
-  { value: `${site.teacher.yearsTeaching}+`, label: 'years teaching the Quran' },
+  { value: `${site.teacher.yearsTeaching}+`, label: 'years of teaching experience' },
   { value: site.teacher.studentsTaught, label: 'students taught' },
   { value: site.teacher.lecturesDelivered, label: 'lessons delivered' },
   { value: '1:1', label: 'every class, always live' },

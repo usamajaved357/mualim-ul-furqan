@@ -25,7 +25,7 @@ export function HifzSection() {
             dir="rtl"
             className="font-naskh text-bronze text-[clamp(40px,5vw,60px)] leading-[1.6] font-bold"
           >
-            حِفْظُ الْقُرْآنِ
+            حِفْظُ الْقُرْآن
           </p>
           <ul className="flex flex-wrap gap-2 lg:justify-end">
             {hifzFacts.map((fact) => (

@@ -14,7 +14,7 @@ export function TrackRecord() {
             Don't take our word for it. <em>Try a class.</em>
           </>
         }
-        description={`${site.teacher.name} has taught the Quran for ${site.teacher.yearsTeaching} years. The best way to see the difference is to watch one lesson yourself.`}
+        description={`${site.teacher.name} brings ${site.teacher.yearsTeaching} years of teaching experience. The best way to see the difference is to watch one lesson yourself.`}
       />
 
       <div className="grid gap-5 lg:grid-cols-[1fr_1.15fr]">

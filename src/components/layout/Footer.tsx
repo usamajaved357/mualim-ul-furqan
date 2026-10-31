@@ -80,10 +80,15 @@ export function Footer() {
           ))}
           <div className="flex flex-col gap-3">
             <h2 className="font-sans text-sm font-bold tracking-normal text-white">Contact</h2>
-            <span className="inline-flex items-center gap-2.5">
+            <a
+              href={buildWhatsAppLink(whatsappMessages.general)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-mist inline-flex items-center gap-2.5 hover:text-white"
+            >
               <Icon name="whatsapp" size={18} className="text-gold shrink-0" />
               {site.contact.whatsappDisplay}
-            </span>
+            </a>
             <span className="inline-flex items-center gap-2.5">
               <Icon name="mail" size={18} className="text-gold shrink-0" />
               {site.contact.email}

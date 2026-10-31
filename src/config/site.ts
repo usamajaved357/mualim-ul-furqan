@@ -10,7 +10,7 @@ export const site = {
   /** Logo lockup: shadda only, so the wordmark stays clean at small sizes. */
   arabicName: 'معلّم الفرقان',
   /** Fully vocalised name for large display (booking card, footer). */
-  arabicNameFull: 'مُعَلِّمُ الْفُرْقَانِ',
+  arabicNameFull: 'مُعَلِّمُ الْفُرْقَان',
   tagline: 'Online Quran Academy',
   description:
     'Live one-on-one Noorani Qaida, Nazra, Tajweed, Hifz and Duas classes for kids and adults in the UK, US and Europe.',
@@ -27,8 +27,9 @@ export const site = {
   },
 
   contact: {
-    whatsappNumber: env.whatsappNumber,
-    whatsappDisplay: '[+XX XXX XXX XXXX]',
+    /** International format, digits only. VITE_WHATSAPP_NUMBER overrides it if set. */
+    whatsappNumber: env.whatsappNumber || '923117503005',
+    whatsappDisplay: '+92 311 7503005',
     email: '[hello@yourdomain.com]',
   },
 
