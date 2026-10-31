@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
 import { AL_FATIHA, MushafPanel } from '@/components/mockups';
 import { Icon, type IconName } from '@/components/ui';
 import { site } from '@/config/site';
@@ -58,15 +57,40 @@ function Participant({ initial, name, duty, avatar, speaking = false }: Particip
   );
 }
 
-function FloatingCard({ className, children }: { className: string; children: ReactNode }) {
+interface NotificationProps {
+  icon: IconName;
+  /** Gradient for the app-style icon tile. */
+  iconTint: string;
+  title: string;
+  time: string;
+  message: string;
+  className: string;
+}
+
+/** Phone-style notification: gradient app icon, title with a timestamp, and a one-line message. */
+function Notification({ icon, iconTint, title, time, message, className }: NotificationProps) {
   return (
     <div
       className={cn(
-        'border-line shadow-float absolute flex items-center gap-3 rounded-2xl border bg-white/95 py-2 pr-4 pl-2 backdrop-blur',
+        'absolute flex w-[230px] items-start gap-3 rounded-[22px] bg-white/80 p-3 shadow-[0_24px_50px_-22px_rgb(15_31_26/0.45),0_2px_6px_rgb(15_31_26/0.04)] ring-1 ring-black/5 backdrop-blur-xl sm:w-[250px]',
         className,
       )}
     >
-      {children}
+      <span
+        className={cn(
+          'flex size-10 shrink-0 items-center justify-center rounded-[13px] bg-gradient-to-br text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.35)]',
+          iconTint,
+        )}
+      >
+        <Icon name={icon} size={19} strokeWidth={2.2} />
+      </span>
+      <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+        <span className="flex items-baseline justify-between gap-2">
+          <span className="truncate text-[13px] font-bold">{title}</span>
+          <span className="text-muted shrink-0 text-[11px] font-medium">{time}</span>
+        </span>
+        <span className="text-muted text-[12.5px] leading-snug">{message}</span>
+      </span>
     </div>
   );
 }
@@ -77,7 +101,7 @@ function FloatingCard({ className, children }: { className: string; children: Re
  */
 export function HeroVisual() {
   return (
-    <div className="relative pt-9 pb-11 sm:px-5" aria-hidden>
+    <div className="relative pt-16 pb-16 sm:px-5 sm:pt-10 sm:pb-12" aria-hidden>
       <div className="from-brand-light/35 via-gold/30 to-sky absolute inset-x-6 top-16 bottom-8 rounded-[48px] bg-gradient-to-br blur-3xl" />
 
       <div className="border-line shadow-float relative overflow-hidden rounded-[30px] border bg-white">
@@ -134,25 +158,23 @@ export function HeroVisual() {
         </div>
       </div>
 
-      <FloatingCard className="animate-float top-0 right-0">
-        <span className="bg-sky text-sky-ink flex size-10 items-center justify-center rounded-xl">
-          <Icon name="eye" size={20} strokeWidth={2} />
-        </span>
-        <span className="flex flex-col leading-tight">
-          <span className="text-muted text-xs font-semibold">Parents welcome</span>
-          <span className="text-[15px] font-bold">Watch any lesson</span>
-        </span>
-      </FloatingCard>
+      <Notification
+        className="animate-float top-0 right-0"
+        icon="eye"
+        iconTint="from-call-blue to-sky-ink"
+        title="Parents welcome"
+        time="now"
+        message="Join from anywhere and watch the lesson live."
+      />
 
-      <FloatingCard className="animate-float-alt bottom-0 left-0 [animation-delay:1.2s]">
-        <span className="bg-sand text-bronze flex size-10 items-center justify-center rounded-xl">
-          <Icon name="calendar" size={20} strokeWidth={2} />
-        </span>
-        <span className="flex flex-col leading-tight">
-          <span className="text-muted text-xs font-semibold">Next class</span>
-          <span className="text-[15px] font-bold">Today · 5:30 PM</span>
-        </span>
-      </FloatingCard>
+      <Notification
+        className="animate-float-alt bottom-0 left-0 [animation-delay:1.2s]"
+        icon="calendar"
+        iconTint="from-amber to-gold-deep"
+        title="Next class"
+        time="in 2h"
+        message="Nazra · today at 5:30 PM"
+      />
     </div>
   );
 }

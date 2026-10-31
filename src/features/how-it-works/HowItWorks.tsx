@@ -39,7 +39,7 @@ export function HowItWorks() {
       <ol className="relative grid gap-5 md:grid-cols-3">
         <span
           aria-hidden
-          className="border-line-strong absolute top-[118px] right-[16%] left-[16%] hidden border-t-2 border-dashed md:block"
+          className="border-line-strong absolute top-[142px] right-[16%] left-[16%] hidden border-t-2 border-dashed md:block"
         />
         {steps.map(({ title, body, Illustration, tint }, i) => (
           <Reveal
@@ -49,15 +49,13 @@ export function HowItWorks() {
             className="lift border-line relative flex flex-col overflow-hidden rounded-[28px] border bg-white p-3"
           >
             <div
-              className={`flex h-[220px] items-center justify-center rounded-[22px] p-6 ${tint}`}
+              className={`flex h-[260px] items-center justify-center rounded-[22px] px-7 py-8 ${tint}`}
               aria-hidden
             >
               <Illustration />
             </div>
-            <div className="flex flex-col gap-2.5 px-4 pt-5 pb-4">
-              <span className="bg-ink font-display flex size-9 items-center justify-center rounded-full text-sm font-bold text-white">
-                {i + 1}
-              </span>
+            <div className="flex flex-col gap-2 px-4 pt-5 pb-4">
+              <span className="text-brand text-[13px] font-bold tracking-wide uppercase">Step {i + 1}</span>
               <h3 className="text-[24px] leading-tight">{title}</h3>
               <p className="text-muted text-[15px]">{body}</p>
             </div>
