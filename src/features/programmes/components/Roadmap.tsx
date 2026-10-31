@@ -1,20 +1,20 @@
-import { Reveal } from '@/components/ui';
-import { hifzPlan } from '../data';
+import type { Programme } from '../data';
 
-/** Step-by-step route from the free assessment to completing the Quran. */
-export function HifzRoadmap() {
+/** The step-by-step plan for one programme, from the free class onwards. */
+export function Roadmap({ programme }: { programme: Programme }) {
+  const { label, planIntro, plan } = programme;
   return (
-    <Reveal className="border-line flex flex-col gap-6 rounded-[28px] border bg-white p-6 sm:p-9">
+    <div className="border-line flex flex-col gap-6 rounded-[28px] border bg-white p-6 sm:p-9">
       <div className="flex flex-col gap-1.5">
-        <h3 className="text-[clamp(24px,2.4vw,30px)] leading-tight">The Hifz plan, step by step</h3>
-        <p className="text-muted text-[15px]">
-          The order most students follow. Your teacher adjusts the daily target as your child grows.
-        </p>
+        <h4 className="font-display text-[clamp(22px,2.2vw,28px)] leading-tight font-bold tracking-[-0.02em]">
+          The {label} plan, step by step
+        </h4>
+        <p className="text-muted text-[15px]">{planIntro}</p>
       </div>
       <ol className="flex flex-col">
-        {hifzPlan.map((stage, i) => (
+        {plan.map((stage, i) => (
           <li key={stage.title} className="relative flex gap-4 pb-6 last:pb-0">
-            {i < hifzPlan.length - 1 && (
+            {i < plan.length - 1 && (
               <span aria-hidden className="bg-line absolute top-10 bottom-0 left-[19px] w-0.5" />
             )}
             <span className="bg-brand font-display relative flex size-10 shrink-0 items-center justify-center rounded-full text-[15px] font-bold text-white">
@@ -29,6 +29,6 @@ export function HifzRoadmap() {
           </li>
         ))}
       </ol>
-    </Reveal>
+    </div>
   );
 }

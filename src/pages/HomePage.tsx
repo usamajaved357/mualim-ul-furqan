@@ -1,12 +1,11 @@
 import { BookingSection } from '@/features/booking';
 import { ClassroomSection } from '@/features/classroom';
-import { CoursesSection } from '@/features/courses';
 import { FaqSection, faqs } from '@/features/faq';
 import { HadithBand } from '@/features/hadith';
 import { Hero } from '@/features/hero';
-import { HifzSection } from '@/features/hifz';
 import { HowItWorks } from '@/features/how-it-works';
 import { PricingSection } from '@/features/pricing';
+import { ProgrammesSection } from '@/features/programmes';
 import { ReviewsSection } from '@/features/reviews';
 import { StatsBar } from '@/features/stats';
 import { TeachersSection } from '@/features/teachers';
@@ -35,8 +34,7 @@ export function HomePage() {
       <Hero />
       <StatsBar />
       <HowItWorks />
-      <CoursesSection />
-      <HifzSection />
+      <ProgrammesSection />
       <WhyUsSection />
       <ClassroomSection />
       <HadithBand />

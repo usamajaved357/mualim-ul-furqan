@@ -8,15 +8,6 @@ export const courseOptions: SegmentOption<CourseId>[] = (Object.keys(COURSE_LABE
   }),
 );
 
-/** Short Arabic name shown on each course tile. */
-export const courseArabic: Record<CourseId, string> = {
-  qaida: 'قَاعِدَة',
-  nazra: 'نَاظِرَة',
-  tajweed: 'تَجْوِيد',
-  hifz: 'حِفْظ',
-  duas: 'دُعَاء',
-};
-
 export const learnerOptions: SegmentOption<Learner>[] = [
   { value: 'child', label: 'My child' },
   { value: 'adult', label: 'Myself' },

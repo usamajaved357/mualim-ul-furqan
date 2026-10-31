@@ -1,1 +1,0 @@
-export { HifzSection } from './HifzSection';

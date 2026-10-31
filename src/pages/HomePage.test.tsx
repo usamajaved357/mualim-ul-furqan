@@ -58,12 +58,12 @@ describe('HomePage', () => {
     expect(screen.getByText('£39')).toBeInTheDocument();
   });
 
-  it('switches courses to adults', async () => {
+  it('switches programme tabs', async () => {
     renderHome();
     const user = userEvent.setup();
-    await user.click(
-      within(screen.getByRole('group', { name: 'Show courses for' })).getByRole('button', { name: 'Adults' }),
-    );
-    expect(screen.getByRole('heading', { name: 'Tajweed for adults' })).toBeInTheDocument();
+    const tabs = screen.getByRole('tablist', { name: 'Programmes' });
+    await user.click(within(tabs).getByRole('tab', { name: 'Tajweed' }));
+    expect(within(tabs).getByRole('tab', { name: 'Tajweed' })).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByRole('tabpanel')).toHaveTextContent('The Tajweed plan, step by step');
   });
 });

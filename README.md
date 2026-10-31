@@ -105,7 +105,7 @@ src/
 │   │   ├── lib/            trialSummary (pure, unit-tested)
 │   │   ├── data.ts         Options & popular slots per region
 │   │   └── index.ts        Public API of the feature
-│   ├── stats/  how-it-works/  courses/  why-us/  classroom/
+│   ├── stats/  how-it-works/  programmes/  why-us/  classroom/
 │   ├── hadith/  teachers/
 │   ├── pricing/            Plans, currency switch (auto-detects GBP/EUR/USD), per-class maths
 │   ├── reviews/            Track record until real reviews exist; then cards, filters, rating
@@ -140,7 +140,7 @@ src/
 | ---------------------------------- | --------------------------------- |
 | Name, teacher, contact, rating     | `src/config/site.ts`              |
 | Prices & plans                     | `src/features/pricing/data.ts`    |
-| Courses (kids / adults)            | `src/features/courses/data.ts`    |
+| Courses (all five programmes)      | `src/features/programmes/data.ts` |
 | Reviews, milestones                | `src/features/reviews/data.ts`    |
 | Teacher card (photo, availability) | `src/features/teachers/data.ts`   |
 | FAQ                                | `src/features/faq/data.ts`        |

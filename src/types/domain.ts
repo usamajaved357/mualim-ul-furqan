@@ -18,3 +18,12 @@ export const COURSE_LABELS: Record<CourseId, string> = {
   hifz: 'Hifz',
   duas: 'Duas',
 };
+
+/** Short Arabic name for each course (course tiles, menus, tabs). */
+export const COURSE_ARABIC: Record<CourseId, string> = {
+  qaida: 'قَاعِدَة',
+  nazra: 'نَاظِرَة',
+  tajweed: 'تَجْوِيد',
+  hifz: 'حِفْظ',
+  duas: 'دُعَاء',
+};

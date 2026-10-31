@@ -1,4 +1,4 @@
-import type { Rating } from '@/types/domain';
+import type { CourseId, Rating } from '@/types/domain';
 import { env } from './env';
 
 /**
@@ -51,9 +51,17 @@ export const site = {
   },
 } as const;
 
+/** One link per programme tab in the Courses section (header menu, footer). */
+export const courseLinks = [
+  { id: 'qaida', label: 'Noorani Qaida', note: 'Letters and sounds, from zero', href: '/#qaida' },
+  { id: 'nazra', label: 'Nazra', note: 'Read the Quran fluently', href: '/#nazra' },
+  { id: 'tajweed', label: 'Tajweed', note: 'Recite with the rules', href: '/#tajweed' },
+  { id: 'hifz', label: 'Hifz', note: 'Memorise the Quran', href: '/#hifz' },
+  { id: 'duas', label: 'Duas', note: 'Everyday duas, with meaning', href: '/#duas' },
+] as const satisfies readonly { id: CourseId; label: string; note: string; href: string }[];
+
 export const navLinks = [
   { label: 'Courses', href: '/#courses' },
-  { label: 'Hifz', href: '/#hifz' },
   { label: 'How it works', href: '/#how' },
   { label: 'Classroom', href: '/#classroom' },
   { label: 'Teachers', href: '/#teachers' },

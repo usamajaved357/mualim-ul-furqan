@@ -2,8 +2,8 @@ import { anchors } from '@/config/site';
 import { ButtonLink, Icon, SegmentedControl } from '@/components/ui';
 import { setBookingIntent } from '@/lib/bookingIntent';
 import { cn } from '@/lib/cn';
-import type { CourseId } from '@/types/domain';
-import { courseArabic, courseOptions, learnerOptions, regionOptions } from '../data';
+import { COURSE_ARABIC, type CourseId } from '@/types/domain';
+import { courseOptions, learnerOptions, regionOptions } from '../data';
 import { useTrialFinder } from '../hooks/useTrialFinder';
 
 const label = 'text-muted text-[13px] font-bold';
@@ -37,7 +37,7 @@ function CoursePicker({ value, onChange }: { value: CourseId; onChange: (course:
                 selected ? 'text-brand' : 'text-bronze',
               )}
             >
-              {courseArabic[option.value]}
+              {COURSE_ARABIC[option.value]}
             </span>
             <span className={cn('text-[13px] leading-tight font-bold', selected ? 'text-brand' : 'text-ink')}>
               {option.label}

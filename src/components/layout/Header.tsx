@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { cn } from '@/lib/cn';
-import { anchors, navLinks, site } from '@/config/site';
+import { anchors, courseLinks, navLinks, site } from '@/config/site';
 import { useHideOnScroll } from '@/hooks/useHideOnScroll';
 import { Logo } from '@/components/brand/Logo';
 import { ButtonLink, Icon } from '@/components/ui';
 import { buildWhatsAppLink, whatsappMessages } from '@/lib/whatsapp';
+import { CourseMenuLink, CoursesMenu } from './CoursesMenu';
 
 /** Floating header: slides away while scrolling down, comes back as soon as you scroll up. */
 export function Header() {
@@ -38,15 +39,19 @@ export function Header() {
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-1 text-[15px] font-semibold xl:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-ink/80 hover:text-ink hover:bg-cream rounded-full px-3.5 py-2 whitespace-nowrap no-underline transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.label === 'Courses' ? (
+              <CoursesMenu key={link.href} />
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-ink/80 hover:text-ink hover:bg-cream rounded-full px-3.5 py-2 whitespace-nowrap no-underline transition-colors"
+              >
+                {link.label}
+              </a>
+            ),
+          )}
         </nav>
 
         <div className="ml-auto hidden items-center gap-2 md:flex xl:ml-0">
@@ -80,17 +85,24 @@ export function Header() {
           className="border-line shadow-float mx-auto mt-2 max-w-[1260px] rounded-[28px] border bg-white p-3 xl:hidden"
         >
           <nav aria-label="Mobile" className="flex flex-col">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="text-ink hover:bg-cream flex items-center justify-between rounded-2xl px-4 py-3.5 text-base font-semibold no-underline"
-              >
-                {link.label}
-                <Icon name="chevron-right" size={18} className="text-muted" />
-              </a>
+            <p className="text-muted px-4 pt-2 pb-1 text-xs font-bold tracking-wide uppercase">Courses</p>
+            {courseLinks.map((link) => (
+              <CourseMenuLink key={link.id} link={link} onNavigate={() => setOpen(false)} />
             ))}
+            <span aria-hidden className="bg-line mx-4 my-2 h-px" />
+            {navLinks
+              .filter((link) => link.label !== 'Courses')
+              .map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="text-ink hover:bg-cream flex items-center justify-between rounded-2xl px-4 py-3.5 text-base font-semibold no-underline"
+                >
+                  {link.label}
+                  <Icon name="chevron-right" size={18} className="text-muted" />
+                </a>
+              ))}
           </nav>
           <div className="mt-2 grid gap-2 p-1">
             <ButtonLink href={anchors.book} trackAs="Lead" size="lg" onClick={() => setOpen(false)}>

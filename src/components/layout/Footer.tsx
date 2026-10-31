@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { anchors, site } from '@/config/site';
+import { anchors, courseLinks, site } from '@/config/site';
 import { Logo } from '@/components/brand/Logo';
 import { ButtonLink, Container, Icon } from '@/components/ui';
 import { buildWhatsAppLink, whatsappMessages } from '@/lib/whatsapp';
@@ -7,13 +7,7 @@ import { buildWhatsAppLink, whatsappMessages } from '@/lib/whatsapp';
 const columns = [
   {
     title: 'Courses',
-    links: [
-      { label: 'Noorani Qaida', href: '/#courses' },
-      { label: 'Nazra', href: '/#courses' },
-      { label: 'Tajweed', href: '/#courses' },
-      { label: 'Hifz', href: '/#hifz' },
-      { label: 'Daily Duas', href: '/#courses' },
-    ],
+    links: courseLinks.map(({ label, href }) => ({ label, href })),
   },
   {
     title: 'Academy',
