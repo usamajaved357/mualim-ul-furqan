@@ -2,11 +2,15 @@ import { Icon } from '@/components/ui';
 import { openingHours } from '@/config/hours';
 import { describeHours, sameClock, timeZoneLabel } from '@/lib/timezone';
 
+/** Glues "9 AM – 9 PM" together (no-break spaces, plus a word joiner since lines may break after a dash). */
+const keepRanges = (text: string) =>
+  text.replace(/ (?=[AP]M)/g, '\u00a0').replace(/ – /g, '\u00a0–\u2060\u00a0');
+
 /** The teacher's hours in the visitor's own time, and the time zone the slots below are shown in. */
 export function AvailabilityNote({ timeZone }: { timeZone: string }) {
   const now = new Date();
-  const local = describeHours(openingHours, timeZone, now);
-  const teacher = describeHours(openingHours, openingHours.timeZone, now);
+  const local = keepRanges(describeHours(openingHours, timeZone, now));
+  const teacher = keepRanges(describeHours(openingHours, openingHours.timeZone, now));
   const { place } = openingHours;
 
   return (
