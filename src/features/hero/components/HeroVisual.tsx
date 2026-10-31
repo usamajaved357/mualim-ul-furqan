@@ -70,12 +70,7 @@ export function HeroVisual() {
         </div>
 
         <div className="flex flex-col gap-3 p-3 sm:p-4">
-          <MushafPanel
-            layout="lines"
-            title="سُورَةُ ٱلْفَاتِحَةِ"
-            ayat={AL_FATIHA.slice(0, 4)}
-            activeIndex={1}
-          />
+          <MushafPanel title="سُورَةُ ٱلْفَاتِحَةِ" ayat={AL_FATIHA.slice(0, 4)} activeIndex={1} />
           <div className="bg-mint flex items-center gap-2.5 rounded-2xl px-3 py-2.5">
             <span className="bg-brand flex size-7 shrink-0 items-center justify-center rounded-full text-white">
               <Icon name="check" size={14} strokeWidth={2.8} />

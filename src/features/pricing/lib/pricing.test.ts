@@ -1,5 +1,4 @@
-import type { CurrencyCode } from '@/types/domain';
-import { hifzPlan, plans, type Plan } from '../data';
+import { hifzPlan, plans } from '../data';
 import { detectCurrency, formatPrice, pricePerClass } from './pricing';
 
 const [starter, regular, intensive] = plans;
@@ -10,10 +9,15 @@ describe('pricing', () => {
     expect(formatPrice(39, 'GBP')).toBe('£39');
   });
 
+  it('shows pence and cents when a price has them', () => {
+    expect(formatPrice(49.99, 'USD')).toBe('$49.99');
+    expect(formatPrice(54.99, 'GBP')).toBe('£54.99');
+  });
+
   it('calculates the price per class', () => {
-    expect(pricePerClass(starter!, 'USD')).toBe('$4.25');
-    expect(pricePerClass(regular!, 'GBP')).toBe('£3.25');
-    expect(pricePerClass(intensive!, 'EUR')).toBe('€3.30');
+    expect(pricePerClass(starter!, 'USD')).toBe('$6.25');
+    expect(pricePerClass(regular!, 'GBP')).toBe('£4.58');
+    expect(pricePerClass(intensive!, 'EUR')).toBe('€4.60');
   });
 
   it('gets cheaper per class on bigger plans', () => {
@@ -33,14 +37,7 @@ describe('pricing', () => {
 
 describe('Hifz plan', () => {
   it('prices each 45-minute lesson', () => {
-    expect(pricePerClass(hifzPlan, 'GBP')).toBe('£3.95');
-    expect(pricePerClass(hifzPlan, 'USD')).toBe('$4.95');
-  });
-
-  it('costs no more per minute than the Intensive plan', () => {
-    const perMinute = (p: Plan, c: CurrencyCode) => p.price[c] / (p.classesPerMonth * p.minutes);
-    for (const c of ['USD', 'GBP', 'EUR'] as const) {
-      expect(perMinute(hifzPlan, c)).toBeLessThanOrEqual(perMinute(intensive!, c));
-    }
+    expect(pricePerClass(hifzPlan, 'USD')).toBe('$7.50');
+    expect(pricePerClass(hifzPlan, 'GBP')).toBe('£5.90');
   });
 });

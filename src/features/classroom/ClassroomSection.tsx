@@ -35,7 +35,7 @@ export function ClassroomSection() {
                 <FeatureTile key={f.title} feature={f} delay={i * 100} />
               ))}
             </div>
-            <Reveal className="min-w-0">
+            <Reveal className="order-first min-w-0 lg:order-none">
               <ClassroomWindow />
             </Reveal>
             <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">

@@ -7,7 +7,7 @@ export interface Plan {
   classesPerMonth: number;
   /** Length of each lesson. */
   minutes: number;
-  /** Monthly price per currency. ~10–15% below the market average. */
+  /** Monthly price per currency. Set in USD by the academy; GBP and EUR converted (≈0.79 and ≈0.92) and rounded to .99. */
   price: Record<CurrencyCode, number>;
   perks: string[];
   featured?: boolean;
@@ -26,7 +26,7 @@ export const plans: Plan[] = [
     classesPerWeek: 2,
     classesPerMonth: 8,
     minutes: 30,
-    price: { USD: 34, GBP: 27, EUR: 31 },
+    price: { USD: 49.99, GBP: 38.99, EUR: 45.99 },
     perks: ['Live 1-on-1 with your teacher', 'Monthly progress report', 'A steady, gentle pace'],
   },
   {
@@ -35,7 +35,7 @@ export const plans: Plan[] = [
     classesPerWeek: 3,
     classesPerMonth: 12,
     minutes: 30,
-    price: { USD: 49, GBP: 39, EUR: 45 },
+    price: { USD: 69.99, GBP: 54.99, EUR: 63.99 },
     perks: ['Live 1-on-1 with your teacher', 'Monthly progress report', 'The best pace for most children'],
     featured: true,
   },
@@ -45,7 +45,7 @@ export const plans: Plan[] = [
     classesPerWeek: 5,
     classesPerMonth: 20,
     minutes: 30,
-    price: { USD: 72, GBP: 57, EUR: 66 },
+    price: { USD: 99.99, GBP: 78.99, EUR: 91.99 },
     perks: [
       'Live 1-on-1 with your teacher',
       'Monthly progress report',
@@ -54,17 +54,14 @@ export const plans: Plan[] = [
   },
 ];
 
-/**
- * Hifz: daily 45-minute lessons (new lesson + two kinds of revision). Priced a little below the Intensive plan's
- * per-minute rate. Proposed price: confirm before launch.
- */
+/** Hifz: daily 45-minute lessons (new lesson + two kinds of revision). */
 export const hifzPlan: Plan = {
   id: 'hifz',
   name: 'Hifz programme',
   classesPerWeek: 5,
   classesPerMonth: 20,
   minutes: 45,
-  price: { USD: 99, GBP: 79, EUR: 89 },
+  price: { USD: 149.99, GBP: 117.99, EUR: 137.99 },
   perks: [
     'Sabaq, sabqi and manzil in every lesson',
     'Monthly progress report',
@@ -75,6 +72,16 @@ export const hifzPlan: Plan = {
 
 /** Placeholders: confirm these policies before launch. */
 export const pricingPerks = [
-  { icon: 'users', text: 'Brothers & sisters: [10]% off' },
-  { icon: 'calendar', text: 'Pay monthly, [cancel anytime]' },
+  {
+    icon: 'users',
+    tint: 'from-brand-light to-brand',
+    title: 'Sibling discount',
+    body: 'Brothers & sisters: [10]% off',
+  },
+  {
+    icon: 'calendar',
+    tint: 'from-amber to-gold-deep',
+    title: 'Simple monthly billing',
+    body: 'Pay monthly, [cancel anytime]',
+  },
 ] as const;
