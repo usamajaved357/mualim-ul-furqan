@@ -38,12 +38,15 @@ export function Hero() {
           <div className="animate-fade-up [animation-delay:300ms]">
             <TrialFinder />
           </div>
-          <div className="animate-fade-up flex flex-wrap items-center gap-x-6 gap-y-3 [animation-delay:400ms]">
+          <div className="animate-fade-up flex flex-col gap-4 [animation-delay:400ms]">
             <RatingBadge />
-            <ul className="text-muted flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
+            <ul className="flex flex-wrap gap-2">
               {promises.map((p) => (
-                <li key={p} className="inline-flex items-center gap-1.5">
-                  <Icon name="check" size={16} strokeWidth={2.6} className="text-brand" />
+                <li
+                  key={p}
+                  className="border-line text-ink inline-flex items-center gap-1.5 rounded-full border bg-white/70 px-3 py-1.5 text-[13px] font-semibold backdrop-blur"
+                >
+                  <Icon name="check" size={14} strokeWidth={2.8} className="text-brand" />
                   {p}
                 </li>
               ))}

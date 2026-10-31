@@ -1,8 +1,7 @@
-import { Stars } from '@/components/ui';
+import { Icon, Stars } from '@/components/ui';
 import { site } from '@/config/site';
 
-const avatars = ['bg-brand', 'bg-gold-deep', 'bg-sky-ink', 'bg-lilac-ink'];
-
+/** Family count; stars appear only once there is a real rating. */
 export function RatingBadge() {
   return (
     <a
@@ -10,19 +9,20 @@ export function RatingBadge() {
       className="text-ink hover:text-ink inline-flex items-center gap-3 text-sm no-underline"
     >
       <span className="flex" aria-hidden>
-        {avatars.map((bg, i) => (
-          <span
-            key={bg}
-            className={`size-8 rounded-full border-[2.5px] border-white ${bg} ${i ? '-ml-2.5' : ''}`}
-          />
-        ))}
+        <span className="bg-mint text-brand flex size-10 items-center justify-center rounded-full border-2 border-white shadow-[0_4px_10px_-4px_rgb(15_31_26/0.35)]">
+          <Icon name="users" size={18} strokeWidth={2} />
+        </span>
+        <span className="bg-brand -ml-2.5 flex size-10 items-center justify-center rounded-full border-2 border-white text-[12px] font-bold text-white shadow-[0_4px_10px_-4px_rgb(15_31_26/0.35)]">
+          {site.families}
+        </span>
       </span>
       <span className="flex flex-col leading-tight">
         {site.rating && <Stars size={13} />}
-        <span>
-          Trusted by <strong>{site.families} families</strong>
+        <span className="font-bold">
+          Trusted by {site.families} families
           {site.rating && <> · {site.rating.score}</>}
         </span>
+        <span className="text-muted text-[13px]">Taught by {site.teacher.name}</span>
       </span>
     </a>
   );

@@ -58,7 +58,8 @@ export function LegalPage({
           <div className="bg-mint flex flex-col gap-3 rounded-[28px] p-6">
             <p className="font-display text-lg font-semibold">Questions about this page?</p>
             <p className="text-muted text-[15px]">
-              We're happy to explain anything. Email {site.contact.email}.
+              We're happy to explain anything. Email{' '}
+              <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
             </p>
             <ButtonLink
               href={buildWhatsAppLink(whatsappMessages.general)}

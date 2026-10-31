@@ -89,10 +89,13 @@ export function Footer() {
               <Icon name="whatsapp" size={18} className="text-gold shrink-0" />
               {site.contact.whatsappDisplay}
             </a>
-            <span className="inline-flex items-center gap-2.5">
+            <a
+              href={`mailto:${site.contact.email}`}
+              className="text-mist inline-flex items-center gap-2.5 hover:text-white"
+            >
               <Icon name="mail" size={18} className="text-gold shrink-0" />
               {site.contact.email}
-            </span>
+            </a>
             <span className="inline-flex items-center gap-2.5">
               <Icon name="video" size={18} className="text-gold shrink-0" />
               Classes on Google Meet

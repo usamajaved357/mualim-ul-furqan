@@ -34,7 +34,10 @@ export function PrivacyPage() {
       <h2>Cookies &amp; analytics</h2>
       <p>[Describe Meta Pixel / analytics use and how visitors can opt out.]</p>
       <h2>Contact</h2>
-      <p>For any privacy question or to delete your data, email {site.contact.email}.</p>
+      <p>
+        For any privacy question or to delete your data, email{' '}
+        <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+      </p>
     </LegalPage>
   );
 }

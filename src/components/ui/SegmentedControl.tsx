@@ -13,11 +13,11 @@ const styles = {
     on: 'border-brand bg-brand text-white font-bold shadow-[0_6px_14px_-8px_rgb(12_122_91/0.8)]',
     off: 'border-line-strong bg-white text-ink font-semibold hover:border-brand/40',
   },
-  /** Joined track (learner / region / currency). */
+  /** Joined track (learner / region): light tray, the selected option lifts out as a white tile. */
   track: {
-    group: 'flex gap-1 rounded-full bg-cream p-1',
-    item: 'min-h-9 flex-1 rounded-full px-3 text-sm',
-    on: 'bg-white text-ink font-bold shadow-[0_2px_6px_rgb(10_42_36/0.12)]',
+    group: 'flex gap-1 rounded-2xl border border-line bg-parchment p-1',
+    item: 'min-h-10 flex-1 rounded-xl px-3 text-sm',
+    on: 'bg-white text-brand font-bold ring-1 ring-line shadow-[0_6px_16px_-10px_rgb(15_31_26/0.35)]',
     off: 'text-muted font-semibold hover:text-ink',
   },
   /** Track with a solid selected state. */

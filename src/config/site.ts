@@ -18,6 +18,8 @@ export const site = {
 
   teacher: {
     name: 'Qari Abu Sufyan',
+    /** Cut-out portrait (transparent background) in /public. */
+    photo: '/teachers/qari-abu-sufyan-v2.webp',
     role: 'Founder & lead teacher',
     yearsTeaching: 7,
     studentsTaught: '100+',
@@ -30,7 +32,7 @@ export const site = {
     /** International format, digits only. VITE_WHATSAPP_NUMBER overrides it if set. */
     whatsappNumber: env.whatsappNumber || '923117503005',
     whatsappDisplay: '+92 311 7503005',
-    email: '[hello@yourdomain.com]',
+    email: 'mualimulfurqan@gmail.com',
   },
 
   /** Shown as "loved by N families" in the hero. */
