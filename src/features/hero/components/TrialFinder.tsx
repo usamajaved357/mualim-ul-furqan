@@ -3,7 +3,7 @@ import { ButtonLink, Icon, SegmentedControl } from '@/components/ui';
 import { setBookingIntent } from '@/lib/bookingIntent';
 import { cn } from '@/lib/cn';
 import { COURSE_ARABIC, type CourseId } from '@/types/domain';
-import { courseOptions, learnerOptions, regionOptions } from '../data';
+import { courseOptions, learnerOptions } from '../data';
 import { useTrialFinder } from '../hooks/useTrialFinder';
 
 const label = 'text-muted text-[13px] font-bold';
@@ -93,14 +93,12 @@ export function TrialFinder() {
             />
           </div>
           <div className="flex flex-col gap-2.5">
-            <p className={label}>Where are you?</p>
-            <SegmentedControl
-              label="Region"
-              variant="track"
-              options={regionOptions}
-              value={finder.selection.region}
-              onChange={finder.setRegion}
-            />
+            <p className={label}>Your time zone</p>
+            <p className="border-line bg-parchment text-ink flex min-h-12 items-center gap-2 rounded-2xl border px-3.5 text-sm font-bold">
+              <Icon name="globe" size={16} strokeWidth={2.2} className="text-brand shrink-0" />
+              <span className="truncate">{finder.zone}</span>
+              <span className="text-muted ml-auto shrink-0 text-xs font-semibold">Auto-detected</span>
+            </p>
           </div>
         </div>
       </div>

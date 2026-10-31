@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 import { getBookingIntent, subscribeBookingIntent } from '@/lib/bookingIntent';
 import { track } from '@/lib/analytics';
+import { visitorTimeZone } from '@/lib/timezone';
 import { COURSE_LABELS } from '@/types/domain';
 import {
   BookingError,
@@ -32,7 +33,7 @@ type AvailabilityState =
 
 /** State for the three-step booking flow: pick a time → your details → confirmed. */
 export function useBooking() {
-  const timeZone = useMemo(() => Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/London', []);
+  const timeZone = useMemo(() => visitorTimeZone(), []);
   const [availability, setAvailability] = useState<AvailabilityState>({ status: 'loading' });
   const [reload, setReload] = useState(0);
   const [selectedDay, setSelectedDay] = useState<string | null>(null);

@@ -7,11 +7,21 @@ export interface Plan {
   classesPerMonth: number;
   /** Length of each lesson. */
   minutes: number;
-  /** Monthly price per currency. Set in USD by the academy; GBP and EUR converted (≈0.79 and ≈0.92) and rounded to .99. */
-  price: Record<CurrencyCode, number>;
+  /** Monthly price in US dollars. Other currencies are converted from it (see exchangeRates). */
+  usd: number;
   perks: string[];
   featured?: boolean;
 }
+
+/**
+ * How many units of each currency one US dollar buys: ECB reference rates (frankfurter.dev), 30 October 2026.
+ * Update these now and then; every plan price follows automatically.
+ */
+export const exchangeRates: Record<CurrencyCode, number> = {
+  USD: 1,
+  GBP: 0.74633,
+  EUR: 0.89509,
+};
 
 export const currencies: { value: CurrencyCode; label: string; symbol: string }[] = [
   { value: 'USD', label: 'USD', symbol: '$' },
@@ -26,7 +36,7 @@ export const plans: Plan[] = [
     classesPerWeek: 2,
     classesPerMonth: 8,
     minutes: 30,
-    price: { USD: 49.99, GBP: 38.99, EUR: 45.99 },
+    usd: 49.99,
     perks: ['Live 1-on-1 with your teacher', 'Monthly progress report', 'A steady, gentle pace'],
   },
   {
@@ -35,7 +45,7 @@ export const plans: Plan[] = [
     classesPerWeek: 3,
     classesPerMonth: 12,
     minutes: 30,
-    price: { USD: 69.99, GBP: 54.99, EUR: 63.99 },
+    usd: 69.99,
     perks: ['Live 1-on-1 with your teacher', 'Monthly progress report', 'The best pace for most children'],
     featured: true,
   },
@@ -45,7 +55,7 @@ export const plans: Plan[] = [
     classesPerWeek: 5,
     classesPerMonth: 20,
     minutes: 30,
-    price: { USD: 99.99, GBP: 78.99, EUR: 91.99 },
+    usd: 99.99,
     perks: [
       'Live 1-on-1 with your teacher',
       'Monthly progress report',
@@ -61,7 +71,7 @@ export const hifzPlan: Plan = {
   classesPerWeek: 5,
   classesPerMonth: 20,
   minutes: 45,
-  price: { USD: 149.99, GBP: 117.99, EUR: 137.99 },
+  usd: 149.99,
   perks: [
     'Sabaq, sabqi and manzil in every lesson',
     'Monthly progress report',

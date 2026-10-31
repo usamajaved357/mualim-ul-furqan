@@ -3,7 +3,7 @@ import { anchors } from '@/config/site';
 import { cn } from '@/lib/cn';
 import type { CurrencyCode } from '@/types/domain';
 import type { Plan } from '../data';
-import { formatPrice, pricePerClass } from '../lib/pricing';
+import { formatPrice, planPrice, pricePerClass } from '../lib/pricing';
 
 export function PlanCard({ plan, currency }: { plan: Plan; currency: CurrencyCode }) {
   const featured = Boolean(plan.featured);
@@ -38,7 +38,7 @@ export function PlanCard({ plan, currency }: { plan: Plan; currency: CurrencyCod
       <div className="relative">
         <p className="font-display flex items-baseline gap-1.5 leading-none">
           <span className="text-[60px] font-bold tracking-[-0.045em]">
-            {formatPrice(plan.price[currency], currency)}
+            {formatPrice(planPrice(plan, currency), currency)}
           </span>
           <span className={cn('text-base font-semibold', featured ? 'text-sage' : 'text-muted')}>
             / month

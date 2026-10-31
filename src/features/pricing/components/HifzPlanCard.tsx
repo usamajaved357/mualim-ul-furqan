@@ -3,7 +3,7 @@ import { anchors } from '@/config/site';
 import { setBookingIntent } from '@/lib/bookingIntent';
 import type { CurrencyCode } from '@/types/domain';
 import type { Plan } from '../data';
-import { formatPrice, pricePerClass } from '../lib/pricing';
+import { formatPrice, planPrice, pricePerClass } from '../lib/pricing';
 
 /** Wide card under the regular plans: Hifz is its own programme with longer daily lessons. */
 export function HifzPlanCard({ plan, currency }: { plan: Plan; currency: CurrencyCode }) {
@@ -25,7 +25,7 @@ export function HifzPlanCard({ plan, currency }: { plan: Plan; currency: Currenc
         </p>
         <p className="font-display flex items-baseline gap-1.5 leading-none">
           <span className="text-[52px] font-bold tracking-[-0.045em]">
-            {formatPrice(plan.price[currency], currency)}
+            {formatPrice(planPrice(plan, currency), currency)}
           </span>
           <span className="text-muted text-base font-semibold">/ month</span>
         </p>

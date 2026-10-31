@@ -55,7 +55,7 @@ describe('HomePage', () => {
     await user.click(
       within(screen.getByRole('group', { name: 'Currency' })).getByRole('button', { name: 'GBP' }),
     );
-    expect(screen.getByText('£54.99')).toBeInTheDocument();
+    expect(screen.getByText('£51.99')).toBeInTheDocument();
   });
 
   it('switches programme tabs', async () => {

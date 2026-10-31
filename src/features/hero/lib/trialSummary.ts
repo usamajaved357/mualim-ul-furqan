@@ -1,10 +1,10 @@
-import { COURSE_LABELS, type CourseId, type Learner, type Region } from '@/types/domain';
-import { popularSlots } from '../data';
+import { openingHours } from '@/config/hours';
+import { hoursIn, timeZoneCity } from '@/lib/timezone';
+import { COURSE_LABELS, type CourseId, type Learner } from '@/types/domain';
 
 export interface TrialSelection {
   course: CourseId;
   learner: Learner;
-  region: Region;
 }
 
 export function trialSummary({ course, learner }: TrialSelection): string {
@@ -12,12 +12,14 @@ export function trialSummary({ course, learner }: TrialSelection): string {
   return `Free 30-min ${COURSE_LABELS[course]} trial ${who}`;
 }
 
-export function trialSlots({ region }: TrialSelection): string {
-  return popularSlots[region];
+/** The teacher's opening hours converted to the visitor's own time zone. */
+export function trialSlots(timeZone: string, now: Date): string {
+  const { weekdays, weekends } = hoursIn(openingHours, timeZone, now);
+  return `Open in your time: weekdays ${weekdays}, weekends ${weekends}`;
 }
 
-/** Pre-filled WhatsApp message so the teacher knows what the family chose. */
-export function trialMessage({ course, learner, region }: TrialSelection): string {
+/** Pre-filled WhatsApp message so the teacher knows what the family chose and their time zone. */
+export function trialMessage({ course, learner }: TrialSelection, timeZone: string): string {
   const who = learner === 'child' ? 'my child' : 'myself';
-  return `Assalamu alaikum, I'd like a free ${COURSE_LABELS[course]} trial class for ${who} (${region.toUpperCase()}).`;
+  return `Assalamu alaikum, I'd like a free ${COURSE_LABELS[course]} trial class for ${who} (${timeZoneCity(timeZone)} time).`;
 }

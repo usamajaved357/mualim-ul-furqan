@@ -114,7 +114,4 @@ export function groupByPartOfDay(slots: Date[], timeZone: string) {
   return groups.filter((g) => g.slots.length);
 }
 
-/** Friendly name of a time zone, e.g. "London" from "Europe/London". */
-export function timeZoneCity(timeZone: string): string {
-  return (timeZone.split('/').at(-1) ?? timeZone).replace(/_/g, ' ');
-}
+export { timeZoneCity } from '@/lib/timezone';
