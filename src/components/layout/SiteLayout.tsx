@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
-import { AnnouncementBar } from './AnnouncementBar';
 import { FloatingWhatsApp } from './FloatingWhatsApp';
 import { Footer } from './Footer';
 import { Header } from './Header';
@@ -35,7 +34,6 @@ export function SiteLayout() {
       >
         Skip to content
       </a>
-      <AnnouncementBar />
       <Header />
       <main id="main">
         <Outlet />

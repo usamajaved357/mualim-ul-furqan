@@ -1,9 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#0A2A24"/>
-  <g transform="translate(6 5) scale(0.82)">
-    <path d="M8 62V30C8 17 21 9 32 2C43 9 56 17 56 30V62Z" fill="#0B5D4B"/>
-    <path d="M13 58V31C13 21 23 14 32 8.5C41 14 51 21 51 31V58Z" fill="none" stroke="#E8CF94" stroke-width="2"/>
-    <path d="M32 17l1.6 3.4 3.7.5-2.7 2.6.7 3.7L32 25.5l-3.3 1.7.7-3.7-2.7-2.6 3.7-.5z" fill="#E8CF94"/>
-    <path d="M18 40C24 36.5 29 36.5 32 39.5C35 36.5 40 36.5 46 40V51C40 47.5 35 47.5 32 50.5C29 47.5 24 47.5 18 51Z" fill="#E8CF94"/>
-  </g>
+  <defs>
+    <linearGradient id="me" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#17a078"/><stop offset="1" stop-color="#08513e"/></linearGradient>
+    <linearGradient id="mg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fde7ae"/><stop offset="1" stop-color="#e2a540"/></linearGradient>
+    <radialGradient id="mr"><stop offset="0" stop-color="#fff" stop-opacity=".32"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+  </defs>
+  <path d="M7 61V29.5C7 19 15.5 12.5 23.5 8.2C27.6 6 30.6 4.2 32 1.5C33.4 4.2 36.4 6 40.5 8.2C48.5 12.5 57 19 57 29.5V61Q57 63 55 63H9Q7 63 7 61Z" fill="url(#me)" stroke="url(#mg)" stroke-width="1.2"/>
+  <path d="M11.3 59V30C11.3 21.6 18.4 16.1 25.4 12.3C28.7 10.5 30.9 9 32 7.1C33.1 9 35.3 10.5 38.6 12.3C45.6 16.1 52.7 21.6 52.7 30V59Z" fill="none" stroke="url(#mg)" stroke-width="1" opacity=".75"/>
+  <circle cx="32" cy="22" r="13" fill="url(#mr)"/>
+  <g fill="url(#mg)"><rect x="27.19" y="17.19" width="9.62" height="9.62"/><rect x="27.19" y="17.19" width="9.62" height="9.62" transform="rotate(45 32 22)"/></g>
+  <circle cx="32" cy="22" r="2.1" fill="#118464"/>
+  <path d="M19.5 45L42 57.2M44.5 45L22 57.2" stroke="url(#mg)" stroke-width="2.6" stroke-linecap="round"/>
+  <g fill="#b9781f" transform="translate(0 1.7)"><path d="M31.2 39.7C27.5 36.9 22.6 36.1 17 37.4Q16 37.6 16 38.6V46.1Q16 47.1 17 46.9C22.6 45.7 27.5 46.4 31.2 49.1Z"/><path d="M31.2 39.7C27.5 36.9 22.6 36.1 17 37.4Q16 37.6 16 38.6V46.1Q16 47.1 17 46.9C22.6 45.7 27.5 46.4 31.2 49.1Z" transform="matrix(-1 0 0 1 64 0)"/></g>
+  <g fill="url(#mg)"><path d="M31.2 39.7C27.5 36.9 22.6 36.1 17 37.4Q16 37.6 16 38.6V46.1Q16 47.1 17 46.9C22.6 45.7 27.5 46.4 31.2 49.1Z"/><path d="M31.2 39.7C27.5 36.9 22.6 36.1 17 37.4Q16 37.6 16 38.6V46.1Q16 47.1 17 46.9C22.6 45.7 27.5 46.4 31.2 49.1Z" transform="matrix(-1 0 0 1 64 0)"/></g>
 </svg>
