@@ -13,7 +13,8 @@ export function timeZoneCity(timeZone: string): string {
 /** UTC offset label at a moment, e.g. "GMT+5" or "GMT". */
 export function timeZoneOffset(timeZone: string, at: Date): string {
   const parts = new Intl.DateTimeFormat('en-GB', { timeZone, timeZoneName: 'shortOffset' }).formatToParts(at);
-  return parts.find((p) => p.type === 'timeZoneName')?.value ?? '';
+  // Some ICU versions (e.g. Node on GitHub's runners) write a zero offset as "GMT+0".
+  return (parts.find((p) => p.type === 'timeZoneName')?.value ?? '').replace(/^GMT[+-]0(:00)?$/, 'GMT');
 }
 
 /** "Karachi (GMT+5)": city plus current offset. */
