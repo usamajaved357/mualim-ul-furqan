@@ -1,7 +1,7 @@
 /**
  * One-time helper: signs the academy's Google account in and prints GOOGLE_REFRESH_TOKEN.
  *
- *   1. Google Cloud Console → enable "Google Calendar API".
+ *   1. Google Cloud Console → enable "Google Calendar API" and "Gmail API".
  *   2. APIs & Services → Credentials → Create OAuth client ID → type "Desktop app".
  *   3. Put GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in .env, then run: npm run google:auth
  *   4. Sign in with the account whose calendar should receive bookings, then copy the printed token.
@@ -33,6 +33,8 @@ const redirectUri = `http://127.0.0.1:${PORT}/callback`;
 const scopes = [
   'https://www.googleapis.com/auth/calendar.events',
   'https://www.googleapis.com/auth/calendar.freebusy',
+  // Booking confirmations and new-booking alerts are sent from this account's Gmail.
+  'https://www.googleapis.com/auth/gmail.send',
 ];
 const authUrl =
   'https://accounts.google.com/o/oauth2/v2/auth?' +

@@ -16,3 +16,31 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
+
+  # Every push to main that passes the checks goes live on Cloudflare Pages (project "mualim-ul-furqan").
+  # Needs repository secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID. Server secrets (GOOGLE_*,
+  # OWNER_EMAIL) live in Cloudflare itself, so nothing secret is built into the site.
+  deploy:
+    needs: check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    env:
+      VITE_SITE_URL: https://mualimulfurqan.com
+      VITE_WHATSAPP_NUMBER: '923117503005'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: '4.156.0'
+          command: pages deploy dist --project-name=mualim-ul-furqan --branch=main --commit-hash=${{ github.sha }}

@@ -1,5 +1,5 @@
 import { parseBookingRequest, learnerLabel, type Booking } from './booking';
-import { bookingEmails, sendEmail } from './email';
+import { bookingEmails, sendEmail, type MailConfig } from './email';
 import { googleConfig, type Env } from './env';
 import { busyIntervals, createMeetEvent } from './google';
 import { schedule } from './schedule';
@@ -62,7 +62,13 @@ export async function handleBook({ request, env }: Context): Promise<Response> {
   const start = new Date(req.start);
   const end = new Date(start.getTime() + schedule.slotMinutes * 60_000);
   const google = googleConfig(env);
-  const mail = { apiKey: env.RESEND_API_KEY?.trim(), from: env.EMAIL_FROM?.trim() };
+  const ownerEmail = env.OWNER_EMAIL?.trim();
+  const mail: MailConfig = {
+    apiKey: env.RESEND_API_KEY?.trim(),
+    from: env.EMAIL_FROM?.trim(),
+    // Gmail sends as the connected account; OWNER_EMAIL is that account, shown under the academy's name.
+    gmail: google && ownerEmail ? { config: google, from: `${SITE_NAME} <${ownerEmail}>` } : undefined,
+  };
   if (!google && !mail.apiKey && env.BOOKING_DEMO !== 'true') {
     return json(
       {
@@ -104,7 +110,6 @@ export async function handleBook({ request, env }: Context): Promise<Response> {
         })
       : null;
 
-    const ownerEmail = env.OWNER_EMAIL?.trim();
     const emails = bookingEmails(booking, {
       meetLink: event?.meetLink ?? null,
       ownerEmail: ownerEmail ?? '',

@@ -2,6 +2,7 @@ import type { GoogleConfig } from './env';
 import type { Interval } from './slots';
 
 const CALENDAR_API = 'https://www.googleapis.com/calendar/v3';
+const GMAIL_SEND = 'https://gmail.googleapis.com/gmail/v1/users/me/messages/send';
 
 export class GoogleApiError extends Error {}
 
@@ -95,4 +96,18 @@ export async function createMeetEvent(
   );
   const video = event.conferenceData?.entryPoints?.find((e) => e.entryPointType === 'video')?.uri;
   return { id: event.id, meetLink: event.hangoutLink ?? video ?? null, htmlLink: event.htmlLink };
+}
+
+/**
+ * Sends an email from the owner's Gmail account. `raw` is a full RFC 2822 message, base64url-encoded.
+ * Needs the gmail.send permission: run `npm run google:auth` again if the token predates it.
+ */
+export async function sendGmail(config: GoogleConfig, raw: string): Promise<void> {
+  const token = await accessToken(config);
+  const res = await fetch(GMAIL_SEND, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ raw }),
+  });
+  if (!res.ok) throw new GoogleApiError(`Gmail send failed (${res.status}): ${await res.text()}`);
 }

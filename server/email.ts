@@ -1,4 +1,6 @@
 import { learnerLabel, type Booking } from './booking';
+import type { GoogleConfig } from './env';
+import { sendGmail } from './google';
 import { formatInZone } from './time';
 
 export interface EmailMessage {
@@ -118,29 +120,85 @@ export function bookingEmails(
   };
 }
 
-/** Sends through Resend. Without an API key the message is logged instead (local development). */
+/** Base64url of a UTF-8 string, as Gmail's `raw` field and RFC 2047 headers expect. */
+function base64(text: string, url = false): string {
+  let binary = '';
+  for (const byte of new TextEncoder().encode(text)) binary += String.fromCharCode(byte);
+  const b64 = btoa(binary);
+  return url ? b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '') : b64;
+}
+
+/** Header value safe for any characters (RFC 2047), left as is when plain ASCII. */
+const encodeHeader = (value: string) =>
+  /^[\x20-\x7e]*$/.test(value) ? value : `=?UTF-8?B?${base64(value)}?=`;
+
+/** A complete multipart (text + HTML) email, as the text Gmail's API sends. */
+export function mimeMessage(message: EmailMessage, from: string): string {
+  const boundary = `mualim-${crypto.randomUUID()}`;
+  const headers = [
+    `From: ${from}`,
+    `To: ${message.to}`,
+    ...(message.replyTo ? [`Reply-To: ${message.replyTo}`] : []),
+    `Subject: ${encodeHeader(message.subject)}`,
+    'MIME-Version: 1.0',
+    `Content-Type: multipart/alternative; boundary="${boundary}"`,
+  ];
+  const part = (type: string, body: string) =>
+    [
+      `--${boundary}`,
+      `Content-Type: ${type}; charset=UTF-8`,
+      'Content-Transfer-Encoding: base64',
+      '',
+      base64(body),
+    ].join('\r\n');
+  return [
+    ...headers,
+    '',
+    part('text/plain', message.text),
+    part('text/html', message.html),
+    `--${boundary}--`,
+    '',
+  ].join('\r\n');
+}
+
+export interface MailConfig {
+  /** Resend, when a key and a verified sender are set. */
+  apiKey?: string;
+  from?: string;
+  /** Otherwise the owner's Gmail, through the same Google connection as the calendar. */
+  gmail?: { config: GoogleConfig; from: string };
+}
+
+/**
+ * Sends through Resend if configured, else from the owner's Gmail. With neither, the message is logged instead
+ * (local development).
+ */
 export async function sendEmail(
   message: EmailMessage,
-  { apiKey, from }: { apiKey?: string; from?: string },
+  { apiKey, from, gmail }: MailConfig,
 ): Promise<'sent' | 'logged'> {
-  if (!apiKey || !from) {
-    console.log(
-      `[email not sent: RESEND_API_KEY/EMAIL_FROM unset]\nTo: ${message.to}\nSubject: ${message.subject}\n\n${message.text}\n`,
-    );
-    return 'logged';
+  if (apiKey && from) {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from,
+        to: [message.to],
+        subject: message.subject,
+        html: message.html,
+        text: message.text,
+        reply_to: message.replyTo,
+      }),
+    });
+    if (!res.ok) throw new Error(`Resend failed (${res.status}): ${await res.text()}`);
+    return 'sent';
   }
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from,
-      to: [message.to],
-      subject: message.subject,
-      html: message.html,
-      text: message.text,
-      reply_to: message.replyTo,
-    }),
-  });
-  if (!res.ok) throw new Error(`Resend failed (${res.status}): ${await res.text()}`);
-  return 'sent';
+  if (gmail) {
+    await sendGmail(gmail.config, base64(mimeMessage(message, gmail.from), true));
+    return 'sent';
+  }
+  console.log(
+    `[email not sent: no Resend key or Google connection]\nTo: ${message.to}\nSubject: ${message.subject}\n\n${message.text}\n`,
+  );
+  return 'logged';
 }

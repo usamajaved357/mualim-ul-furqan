@@ -1,5 +1,5 @@
 import { parseBookingRequest } from './booking';
-import { bookingEmails } from './email';
+import { bookingEmails, mimeMessage } from './email';
 
 const valid = {
   start: '2026-01-15T17:30:00.000Z',
@@ -50,5 +50,40 @@ describe('bookingEmails', () => {
   it('escapes visitor input in HTML', () => {
     expect(emails.owner.html).not.toContain('<b>Khan</b>');
     expect(emails.owner.html).toContain('&lt;b&gt;Khan&lt;/b&gt;');
+  });
+});
+
+describe('mimeMessage', () => {
+  const raw = mimeMessage(
+    {
+      to: 'family@example.com',
+      replyTo: 'owner@example.com',
+      subject: 'Class · Monday',
+      text: 'Hello',
+      html: '<p>Hello</p>',
+    },
+    'Mualim Ul Furqan <owner@example.com>',
+  );
+  const decode = (b64: string) =>
+    new TextDecoder().decode(Uint8Array.from(atob(b64), (c) => c.charCodeAt(0)));
+
+  it('addresses the message and encodes a non-ASCII subject', () => {
+    expect(raw).toContain('From: Mualim Ul Furqan <owner@example.com>\r\n');
+    expect(raw).toContain('To: family@example.com\r\n');
+    expect(raw).toContain('Reply-To: owner@example.com\r\n');
+    const subject = raw.match(/^Subject: =\?UTF-8\?B\?(.+)\?=$/m)?.[1];
+    expect(decode(subject!)).toBe('Class · Monday');
+  });
+
+  it('carries both a text and an HTML part', () => {
+    const parts = [
+      ...raw.matchAll(
+        /Content-Type: (text\/\w+); charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n(\S+)/g,
+      ),
+    ];
+    expect(parts.map(([, type, body]) => [type, decode(body!)])).toEqual([
+      ['text/plain', 'Hello'],
+      ['text/html', '<p>Hello</p>'],
+    ]);
   });
 });
