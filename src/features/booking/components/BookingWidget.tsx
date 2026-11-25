@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ButtonLink, Icon } from '@/components/ui';
 import { cn } from '@/lib/cn';
 import { buildWhatsAppLink, whatsappMessages } from '@/lib/whatsapp';
@@ -58,6 +58,8 @@ function Steps({ current }: { current: number }) {
 export function BookingWidget({ booking }: { booking: BookingState }) {
   const { availability, result, slot } = booking;
   const step = result ? 2 : slot ? 1 : 0;
+  // Clock format for the time list; lives here so it survives switching days.
+  const [hour24, setHour24] = useState(false);
 
   // Each step has a different height: keep the top of the widget in view when moving between them.
   const root = useRef<HTMLDivElement>(null);
@@ -133,7 +135,7 @@ export function BookingWidget({ booking }: { booking: BookingState }) {
               </p>
             )}
             <AvailabilityNote timeZone={booking.timeZone} />
-            <div className="grid gap-8 md:grid-cols-[1.05fr_1fr] md:gap-0">
+            <div className="grid gap-8 md:grid-cols-[1fr_1.05fr] md:gap-0">
               <div className="md:pr-8">
                 <DayPicker
                   weeks={booking.weeks}
@@ -141,11 +143,13 @@ export function BookingWidget({ booking }: { booking: BookingState }) {
                   onSelect={booking.selectDay}
                 />
               </div>
-              <div className="md:border-line md:border-l md:pl-8">
+              <div className="md:border-line flex flex-col md:border-l md:pl-8">
                 <TimeSlots
                   key={booking.activeDay?.key}
                   day={booking.activeDay}
                   timeZone={booking.timeZone}
+                  hour24={hour24}
+                  onHour24Change={setHour24}
                   onSelect={booking.selectSlot}
                 />
               </div>

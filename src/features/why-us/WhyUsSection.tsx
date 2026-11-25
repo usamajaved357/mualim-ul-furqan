@@ -83,8 +83,8 @@ export function WhyUsSection() {
             </p>
           </div>
           <div className="relative flex flex-wrap items-center gap-3">
-            <span className="glass-dark inline-flex items-center gap-3 rounded-full py-2 pr-4 pl-2">
-              <TeacherAvatar className="size-10 rounded-full ring-2 ring-[#e9c77a]" />
+            <span className="glass-dark inline-flex items-center gap-3 rounded-2xl py-2 pr-4 pl-2">
+              <TeacherAvatar className="h-12 w-[39px] rounded-t-full rounded-b-lg ring-2 ring-[#e9c77a]" />
               <span className="text-sm leading-tight">
                 <span className="block font-bold">{site.teacher.name}</span>
                 <span className="text-sage">{site.teacher.yearsTeaching} years teaching</span>

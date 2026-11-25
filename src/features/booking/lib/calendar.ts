@@ -58,10 +58,34 @@ export function buildCalendar(slots: Date[], timeZone: string, now: Date, minDay
   return weeks;
 }
 
-export function formatTime(date: Date, timeZone: string): string {
+/** "5:30 pm", or "17:30" with the 24-hour clock. */
+export function formatTime(date: Date, timeZone: string, hour12 = true): string {
+  if (!hour12) {
+    return new Intl.DateTimeFormat('en-GB', {
+      timeZone,
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h23',
+    }).format(date);
+  }
   return new Intl.DateTimeFormat('en-GB', { timeZone, hour: 'numeric', minute: '2-digit', hour12: true })
     .format(date)
     .replace(/\s?([ap])\.?m\.?/i, (_, p: string) => ` ${p.toLowerCase()}m`);
+}
+
+/** "Friday 27 November" for a day key. */
+export function formatDayHeading(key: string): string {
+  return new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'UTC',
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+  }).format(keyToDate(key));
+}
+
+/** "Nov", "Dec": short month of a day key. */
+export function formatMonthShort(key: string): string {
+  return new Intl.DateTimeFormat('en-GB', { timeZone: 'UTC', month: 'short' }).format(keyToDate(key));
 }
 
 /** "Thu 15 Jan" for a day key. */

@@ -1,4 +1,5 @@
 import { useEffect, useState, type CSSProperties } from 'react';
+import { TeacherAvatar } from '@/components/brand/TeacherAvatar';
 import { AL_FATIHA } from '@/components/mockups';
 import { Icon, StarGlyph } from '@/components/ui';
 import { site } from '@/config/site';
@@ -112,15 +113,7 @@ export function HeroVisual() {
 
       {/* Teacher, live */}
       <div className="card-night absolute top-0 left-0 flex items-center gap-3 rounded-[22px] py-3 pr-4 pl-3 sm:-left-2">
-        {/* A calligraphic seal rather than the photo: crisp at this small size. The gold ring pulses while he speaks. */}
-        <span className="relative flex size-14 shrink-0 items-center justify-center">
-          <span className="border-gold/50 absolute inset-0 animate-ping rounded-full border [animation-duration:2.4s]" />
-          <span className="relative flex size-14 items-center justify-center rounded-full bg-[radial-gradient(circle_at_50%_30%,#1f8a68,#0a3d30_70%)] shadow-[inset_0_1px_0_rgb(255_255_255/0.25),0_8px_18px_-8px_rgb(0_0_0/0.7)] ring-2 ring-[#e9c77a] ring-offset-2 ring-offset-[#072a20]">
-            <span lang="ar" className="font-calligraphy text-gold-leaf pb-1 text-[30px] leading-none">
-              ق
-            </span>
-          </span>
-        </span>
+        <TeacherAvatar className="h-[68px] w-[55px] rounded-t-full rounded-b-xl ring-2 ring-[#e9c77a] ring-offset-2 ring-offset-[#072a20]" />
         <span className="flex flex-col leading-tight">
           <span className="text-[14px] font-bold">{site.teacher.name}</span>
           <span className="text-live inline-flex items-center gap-2 text-[12px] font-semibold">

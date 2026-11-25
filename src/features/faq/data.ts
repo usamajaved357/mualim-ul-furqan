@@ -32,6 +32,6 @@ export const faqs = [
   },
   {
     q: 'How do I pay?',
-    a: "Monthly, in advance, by [card / PayPal]. You only pay after the free class, once you've chosen a plan.",
+    a: "Monthly, in advance, through a Payoneer payment request. You only pay after the free class, once you've chosen a plan, and you can stop any time before your next month starts.",
   },
 ] as const;

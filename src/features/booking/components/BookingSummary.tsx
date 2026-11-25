@@ -43,7 +43,7 @@ export function BookingSummary({ booking }: { booking: BookingState }) {
           className="pointer-events-none absolute -top-32 -right-24 size-80 rounded-full bg-[radial-gradient(circle,rgb(25_162_122/0.5),transparent_65%)]"
         />
         <div className="relative flex items-center gap-4">
-          <TeacherAvatar className="size-16 rounded-2xl ring-2 ring-[#e9c77a]/80" />
+          <TeacherAvatar className="h-24 w-[78px] rounded-t-full rounded-b-2xl ring-2 ring-[#e9c77a]/80 ring-offset-2 ring-offset-[#0b3a2d]" />
           <span className="flex flex-col leading-tight">
             <span className="text-gold text-[12px] font-bold tracking-[0.14em] uppercase">Your teacher</span>
             <span className="font-display text-[20px] font-bold tracking-[-0.02em]">{site.teacher.name}</span>

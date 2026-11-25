@@ -80,18 +80,18 @@ export const hifzPlan: Plan = {
   ],
 };
 
-/** Placeholders: confirm these policies before launch. */
+/** Policies as set out in the terms of service (src/pages/TermsPage.tsx). */
 export const pricingPerks = [
   {
     icon: 'users',
     tint: 'from-brand-light to-brand',
     title: 'Sibling discount',
-    body: 'Brothers & sisters: [10]% off',
+    body: 'Brothers & sisters: 10% off each',
   },
   {
     icon: 'calendar',
     tint: 'from-amber to-gold-deep',
     title: 'Simple monthly billing',
-    body: 'Pay monthly, [cancel anytime]',
+    body: 'Pay monthly by Payoneer, cancel anytime',
   },
 ] as const;
