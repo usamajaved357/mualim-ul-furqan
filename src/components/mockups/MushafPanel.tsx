@@ -51,18 +51,19 @@ export function MushafPanel({ title, ayat, activeIndex, footer, className }: Mus
               <li
                 key={ayah.number}
                 className={cn(
-                  'font-quran relative rounded-xl px-3 text-[18px] leading-[2.05] sm:text-[20px]',
+                  'font-quran relative rounded-xl px-3 text-[18px] leading-[2.05] transition-[background-color,box-shadow,color] duration-700 sm:text-[20px]',
                   active
                     ? 'bg-[#f7e7bd] text-[#1e2a26] shadow-[inset_0_0_0_1px_#ebcd83]'
-                    : 'text-[#1e2a26]/75',
+                    : 'text-[#1e2a26]/75 shadow-[inset_0_0_0_1px_transparent]',
                 )}
               >
-                {active && (
-                  <span
-                    aria-hidden
-                    className="bg-gold-deep absolute inset-y-2 right-0 w-[3px] rounded-full"
-                  />
-                )}
+                <span
+                  aria-hidden
+                  className={cn(
+                    'bg-gold-deep absolute inset-y-2 right-0 w-[3px] origin-top rounded-full transition-transform duration-700',
+                    active ? 'scale-y-100' : 'scale-y-0',
+                  )}
+                />
                 {ayah.text}
                 <AyahMark number={ayah.number} />
               </li>

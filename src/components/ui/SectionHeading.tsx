@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { cn } from '@/lib/cn';
 import { Eyebrow } from './Eyebrow';
 import { Reveal } from './Reveal';
+import { SplitWords } from './SplitWords';
 
 interface SectionHeadingProps {
   eyebrow?: string;
@@ -15,6 +16,7 @@ interface SectionHeadingProps {
   className?: string;
 }
 
+/** Kicker, a heading that rises in word by word, and a short lead paragraph. */
 export function SectionHeading({
   eyebrow,
   title,
@@ -27,7 +29,7 @@ export function SectionHeading({
   return (
     <Reveal
       className={cn(
-        'flex flex-col gap-4',
+        'flex flex-col gap-5',
         align === 'center' ? 'items-center text-center' : 'items-start text-left',
         className,
       )}
@@ -35,16 +37,16 @@ export function SectionHeading({
       {eyebrow && <Eyebrow tone={tone === 'dark' ? 'dark' : 'mint'}>{eyebrow}</Eyebrow>}
       <Tag
         className={cn(
-          'max-w-[820px] text-[clamp(34px,4.4vw,58px)] leading-[1.04] text-balance',
-          tone === 'dark' ? '[&_em]:text-gold' : '[&_em]:text-brand',
+          'max-w-[860px] text-[clamp(36px,4.6vw,62px)] leading-[1.02] font-[480] text-balance',
+          tone === 'dark' ? '[&_em]:text-gold text-white' : '[&_em]:text-brand',
         )}
       >
-        {title}
+        <SplitWords>{title}</SplitWords>
       </Tag>
       {description && (
         <p
           className={cn(
-            'max-w-[640px] text-[18px] text-pretty',
+            'max-w-[620px] text-[18px] text-pretty',
             tone === 'dark' ? 'text-mist' : 'text-muted',
           )}
         >

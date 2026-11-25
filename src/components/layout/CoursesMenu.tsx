@@ -16,13 +16,13 @@ export function CourseMenuLink({
     <a
       href={link.href}
       onClick={onNavigate}
-      className="text-ink hover:text-ink hover:bg-parchment flex items-center gap-3 rounded-2xl p-2 no-underline transition-colors"
+      className="text-ink hover:text-ink flex items-center gap-3 rounded-2xl p-2 no-underline transition-colors hover:bg-white/80"
     >
       <span
         aria-hidden
         lang="ar"
         dir="rtl"
-        className="bg-sand text-bronze font-naskh flex size-11 shrink-0 items-center justify-center rounded-xl text-[17px] font-bold"
+        className="text-bronze font-naskh flex size-11 shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(160deg,#fff4dc,#fbe3b4)] text-[17px] font-bold"
       >
         {COURSE_ARABIC[link.id]}
       </span>
@@ -35,7 +35,7 @@ export function CourseMenuLink({
 }
 
 /** "Courses" in the desktop nav: opens on hover or click, closes on Escape, outside click or navigation. */
-export function CoursesMenu() {
+export function CoursesMenu({ dark = false }: { dark?: boolean }) {
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
 
@@ -66,8 +66,11 @@ export function CoursesMenu() {
         aria-controls="courses-menu"
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          'text-ink/80 hover:text-ink hover:bg-cream inline-flex cursor-pointer items-center gap-1 rounded-full px-3.5 py-2 whitespace-nowrap transition-colors',
-          open && 'bg-cream text-ink',
+          'inline-flex cursor-pointer items-center gap-1 rounded-full px-3.5 py-2 whitespace-nowrap transition-colors duration-300',
+          dark
+            ? 'text-white/80 hover:bg-white/10 hover:text-white'
+            : 'text-ink/75 hover:text-ink hover:bg-white/70',
+          open && (dark ? 'bg-white/10 text-white' : 'text-ink bg-white/70'),
         )}
       >
         Courses
@@ -79,8 +82,11 @@ export function CoursesMenu() {
         />
       </button>
       {open && (
-        <div id="courses-menu" className="absolute top-full left-1/2 z-50 w-[340px] -translate-x-1/2 pt-3">
-          <div className="border-line shadow-float rounded-[26px] border bg-white p-2">
+        <div
+          id="courses-menu"
+          className="animate-scale-in absolute top-full left-1/2 z-50 w-[340px] -translate-x-1/2 pt-3 [animation-duration:0.35s]"
+        >
+          <div className="glass rounded-[26px] p-2">
             {courseLinks.map((link) => (
               <CourseMenuLink key={link.id} link={link} onNavigate={() => setOpen(false)} />
             ))}

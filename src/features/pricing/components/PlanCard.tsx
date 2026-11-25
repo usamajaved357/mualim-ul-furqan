@@ -10,34 +10,34 @@ export function PlanCard({ plan, currency }: { plan: Plan; currency: CurrencyCod
   return (
     <article
       className={cn(
-        'lift relative flex flex-1 flex-col gap-6 overflow-hidden rounded-[32px] p-8',
+        'lift spotlight relative flex flex-1 flex-col gap-6 overflow-hidden rounded-[32px] p-8 [&>*]:z-10',
         featured
-          ? 'from-brand to-brand-dark bg-gradient-to-br text-white shadow-[0_40px_80px_-30px_rgb(12_122_91/0.6)] lg:-my-4 lg:py-12'
+          ? 'bg-abyss grain border-glow text-white shadow-[0_40px_80px_-30px_rgb(4_21_15/0.75)] [--spotlight-color:rgb(247_213_139/0.14)] lg:-my-4 lg:py-12'
           : 'border-line border bg-white',
       )}
     >
       {featured && (
         <span
           aria-hidden
-          className="bg-brand-light/50 absolute -top-20 -right-16 size-60 rounded-full blur-3xl"
+          className="animate-aurora absolute! -top-24 -right-20 z-0! size-72 rounded-full bg-[radial-gradient(circle,rgb(25_162_122/0.6),transparent_65%)]"
         />
       )}
       <div className="relative flex items-start justify-between gap-3">
         <div>
-          <h3 className="text-[26px] leading-tight">{plan.name}</h3>
+          <h3 className="text-[28px] leading-tight font-[460]">{plan.name}</h3>
           <p className={cn('text-[15px] font-semibold', featured ? 'text-sage' : 'text-muted')}>
             {plan.classesPerWeek} classes a week · {plan.minutes} min
           </p>
         </div>
         {featured && (
-          <span className="bg-gold-deep rounded-full px-3 py-1.5 text-xs font-bold whitespace-nowrap text-white">
+          <span className="bg-gold text-abyss rounded-full px-3 py-1.5 text-xs font-bold whitespace-nowrap">
             Most popular
           </span>
         )}
       </div>
       <div className="relative">
         <p className="font-display flex items-baseline gap-1.5 leading-none">
-          <span className="text-[60px] font-bold tracking-[-0.045em]">
+          <span className="text-[62px] font-[340] tracking-[-0.045em]">
             {formatPrice(planPrice(plan, currency), currency)}
           </span>
           <span className={cn('text-base font-semibold', featured ? 'text-sage' : 'text-muted')}>

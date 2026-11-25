@@ -17,15 +17,15 @@ const styles = {
   track: {
     group: 'flex gap-1 rounded-2xl border border-line bg-parchment p-1',
     item: 'min-h-10 flex-1 rounded-xl px-3 text-sm',
-    on: 'bg-white text-brand font-bold ring-1 ring-line shadow-[0_6px_16px_-10px_rgb(15_31_26/0.35)]',
+    on: 'bg-white text-brand font-bold shadow-[inset_0_1px_0_white,0_0_0_1px_rgb(15_31_26/0.06),0_6px_16px_-10px_rgb(15_31_26/0.35)]',
     off: 'text-muted font-semibold hover:text-ink',
   },
   /** Track with a solid selected state. */
   solid: {
-    group: 'inline-flex gap-1 rounded-full border border-line bg-white p-1 shadow-card',
+    group: 'glass inline-flex gap-1 rounded-full p-1',
     item: 'min-h-10 rounded-full px-5 text-[15px]',
-    on: 'bg-ink text-white font-bold',
-    off: 'text-ink font-semibold hover:bg-cream',
+    on: 'bg-[linear-gradient(180deg,#14916c,#0a6a4f)] text-white font-bold shadow-[inset_0_1px_0_rgb(255_255_255/0.28),0_8px_18px_-10px_rgb(12_122_91/0.9)]',
+    off: 'text-ink font-semibold hover:bg-white/70',
   },
   /** Vertical list on dark background. */
   sidebar: {
@@ -65,7 +65,11 @@ export function SegmentedControl<T extends string>({
             type="button"
             aria-pressed={selected}
             onClick={() => onChange(option.value)}
-            className={cn('cursor-pointer transition-colors duration-200', s.item, selected ? s.on : s.off)}
+            className={cn(
+              'cursor-pointer transition-[color,background-color,box-shadow] duration-300',
+              s.item,
+              selected ? s.on : s.off,
+            )}
           >
             {option.label}
           </button>

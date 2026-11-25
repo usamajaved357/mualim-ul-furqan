@@ -29,7 +29,7 @@ export function BookingSection() {
             >
               {site.arabicNameFull}
             </span>
-            <h2 id="book-title" className="text-[clamp(38px,4.6vw,60px)] leading-[1.02]">
+            <h2 id="book-title" className="text-[clamp(40px,4.8vw,64px)] leading-[1.02] font-[420]">
               Book your <em className="text-brand">free class</em> today
             </h2>
             <p className="text-muted max-w-[440px] text-lg">
@@ -38,18 +38,15 @@ export function BookingSection() {
             </p>
             <ol className="flex flex-col gap-3">
               {nextSteps.map((s, i) => (
-                <li
-                  key={s.title}
-                  className="flex items-start gap-3.5 rounded-[22px] bg-white/70 p-3.5 backdrop-blur"
-                >
-                  <span className="bg-brand relative flex size-11 shrink-0 items-center justify-center rounded-full text-white">
+                <li key={s.title} className="glass flex items-start gap-3.5 rounded-[22px] p-3.5">
+                  <span className="relative flex size-11 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(180deg,#14916c,#0a6a4f)] text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3)]">
                     <Icon name={s.icon} size={19} />
                     <span className="bg-gold-deep absolute -top-1 -right-1 flex size-5 items-center justify-center rounded-full text-[11px] font-bold text-white ring-2 ring-white">
                       {i + 1}
                     </span>
                   </span>
                   <span className="flex flex-col">
-                    <span className="font-display font-semibold">{s.title}</span>
+                    <span className="font-display font-[500]">{s.title}</span>
                     <span className="text-muted text-[14px]">{s.body}</span>
                   </span>
                 </li>
@@ -65,7 +62,7 @@ export function BookingSection() {
               Prefer to chat first? WhatsApp us
             </ButtonLink>
           </div>
-          <div className="text-ink shadow-float relative min-w-0 flex-[999_1_560px] rounded-[30px] bg-white p-5 sm:p-7">
+          <div className="text-ink border-glow relative min-w-0 flex-[999_1_560px] rounded-[30px] bg-white p-5 shadow-[0_40px_90px_-40px_rgb(15_31_26/0.45)] sm:p-7">
             <h3 className="sr-only">Book your free class</h3>
             <BookingWidget />
           </div>

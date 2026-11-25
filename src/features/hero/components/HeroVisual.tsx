@@ -1,7 +1,29 @@
+import { useEffect, useState } from 'react';
 import { AL_FATIHA, CallParticipant, MushafPanel } from '@/components/mockups';
 import { Icon, type IconName } from '@/components/ui';
 import { site } from '@/config/site';
+import { useTilt } from '@/hooks/usePointerEffects';
 import { cn } from '@/lib/cn';
+
+const AYAT = AL_FATIHA.slice(0, 4);
+/** What the teacher says after each ayah, in step with the highlighted line. */
+const feedback = [
+  { title: 'Bismillah, beautiful start!', note: 'Clear and steady.' },
+  { title: 'Ayah 2, well done!', note: 'Makharij correct.' },
+  { title: 'Ayah 3, lovely madd.', note: 'Two counts, just right.' },
+  { title: 'Ayah 4, masha Allah!', note: 'Ready for the next page.' },
+];
+
+/** Steps through the ayat like a student reading, one every few seconds (stays put with reduced motion). */
+function useReadingLine(count: number, ms = 3200) {
+  const [line, setLine] = useState(1);
+  useEffect(() => {
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    const id = window.setInterval(() => setLine((l) => (l + 1) % count), ms);
+    return () => window.clearInterval(id);
+  }, [count, ms]);
+  return line;
+}
 
 const controls: IconName[] = ['mic', 'video', 'hand', 'present'];
 
@@ -20,7 +42,7 @@ function Notification({ icon, iconTint, title, time, message, className }: Notif
   return (
     <div
       className={cn(
-        'absolute flex w-[230px] items-start gap-3 rounded-[22px] bg-white/80 p-3 shadow-[0_24px_50px_-22px_rgb(15_31_26/0.45),0_2px_6px_rgb(15_31_26/0.04)] ring-1 ring-black/5 backdrop-blur-xl sm:w-[250px]',
+        'absolute z-10 flex w-[230px] items-start gap-3 rounded-[22px] bg-white/[0.93] p-3 shadow-[inset_0_1px_0_white,0_30px_60px_-24px_rgb(0_0_0/0.7)] backdrop-blur-xl sm:w-[250px]',
         className,
       )}
     >
@@ -48,11 +70,14 @@ function Notification({ icon, iconTint, title, time, message, className }: Notif
  * in-call feedback and the two people in the class. Decorative, so hidden from assistive tech.
  */
 export function HeroVisual() {
+  const tilt = useTilt<HTMLDivElement>(5);
+  const line = useReadingLine(AYAT.length);
+  const said = feedback[line] ?? feedback[0]!;
   return (
-    <div className="relative pt-16 pb-16 sm:px-5 sm:pt-10 sm:pb-12" aria-hidden>
-      <div className="from-brand-light/35 via-gold/30 to-sky absolute inset-x-6 top-16 bottom-8 rounded-[48px] bg-gradient-to-br blur-3xl" />
+    <div ref={tilt} className="tilt text-ink relative pt-16 pb-16 sm:px-5 sm:pt-10 sm:pb-12" aria-hidden>
+      <div className="from-brand-light/50 via-gold/25 absolute inset-x-6 top-16 bottom-8 rounded-[48px] bg-gradient-to-br to-transparent blur-3xl" />
 
-      <div className="border-line shadow-float relative overflow-hidden rounded-[30px] border bg-white">
+      <div className="border-glow relative overflow-hidden rounded-[30px] bg-white shadow-[0_50px_100px_-40px_rgb(0_0_0/0.8),0_0_0_1px_rgb(255_255_255/0.08)]">
         <div className="border-line flex items-center gap-3 border-b px-4 py-3 sm:px-5">
           <span className="bg-mint text-brand flex size-9 shrink-0 items-center justify-center rounded-xl">
             <Icon name="video" size={18} strokeWidth={2} />
@@ -70,19 +95,18 @@ export function HeroVisual() {
         </div>
 
         <div className="flex flex-col gap-3 p-3 sm:p-4">
-          <MushafPanel title="سُورَةُ ٱلْفَاتِحَةِ" ayat={AL_FATIHA.slice(0, 4)} activeIndex={1} />
-          <div className="bg-mint flex items-center gap-2.5 rounded-2xl px-3 py-2.5">
+          <MushafPanel title="سُورَةُ ٱلْفَاتِحَةِ" ayat={AYAT} activeIndex={line} />
+          <div className="bg-mint flex items-center gap-2.5 overflow-hidden rounded-2xl px-3 py-2.5">
             <span className="bg-brand flex size-7 shrink-0 items-center justify-center rounded-full text-white">
               <Icon name="check" size={14} strokeWidth={2.8} />
             </span>
-            <p className="text-[13px] leading-snug">
-              <span className="font-bold">Ayah 2, well done!</span>{' '}
-              <span className="text-muted">Makharij correct.</span>
+            <p key={line} className="animate-fade-up text-[13px] leading-snug [animation-duration:0.6s]">
+              <span className="font-bold">{said.title}</span> <span className="text-muted">{said.note}</span>
             </p>
           </div>
           <div className="grid gap-2.5 sm:grid-cols-2">
             <CallParticipant initial="Q" name={site.teacher.name} duty="Teacher" avatar="bg-brand" speaking />
-            <CallParticipant initial="A" name="Aisha" duty="Student" avatar="bg-lilac-ink" />
+            <CallParticipant initial="A" name="Aisha" duty="Student" avatar="bg-gold-deep" />
           </div>
         </div>
 
@@ -104,7 +128,7 @@ export function HeroVisual() {
       <Notification
         className="animate-float top-0 right-0"
         icon="eye"
-        iconTint="from-call-blue to-sky-ink"
+        iconTint="from-brand-light to-brand"
         title="Parents welcome"
         time="now"
         message="Join from anywhere and watch the lesson live."

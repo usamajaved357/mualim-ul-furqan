@@ -1,14 +1,32 @@
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { cn } from '@/lib/cn';
 
 const tones = {
-  mint: 'border-sage bg-white text-brand',
-  sand: 'border-[#f6dfb3] bg-white text-bronze',
-  dark: 'border-white/20 bg-white/10 text-gold',
+  mint: 'text-brand',
+  sand: 'text-bronze',
+  dark: 'text-gold',
 } as const;
 
-const dots = { mint: 'bg-brand-light', sand: 'bg-gold-deep', dark: 'bg-gold' } as const;
+/** Small eight-pointed star, the Rub el Hizb ornament used across the site. */
+export function StarGlyph({ className, style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden
+      focusable="false"
+      className={cn('fill-current', className)}
+      style={style}
+    >
+      <rect x="6" y="6" width="12" height="12" />
+      <rect x="6" y="6" width="12" height="12" transform="rotate(45 12 12)" />
+    </svg>
+  );
+}
 
+/**
+ * Section kicker: small-caps label between two hairlines with a star, like a manuscript rubric.
+ * Lighter than a pill badge, so headings stay calm.
+ */
 export function Eyebrow({
   children,
   tone = 'mint',
@@ -21,13 +39,14 @@ export function Eyebrow({
   return (
     <span
       className={cn(
-        'inline-flex w-fit items-center gap-2 rounded-full border px-3.5 py-1.5 text-[13px] font-bold',
+        'inline-flex w-fit items-center gap-2.5 text-[12.5px] font-bold tracking-[0.18em] uppercase',
         tones[tone],
         className,
       )}
     >
-      <span className={cn('size-1.5 rounded-full', dots[tone])} aria-hidden />
+      <StarGlyph className="size-3 opacity-80" />
       {children}
+      <span aria-hidden className="hidden h-px w-8 shrink-0 bg-current opacity-40 sm:block" />
     </span>
   );
 }

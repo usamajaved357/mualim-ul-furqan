@@ -1,10 +1,13 @@
 export { AccordionItem } from './Accordion';
 export { ButtonLink } from './ButtonLink';
 export { Container } from './Container';
-export { Eyebrow } from './Eyebrow';
+export { CountUp } from './CountUp';
+export { Eyebrow, StarGlyph } from './Eyebrow';
 export { Icon, PlayGlyph, type IconName } from './Icon';
+export { Marquee } from './Marquee';
 export { Reveal } from './Reveal';
 export { Section } from './Section';
 export { SectionHeading } from './SectionHeading';
+export { SplitWords } from './SplitWords';
 export { SegmentedControl, type SegmentOption } from './SegmentedControl';
 export { Star, Stars } from './Stars';

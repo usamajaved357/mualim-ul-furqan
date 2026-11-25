@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
+import { useSpotlight } from '@/hooks/usePointerEffects';
 import { FloatingWhatsApp } from './FloatingWhatsApp';
 import { Footer } from './Footer';
 import { Header } from './Header';
@@ -26,6 +27,7 @@ function useScrollToTopOnNavigate() {
 
 export function SiteLayout() {
   useScrollToTopOnNavigate();
+  useSpotlight();
   return (
     <>
       <a

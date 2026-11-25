@@ -8,14 +8,14 @@ import { formatPrice, planPrice, pricePerClass } from '../lib/pricing';
 /** Wide card under the regular plans: Hifz is its own programme with longer daily lessons. */
 export function HifzPlanCard({ plan, currency }: { plan: Plan; currency: CurrencyCode }) {
   return (
-    <article className="lift border-line relative grid gap-7 overflow-hidden rounded-[32px] border bg-white p-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)_auto] lg:items-center lg:gap-10">
+    <article className="lift spotlight border-line relative grid gap-7 overflow-hidden rounded-[32px] border bg-white p-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)_auto] lg:items-center lg:gap-10 [&>*]:relative [&>*]:z-10">
       <div className="flex flex-col gap-3">
         <div className="flex flex-wrap items-center gap-3">
-          <h3 className="text-[26px] leading-tight">{plan.name}</h3>
+          <h3 className="text-[28px] leading-tight font-[460]">{plan.name}</h3>
           <span
             lang="ar"
             dir="rtl"
-            className="bg-rose text-rose-ink font-naskh rounded-full px-3 py-0.5 text-[17px] font-bold"
+            className="text-bronze font-naskh rounded-full bg-[#fdf0d5] px-3 py-0.5 text-[17px] font-bold"
           >
             حِفْظ
           </span>
@@ -24,12 +24,12 @@ export function HifzPlanCard({ plan, currency }: { plan: Plan; currency: Currenc
           {plan.classesPerWeek} lessons a week · {plan.minutes} min each
         </p>
         <p className="font-display flex items-baseline gap-1.5 leading-none">
-          <span className="text-[52px] font-bold tracking-[-0.045em]">
+          <span className="text-[54px] font-[340] tracking-[-0.045em]">
             {formatPrice(planPrice(plan, currency), currency)}
           </span>
           <span className="text-muted text-base font-semibold">/ month</span>
         </p>
-        <p className="bg-rose text-rose-ink inline-flex w-fit rounded-full px-3 py-1 text-[13px] font-bold">
+        <p className="text-bronze inline-flex w-fit rounded-full bg-[#fdf0d5] px-3 py-1 text-[13px] font-bold">
           {plan.classesPerMonth} lessons · about {pricePerClass(plan, currency)} each
         </p>
       </div>

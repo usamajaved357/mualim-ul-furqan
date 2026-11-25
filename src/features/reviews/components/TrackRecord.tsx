@@ -22,9 +22,9 @@ export function TrackRecord() {
           {trackRecord.map((item, i) => (
             <li
               key={item.label}
-              className={`flex flex-col justify-end gap-1 rounded-[28px] p-6 sm:p-7 ${['bg-mint', 'bg-sand', 'bg-sky', 'bg-lilac'][i]}`}
+              className={`flex flex-col justify-end gap-1 rounded-[28px] p-6 sm:p-7 ${['bg-[linear-gradient(160deg,#eefaf4,#d5f0e3)]', 'bg-[linear-gradient(160deg,#fff6e3,#fde9c2)]', 'bg-[linear-gradient(160deg,#fff6e3,#fde9c2)]', 'bg-[linear-gradient(160deg,#eefaf4,#d5f0e3)]'][i]}`}
             >
-              <span className="font-display text-[clamp(34px,4vw,52px)] leading-none font-bold tracking-[-0.04em]">
+              <span className="font-display text-[clamp(34px,4vw,52px)] leading-none font-[540] tracking-[-0.04em]">
                 {item.value}
               </span>
               <span className="text-muted text-sm font-semibold sm:text-[15px]">{item.label}</span>

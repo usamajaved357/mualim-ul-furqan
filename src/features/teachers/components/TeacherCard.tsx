@@ -106,7 +106,7 @@ export function TeacherCard({ teacher }: { teacher: Teacher }) {
           ].map((s) => (
             <div key={s.label} className="bg-parchment rounded-[20px] px-4 py-3.5">
               <dt className="text-muted text-xs font-bold">{s.label}</dt>
-              <dd className="font-display text-brand m-0 inline-flex items-center gap-1.5 text-[22px] font-bold tracking-[-0.03em] whitespace-nowrap sm:text-[26px]">
+              <dd className="font-display text-brand m-0 inline-flex items-center gap-1.5 text-[22px] font-[540] tracking-[-0.03em] whitespace-nowrap sm:text-[26px]">
                 {teacher.rating && s.value === teacher.rating.score && <Star />}
                 {s.value}
               </dd>

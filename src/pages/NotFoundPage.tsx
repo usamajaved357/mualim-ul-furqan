@@ -13,7 +13,7 @@ export function NotFoundPage() {
           <Glow color="mint" className="-top-40 -left-20 size-[480px]" />
           <Glow color="saffron" className="-right-20 -bottom-40 size-[480px]" />
           <LogoMark size={72} className="relative" />
-          <p className="font-display text-brand relative text-[96px] leading-none font-bold tracking-[-0.05em]">
+          <p className="font-display text-brand relative text-[96px] leading-none font-[540] tracking-[-0.05em]">
             404
           </p>
           <h1 className="relative text-[clamp(32px,4.4vw,52px)] leading-tight">

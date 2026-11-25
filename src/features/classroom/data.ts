@@ -23,7 +23,7 @@ export const leftFeatures: ClassroomFeature[] = [
   },
   {
     icon: 'captions',
-    tint: 'from-call-blue to-sky-ink',
+    tint: 'from-brand-light to-brand',
     title: 'Live captions',
     body: 'Every correction written on screen as it is said.',
   },
@@ -44,7 +44,7 @@ export const rightFeatures: ClassroomFeature[] = [
   },
   {
     icon: 'record',
-    tint: 'from-rec to-rose-ink',
+    tint: 'from-amber to-gold-deep',
     title: 'Lesson recordings',
     body: 'On request, to practise along at home.',
   },

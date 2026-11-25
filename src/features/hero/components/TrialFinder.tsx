@@ -24,8 +24,8 @@ function CoursePicker({ value, onChange }: { value: CourseId; onChange: (course:
               'relative col-span-2 flex min-h-[78px] cursor-pointer flex-col items-center justify-center gap-0.5 rounded-2xl border px-1.5 py-2 text-center transition duration-200 sm:col-span-1',
               i === 3 && 'col-start-2 sm:col-start-auto',
               selected
-                ? 'border-brand bg-mint shadow-[0_10px_22px_-14px_rgb(12_122_91/0.9)]'
-                : 'border-line hover:border-brand/40 hover:bg-parchment bg-white',
+                ? 'border-brand bg-mint -translate-y-0.5 shadow-[0_12px_24px_-14px_rgb(12_122_91/0.9)]'
+                : 'border-line hover:border-brand/40 hover:bg-parchment bg-white hover:-translate-y-0.5',
             )}
           >
             <span
@@ -61,11 +61,11 @@ function CoursePicker({ value, onChange }: { value: CourseId; onChange: (course:
 export function TrialFinder() {
   const finder = useTrialFinder();
   return (
-    <div className="border-line shadow-float max-w-[620px] overflow-hidden rounded-[30px] border bg-white">
+    <div className="border-glow text-ink max-w-[620px] overflow-hidden rounded-[30px] bg-white/[0.97] shadow-[0_40px_90px_-40px_rgb(0_0_0/0.85),inset_0_1px_0_white] backdrop-blur-xl">
       <div className="flex flex-col gap-5 p-5 sm:p-6">
         <div className="flex items-start justify-between gap-3">
           <div className="flex flex-col gap-0.5">
-            <p className="font-display text-[21px] leading-tight font-bold tracking-[-0.02em]">
+            <p className="font-display text-[22px] leading-tight font-[520] tracking-[-0.02em]">
               Plan your free class
             </p>
             <p className="text-muted text-[13px]">Three quick choices. No card, no commitment.</p>
@@ -103,9 +103,9 @@ export function TrialFinder() {
         </div>
       </div>
 
-      <div className="border-line bg-parchment flex flex-col gap-4 border-t p-5 sm:p-6">
+      <div className="border-line flex flex-col gap-4 border-t bg-[linear-gradient(180deg,#fffaf0,#fff4df)] p-5 sm:p-6">
         <div className="flex flex-col gap-1" aria-live="polite">
-          <p className="font-display text-[18px] leading-snug font-bold tracking-[-0.01em]">
+          <p className="font-display text-[19px] leading-snug font-[520] tracking-[-0.01em]">
             {finder.summary}
           </p>
           <p className="text-muted flex items-start gap-1.5 text-[13px]">

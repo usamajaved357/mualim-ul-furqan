@@ -4,15 +4,15 @@ import type { ProgrammePart } from '../data';
 /** One soft tint per lesson part, in order. */
 const tints = [
   { panel: 'bg-mint', ink: 'text-brand' },
-  { panel: 'bg-sky', ink: 'text-sky-ink' },
-  { panel: 'bg-lilac', ink: 'text-lilac-ink' },
+  { panel: 'bg-[linear-gradient(160deg,#fff6e3,#fde9c2)]', ink: 'text-bronze' },
+  { panel: 'bg-[linear-gradient(160deg,#e3f5ec,#c4e8d6)]', ink: 'text-brand-dark' },
 ];
 
 /** The three parts of every lesson, each with its Arabic term. */
 export function MethodCards({ parts }: { parts: ProgrammePart[] }) {
   return (
     <div className="flex flex-col gap-5">
-      <h4 className="font-display text-[clamp(22px,2.2vw,28px)] leading-tight font-bold tracking-[-0.02em]">
+      <h4 className="font-display text-[clamp(22px,2.2vw,28px)] leading-tight font-[540] tracking-[-0.02em]">
         Every lesson has three parts
       </h4>
       <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-5">
@@ -36,7 +36,7 @@ export function MethodCards({ parts }: { parts: ProgrammePart[] }) {
               </span>
               <div className="flex flex-col gap-2 px-3">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <span className="font-display text-[22px] leading-tight font-bold tracking-[-0.02em]">
+                  <span className="font-display text-[22px] leading-tight font-[540] tracking-[-0.02em]">
                     {part.name}
                   </span>
                   <span className={cn('rounded-full px-2.5 py-1 text-xs font-bold', tint.panel, tint.ink)}>

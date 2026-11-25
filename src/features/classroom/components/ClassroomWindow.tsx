@@ -80,7 +80,7 @@ export function ClassroomWindow() {
                 initial={classroomCall.student.charAt(0)}
                 name={classroomCall.student}
                 duty="Student"
-                avatar="bg-lilac-ink"
+                avatar="bg-gold-deep"
               />
               <CallParticipant
                 initial={classroomCall.parent.charAt(0)}

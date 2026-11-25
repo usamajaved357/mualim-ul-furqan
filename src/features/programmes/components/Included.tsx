@@ -12,7 +12,7 @@ export function Included({ programme }: { programme: Programme }) {
         aria-hidden
         className="bg-brand-light/30 pointer-events-none absolute -top-24 -right-20 size-64 rounded-full blur-3xl"
       />
-      <h4 className="font-display relative text-[clamp(22px,2.2vw,28px)] leading-tight font-bold tracking-[-0.02em] text-white">
+      <h4 className="font-display relative text-[clamp(22px,2.2vw,28px)] leading-tight font-[540] tracking-[-0.02em] text-white">
         What's included
       </h4>
       <ul className="relative flex flex-col gap-3">

@@ -135,7 +135,7 @@ export function CallIllustration() {
     <div className={card}>
       <CardHeader
         icon="video"
-        tint="from-call-blue to-sky-ink"
+        tint="from-brand-light to-brand"
         title="Free class · Google Meet"
         meta={
           <span className="text-rose-ink inline-flex items-center gap-1 font-bold">

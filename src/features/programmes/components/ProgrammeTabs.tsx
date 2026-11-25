@@ -62,10 +62,10 @@ export function ProgrammeTabs({ ids, active, onSelect }: ProgrammeTabsProps) {
             onClick={() => onSelect(id)}
             onKeyDown={(e) => onKeyDown(e, i)}
             className={cn(
-              'flex min-h-12 shrink-0 cursor-pointer snap-start items-center gap-2.5 rounded-full border py-2 pr-5 pl-4 text-[15px] font-bold whitespace-nowrap transition duration-200',
+              'flex min-h-12 shrink-0 cursor-pointer snap-start items-center gap-2.5 rounded-full py-2 pr-5 pl-4 text-[15px] font-bold whitespace-nowrap transition duration-300',
               selected
-                ? 'border-ink bg-ink text-white shadow-[0_12px_24px_-14px_rgb(15_31_26/0.8)]'
-                : 'border-line text-ink hover:border-brand/40 bg-white',
+                ? 'bg-abyss text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.18),0_14px_28px_-14px_rgb(4_21_15/0.9)]'
+                : 'glass text-ink hover:-translate-y-0.5',
             )}
           >
             <span

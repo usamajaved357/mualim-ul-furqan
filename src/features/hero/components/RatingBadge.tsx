@@ -1,18 +1,36 @@
 import { Icon, Stars } from '@/components/ui';
 import { site } from '@/config/site';
+import { cn } from '@/lib/cn';
 
 /** Family count; stars appear only once there is a real rating. */
-export function RatingBadge() {
+export function RatingBadge({ tone = 'light' }: { tone?: 'light' | 'dark' }) {
+  const dark = tone === 'dark';
+  const ring = dark ? 'border-abyss' : 'border-white';
   return (
     <a
       href="/#reviews"
-      className="text-ink hover:text-ink inline-flex items-center gap-3 text-sm no-underline"
+      className={cn(
+        'inline-flex shrink-0 items-center gap-3 text-sm no-underline',
+        dark ? 'text-white hover:text-white' : 'text-ink hover:text-ink',
+      )}
     >
       <span className="flex" aria-hidden>
-        <span className="bg-mint text-brand flex size-10 items-center justify-center rounded-full border-2 border-white shadow-[0_4px_10px_-4px_rgb(15_31_26/0.35)]">
+        <span
+          className={cn(
+            'flex size-10 items-center justify-center rounded-full border-2',
+            ring,
+            dark ? 'bg-forest text-gold' : 'bg-mint text-brand',
+          )}
+        >
           <Icon name="users" size={18} strokeWidth={2} />
         </span>
-        <span className="bg-brand -ml-2.5 flex size-10 items-center justify-center rounded-full border-2 border-white text-[12px] font-bold text-white shadow-[0_4px_10px_-4px_rgb(15_31_26/0.35)]">
+        <span
+          className={cn(
+            '-ml-2.5 flex size-10 items-center justify-center rounded-full border-2 text-[12px] font-bold',
+            ring,
+            dark ? 'bg-gold text-abyss' : 'bg-brand text-white',
+          )}
+        >
           {site.families}
         </span>
       </span>
@@ -22,7 +40,9 @@ export function RatingBadge() {
           Trusted by {site.families} families
           {site.rating && <> · {site.rating.score}</>}
         </span>
-        <span className="text-muted text-[13px]">Taught by {site.teacher.name}</span>
+        <span className={cn('text-[13px]', dark ? 'text-mist' : 'text-muted')}>
+          Taught by {site.teacher.name}
+        </span>
       </span>
     </a>
   );

@@ -9,10 +9,17 @@ export function ClassroomSection() {
   return (
     <section id="classroom" className="bg-white py-6 sm:py-10">
       <Container>
-        <div className="bg-night text-cream relative flex flex-col gap-14 overflow-hidden rounded-[40px] px-5 py-16 sm:px-10 sm:py-24">
+        <div
+          data-dark
+          className="bg-abyss text-cream grain relative flex flex-col gap-14 overflow-hidden rounded-[40px] px-5 py-16 sm:px-10 sm:py-24"
+        >
           <div
             aria-hidden
-            className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgb(25_162_122/0.35),transparent_60%)]"
+            className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgb(25_162_122/0.4),transparent_60%)]"
+          />
+          <span
+            aria-hidden
+            className="animate-aurora pointer-events-none absolute -bottom-1/3 -left-1/4 size-[800px] rounded-full bg-[radial-gradient(circle,rgb(229_154_31/0.16),transparent_62%)]"
           />
           <GirihPattern
             tone="dark"

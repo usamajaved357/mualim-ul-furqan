@@ -1,4 +1,5 @@
 import { GirihPattern } from '@/components/decor/GirihPattern';
+import { Rosette } from '@/components/decor/Rosette';
 import { Container, Reveal } from '@/components/ui';
 import { cn } from '@/lib/cn';
 
@@ -25,6 +26,10 @@ export function HadithBand() {
           className="relative m-0 overflow-hidden rounded-[40px] bg-gradient-to-br from-[#fff3dc] via-[#fffaf0] to-[#e9f7f0] px-7 py-16 text-center sm:px-16 sm:py-20"
         >
           <GirihPattern className="[mask-image:radial-gradient(ellipse_at_center,transparent_40%,black_85%)]" />
+          <Rosette
+            opacity={0.9}
+            className="top-1/2 left-1/2 size-[640px] -translate-x-1/2 -translate-y-1/2 [&_g]:stroke-[#e2c07a] [&_g]:[stroke-opacity:0.35]"
+          />
           <span
             aria-hidden
             className="border-gold-deep/30 absolute inset-3 rounded-[30px] border sm:inset-4"
@@ -42,7 +47,7 @@ export function HadithBand() {
             <p
               lang="ar"
               dir="rtl"
-              className="font-naskh text-brand text-[clamp(32px,4.4vw,54px)] leading-[1.9] text-balance"
+              className="font-naskh [animation:var(--animate-shimmer)] [background-image:linear-gradient(100deg,#0a6a4f,#14916c_40%,#9a5b07_60%,#0a6a4f)] [background-size:220%_100%] bg-clip-text text-[clamp(34px,4.8vw,60px)] leading-[1.9] text-balance text-transparent [animation-duration:10s]"
             >
               خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ
             </p>
@@ -51,7 +56,7 @@ export function HadithBand() {
               <Star className="text-gold-deep size-3.5" />
               <span className="to-gold-deep/50 h-px w-14 bg-gradient-to-l from-transparent sm:w-20" />
             </span>
-            <blockquote className="font-display m-0 max-w-[760px] text-[clamp(24px,2.8vw,36px)] leading-[1.25] font-semibold tracking-[-0.02em] text-balance">
+            <blockquote className="font-display m-0 max-w-[760px] text-[clamp(26px,3vw,40px)] leading-[1.22] font-[400] tracking-[-0.02em] text-balance [&_em]:italic">
               “The best of you are those who learn the Quran <em className="text-brand">and teach it.</em>”
             </blockquote>
             <figcaption className="flex flex-col items-center gap-1">

@@ -6,7 +6,7 @@ export function Roadmap({ programme }: { programme: Programme }) {
   return (
     <div className="border-line flex flex-col gap-6 rounded-[28px] border bg-white p-6 sm:p-9">
       <div className="flex flex-col gap-1.5">
-        <h4 className="font-display text-[clamp(22px,2.2vw,28px)] leading-tight font-bold tracking-[-0.02em]">
+        <h4 className="font-display text-[clamp(22px,2.2vw,28px)] leading-tight font-[540] tracking-[-0.02em]">
           The {label} plan, step by step
         </h4>
         <p className="text-muted text-[15px]">{planIntro}</p>
@@ -17,11 +17,11 @@ export function Roadmap({ programme }: { programme: Programme }) {
             {i < plan.length - 1 && (
               <span aria-hidden className="bg-line absolute top-10 bottom-0 left-[19px] w-0.5" />
             )}
-            <span className="bg-brand font-display relative flex size-10 shrink-0 items-center justify-center rounded-full text-[15px] font-bold text-white">
+            <span className="bg-brand font-display relative flex size-10 shrink-0 items-center justify-center rounded-full text-[15px] font-[540] text-white">
               {i + 1}
             </span>
             <div className="flex flex-col gap-0.5 pt-1.5">
-              <span className="font-display text-[18px] leading-snug font-bold tracking-[-0.01em]">
+              <span className="font-display text-[18px] leading-snug font-[540] tracking-[-0.01em]">
                 {stage.title}
               </span>
               <span className="text-muted text-[15px]">{stage.detail}</span>

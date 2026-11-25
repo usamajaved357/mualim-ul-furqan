@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { cn } from '@/lib/cn';
 import { anchors, courseLinks, navLinks, site } from '@/config/site';
+import { useDarkBehind } from '@/hooks/useDarkBehind';
 import { useHideOnScroll } from '@/hooks/useHideOnScroll';
 import { Logo } from '@/components/brand/Logo';
 import { ButtonLink, Icon } from '@/components/ui';
@@ -12,6 +13,8 @@ import { CourseMenuLink, CoursesMenu } from './CoursesMenu';
 export function Header() {
   const [open, setOpen] = useState(false);
   const { hidden, scrolled } = useHideOnScroll();
+  // Over the dark hero the bar turns into dark glass with light text.
+  const dark = useDarkBehind() && !open;
 
   useEffect(() => {
     if (!open) return;
@@ -30,23 +33,28 @@ export function Header() {
     >
       <div
         className={cn(
-          'mx-auto flex max-w-[1260px] items-center justify-between gap-4 rounded-full border py-2 pr-2 pl-4 backdrop-blur-xl transition-[background-color,box-shadow,border-color] duration-300 sm:pl-5',
-          scrolled || open ? 'border-line shadow-card bg-white/85' : 'border-transparent bg-white/50',
+          'relative mx-auto flex max-w-[1260px] items-center justify-between gap-4 rounded-full py-2 pr-2 pl-4 transition-[background,box-shadow] duration-500 sm:pl-5',
+          dark ? (scrolled ? 'glass-dark' : 'bg-transparent') : 'glass',
         )}
       >
         <Link to="/" aria-label={`${site.name} home`} className="no-underline">
-          <Logo />
+          <Logo tone={dark ? 'dark' : 'light'} />
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-1 text-[15px] font-semibold xl:flex">
           {navLinks.map((link) =>
             link.label === 'Courses' ? (
-              <CoursesMenu key={link.href} />
+              <CoursesMenu key={link.href} dark={dark} />
             ) : (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-ink/80 hover:text-ink hover:bg-cream rounded-full px-3.5 py-2 whitespace-nowrap no-underline transition-colors"
+                className={cn(
+                  'rounded-full px-3.5 py-2 whitespace-nowrap no-underline transition-colors duration-300',
+                  dark
+                    ? 'text-white/80 hover:bg-white/10 hover:text-white'
+                    : 'text-ink/75 hover:text-ink hover:bg-white/70',
+                )}
               >
                 {link.label}
               </a>
@@ -58,18 +66,29 @@ export function Header() {
           <a
             href={buildWhatsAppLink(whatsappMessages.general)}
             aria-label="Chat on WhatsApp"
-            className="text-whatsapp hover:bg-mint flex size-11 items-center justify-center rounded-full transition-colors"
+            className={cn(
+              'flex size-11 items-center justify-center rounded-full transition-colors duration-300',
+              dark ? 'text-live hover:bg-white/10' : 'text-whatsapp hover:bg-mint',
+            )}
           >
             <Icon name="whatsapp" size={21} />
           </a>
-          <ButtonLink href={anchors.book} trackAs="Lead" iconRight="arrow-right">
+          <ButtonLink
+            href={anchors.book}
+            trackAs="Lead"
+            iconRight="arrow-right"
+            variant={dark ? 'gold' : 'primary'}
+          >
             Book a free class
           </ButtonLink>
         </div>
 
         <button
           type="button"
-          className="bg-ink inline-flex size-11 shrink-0 items-center justify-center rounded-full text-white xl:hidden"
+          className={cn(
+            'inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full transition-colors duration-300 xl:hidden',
+            dark ? 'text-abyss bg-gold' : 'bg-ink text-white',
+          )}
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? 'Close menu' : 'Open menu'}
@@ -77,12 +96,16 @@ export function Header() {
         >
           <Icon name={open ? 'close' : 'menu'} size={20} />
         </button>
+        <span
+          aria-hidden
+          className="scroll-progress via-gold-deep pointer-events-none absolute inset-x-6 bottom-0 h-[2px] rounded-full bg-gradient-to-r from-transparent to-transparent"
+        />
       </div>
 
       {open && (
         <div
           id="mobile-menu"
-          className="border-line shadow-float mx-auto mt-2 max-w-[1260px] rounded-[28px] border bg-white p-3 xl:hidden"
+          className="glass animate-scale-in mx-auto mt-2 max-w-[1260px] rounded-[28px] p-3 [animation-duration:0.35s] xl:hidden"
         >
           <nav aria-label="Mobile" className="flex flex-col">
             <p className="text-muted px-4 pt-2 pb-1 text-xs font-bold tracking-wide uppercase">Courses</p>
@@ -97,7 +120,7 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="text-ink hover:bg-cream flex items-center justify-between rounded-2xl px-4 py-3.5 text-base font-semibold no-underline"
+                  className="text-ink flex items-center justify-between rounded-2xl px-4 py-3.5 text-base font-semibold no-underline hover:bg-white/80"
                 >
                   {link.label}
                   <Icon name="chevron-right" size={18} className="text-muted" />
