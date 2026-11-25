@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { withoutVowels } from '@/lib/arabic';
 import { cn } from '@/lib/cn';
 
 export interface Ayah {
@@ -25,7 +26,7 @@ function SurahTitle({ title }: { title: string }) {
   return (
     <div className="mb-1.5 flex items-center gap-3">
       <span className="h-px flex-1 bg-gradient-to-l from-[#d9bf7f] to-transparent" />
-      <p className="font-naskh text-bronze text-[16px] leading-[1.9] font-bold">{title}</p>
+      <p className="font-calligraphy text-bronze text-[20px] leading-[1.9]">{withoutVowels(title)}</p>
       <span className="h-px flex-1 bg-gradient-to-r from-[#d9bf7f] to-transparent" />
     </div>
   );

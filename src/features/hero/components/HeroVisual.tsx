@@ -70,8 +70,9 @@ export function HeroVisual() {
 
             <div className="mx-auto mb-4 flex w-fit items-center gap-3 rounded-full border border-[#d9b871] bg-[linear-gradient(180deg,#fff7e2,#f8e6bb)] px-5 shadow-[inset_0_1px_0_white]">
               <StarGlyph className="size-2.5 text-[#c99a45]" />
-              <p lang="ar" dir="rtl" className="font-naskh text-bronze text-[17px] leading-[2] font-bold">
-                سُورَةُ ٱلْفَاتِحَةِ
+              {/* The surah title is a heading, so it takes the calligraphy font; the ayat stay in Amiri Quran. */}
+              <p lang="ar" dir="rtl" className="font-calligraphy text-bronze text-[22px] leading-[1.9]">
+                سورة الفاتحة
               </p>
               <StarGlyph className="size-2.5 text-[#c99a45]" />
             </div>
@@ -83,7 +84,7 @@ export function HeroVisual() {
                   <li
                     key={ayah.number}
                     className={cn(
-                      'font-quran relative rounded-2xl px-3 text-[20px] leading-[2.1] transition-colors duration-700 sm:text-[23px]',
+                      'font-quran relative mx-auto w-fit rounded-2xl px-4 text-[20px] leading-[2.1] transition-colors duration-700 sm:text-[23px]',
                       active ? 'text-[#13251f]' : 'text-[#13251f]/55',
                     )}
                   >

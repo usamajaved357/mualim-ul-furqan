@@ -47,7 +47,7 @@ export function HadithBand() {
             <p
               lang="ar"
               dir="rtl"
-              className="font-naskh [animation:var(--animate-shimmer)] [background-image:linear-gradient(100deg,#0a6a4f,#14916c_40%,#9a5b07_60%,#0a6a4f)] [background-size:220%_100%] bg-clip-text text-[clamp(34px,4.8vw,60px)] leading-[1.9] text-balance text-transparent [animation-duration:10s]"
+              className="font-calligraphy [background-image:linear-gradient(100deg,#0a6a4f,#14916c_40%,#9a5b07_62%,#0a6a4f)] bg-clip-text text-[clamp(40px,5.6vw,72px)] leading-[1.9] text-balance text-transparent"
             >
               خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ
             </p>
