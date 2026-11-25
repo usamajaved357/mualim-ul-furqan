@@ -5,6 +5,8 @@ export interface CalendarDay {
   date: Date;
   slots: Date[];
   isToday: boolean;
+  /** False for the leading/trailing days of the neighbouring months in a month grid. */
+  inMonth: boolean;
 }
 
 const keyFormatter = (timeZone: string) =>
@@ -24,38 +26,58 @@ const addDays = (key: string, n: number) => {
   return d.toISOString().slice(0, 10);
 };
 
+export interface CalendarMonth {
+  /** "2026-11" */
+  key: string;
+  /** "November 2026" */
+  label: string;
+  /** Monday-first weeks covering the whole month; days of the neighbouring months have `inMonth: false`. */
+  weeks: CalendarDay[][];
+}
+
 /**
- * Whole weeks (Monday first) from the current week to the last day with slots. Days outside the range
- * or without slots come back with an empty `slots` list so the grid stays aligned.
+ * One grid per month, from the current month to the last month with an open slot. Each grid is a full
+ * Monday-first calendar page; days before today, outside the month or without slots have no `slots`.
  */
-export function buildCalendar(slots: Date[], timeZone: string, now: Date, minDays = 14): CalendarDay[][] {
+export function buildMonths(slots: Date[], timeZone: string, now: Date): CalendarMonth[] {
   const byDay = new Map<string, Date[]>();
   for (const s of slots) {
     const k = dayKey(s, timeZone);
     byDay.set(k, [...(byDay.get(k) ?? []), s]);
   }
   const today = dayKey(now, timeZone);
-  const lastSlotDay = [...byDay.keys()].sort().at(-1);
-  const minLast = addDays(today, minDays - 1);
-  const last = lastSlotDay && lastSlotDay > minLast ? lastSlotDay : minLast;
+  const lastSlotDay = [...byDay.keys()].sort().at(-1) ?? today;
+  const lastMonth = (lastSlotDay > today ? lastSlotDay : today).slice(0, 7);
 
-  const mondayOffset = (keyToDate(today).getUTCDay() + 6) % 7;
-  let cursor = addDays(today, -mondayOffset);
-  const weeks: CalendarDay[][] = [];
-  while (cursor <= last) {
-    const week: CalendarDay[] = [];
-    for (let i = 0; i < 7; i++) {
-      week.push({
-        key: cursor,
-        date: keyToDate(cursor),
-        slots: cursor >= today ? (byDay.get(cursor) ?? []) : [],
-        isToday: cursor === today,
-      });
-      cursor = addDays(cursor, 1);
+  const months: CalendarMonth[] = [];
+  for (let month = today.slice(0, 7); month <= lastMonth; month = addDays(`${month}-28`, 7).slice(0, 7)) {
+    const first = `${month}-01`;
+    const lastDay = addDays(addDays(`${month}-28`, 7).slice(0, 7) + '-01', -1);
+    let cursor = addDays(first, -((keyToDate(first).getUTCDay() + 6) % 7));
+    const weeks: CalendarDay[][] = [];
+    while (cursor <= lastDay) {
+      const week: CalendarDay[] = [];
+      for (let i = 0; i < 7; i++) {
+        const inMonth = cursor.startsWith(month);
+        week.push({
+          key: cursor,
+          date: keyToDate(cursor),
+          slots: inMonth && cursor >= today ? (byDay.get(cursor) ?? []) : [],
+          isToday: cursor === today,
+          inMonth,
+        });
+        cursor = addDays(cursor, 1);
+      }
+      weeks.push(week);
     }
-    weeks.push(week);
+    const label = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'UTC',
+      month: 'long',
+      year: 'numeric',
+    }).format(keyToDate(first));
+    months.push({ key: month, label, weeks });
   }
-  return weeks;
+  return months;
 }
 
 /** "5:30 pm", or "17:30" with the 24-hour clock. */
@@ -112,18 +134,6 @@ export function formatDayLong(date: Date, timeZone: string): string {
       .map((x) => [x.type, x.value]),
   ) as Record<string, string>;
   return `${p.weekday} ${p.day} ${p.month} ${p.year}`;
-}
-
-/** "October – November 2026" for the span of the calendar. */
-export function formatMonthSpan(weeks: CalendarDay[][]): string {
-  const first = weeks[0]?.[0]?.date;
-  const last = weeks.at(-1)?.at(-1)?.date;
-  if (!first || !last) return '';
-  const month = (d: Date) => new Intl.DateTimeFormat('en-GB', { timeZone: 'UTC', month: 'long' }).format(d);
-  const year = last.getUTCFullYear();
-  return month(first) === month(last)
-    ? `${month(first)} ${year}`
-    : `${month(first)} – ${month(last)} ${year}`;
 }
 
 /** Splits a day's slots into readable groups. */

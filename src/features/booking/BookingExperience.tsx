@@ -61,7 +61,7 @@ export function BookingExperience() {
             <h2 className="sr-only">Choose a time and book</h2>
             <BookingWidget booking={booking} />
           </div>
-          <div className="animate-fade-up [animation-delay:400ms] lg:sticky lg:top-24">
+          <div className="animate-fade-up [animation-delay:400ms] lg:sticky lg:top-32 lg:mt-10">
             <BookingSummary booking={booking} />
           </div>
         </Container>

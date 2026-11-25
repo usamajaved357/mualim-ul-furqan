@@ -1,9 +1,8 @@
 import {
-  buildCalendar,
+  buildMonths,
   dayKey,
   formatDayHeading,
   formatMonthShort,
-  formatMonthSpan,
   formatTime,
   groupByPartOfDay,
 } from './calendar';
@@ -18,12 +17,28 @@ describe('booking calendar', () => {
     new Date('2026-01-17T10:00:00Z'),
   ];
 
-  it('builds Monday-first weeks and groups slots by local day', () => {
-    const weeks = buildCalendar(slots, tz, now);
-    expect(weeks[0]![0]!.key).toBe('2026-01-12');
-    expect(weeks.flat().find((d) => d.key === '2026-01-15')!.slots).toHaveLength(2);
-    expect(weeks.flat().find((d) => d.isToday)!.key).toBe('2026-01-14');
-    expect(weeks.length).toBeGreaterThanOrEqual(2);
+  it('builds Monday-first month grids and groups slots by local day', () => {
+    const months = buildMonths(slots, tz, now);
+    expect(months.map((m) => m.label)).toEqual(['January 2026']);
+    const days = months[0]!.weeks.flat();
+    // January 2026 starts on a Thursday: the grid opens on Monday 29 December.
+    expect(days[0]!.key).toBe('2025-12-29');
+    expect(days[0]!.inMonth).toBe(false);
+    expect(days.find((d) => d.key === '2026-01-15')!.slots).toHaveLength(2);
+    expect(days.find((d) => d.isToday)!.key).toBe('2026-01-14');
+    expect(months[0]!.weeks.every((w) => w.length === 7)).toBe(true);
+  });
+
+  it('adds a month page for every month up to the last open slot', () => {
+    const later = [...slots, new Date('2026-03-02T10:00:00Z')];
+    const months = buildMonths(later, tz, now);
+    expect(months.map((m) => m.key)).toEqual(['2026-01', '2026-02', '2026-03']);
+    expect(months[2]!.weeks.flat().find((d) => d.key === '2026-03-02')!.slots).toHaveLength(1);
+  });
+
+  it('never offers days before today', () => {
+    const past = buildMonths([new Date('2026-01-10T10:00:00Z'), ...slots], tz, now);
+    expect(past[0]!.weeks.flat().find((d) => d.key === '2026-01-10')!.slots).toHaveLength(0);
   });
 
   it('moves a slot to the visitor’s own date', () => {
@@ -41,9 +56,5 @@ describe('booking calendar', () => {
   it('labels days for the time list and new months in the grid', () => {
     expect(formatDayHeading('2026-11-27')).toBe('Friday 27 November');
     expect(formatMonthShort('2026-12-01')).toBe('Dec');
-  });
-
-  it('labels the month span', () => {
-    expect(formatMonthSpan(buildCalendar(slots, tz, now))).toBe('January – February 2026');
   });
 });

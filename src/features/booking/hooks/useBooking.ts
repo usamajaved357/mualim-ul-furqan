@@ -11,11 +11,12 @@ import {
   type BookingPayload,
   type BookingResult,
 } from '../lib/api';
-import { buildCalendar } from '../lib/calendar';
+import { buildMonths } from '../lib/calendar';
 
 export type BookingForm = Omit<BookingPayload, 'start' | 'timeZone'>;
 
-const DAYS_AHEAD = 22;
+/** One day more than the server offers (server/schedule.ts `daysAhead`), so no open slot is cut off. */
+const DAYS_AHEAD = 61;
 
 const emptyForm: BookingForm = {
   name: '',
@@ -70,10 +71,10 @@ export function useBooking() {
     if (intent) setForm((f) => ({ ...f, course: COURSE_LABELS[intent.course], learner: intent.learner }));
   }
 
-  const weeks = useMemo(
+  const months = useMemo(
     () =>
       availability.status === 'ready'
-        ? buildCalendar(
+        ? buildMonths(
             availability.data.slots.map((s) => new Date(s)),
             timeZone,
             new Date(),
@@ -81,7 +82,7 @@ export function useBooking() {
         : [],
     [availability, timeZone],
   );
-  const days = weeks.flat();
+  const days = months.flatMap((m) => m.weeks.flat()).filter((d) => d.inMonth);
   const activeDay = days.find((d) => d.key === selectedDay) ?? days.find((d) => d.slots.length) ?? null;
 
   const refresh = () => {
@@ -133,7 +134,7 @@ export function useBooking() {
   return {
     timeZone,
     availability,
-    weeks,
+    months,
     activeDay,
     selectDay: setSelectedDay,
     slot,

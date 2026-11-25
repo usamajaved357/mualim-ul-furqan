@@ -5,7 +5,7 @@ import { LegalPage, type LegalSection } from './LegalPage';
 const email = site.contact.email;
 const Email = () => <a href={`mailto:${email}`}>{email}</a>;
 
-/** The academy's notice period for moving a class (the booking calendar also asks for 12 hours' notice). */
+/** The academy's notice period for moving or cancelling a booked class. */
 const NOTICE_HOURS = 12;
 /** Discount on each additional child from the same family (keep in step with pricing/data.ts). */
 const SIBLING_DISCOUNT = '10%';

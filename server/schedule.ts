@@ -20,8 +20,10 @@ export interface Schedule {
 export const schedule: Schedule = {
   timeZone: openingHours.timeZone,
   slotMinutes: 30,
-  minNoticeHours: 12,
-  daysAhead: 21,
+  // Today stays bookable: any slot at least 2 hours away can be taken.
+  minNoticeHours: 2,
+  // About two months of dates in the booking calendar.
+  daysAhead: 60,
   weekly: {
     0: [[...weekends]],
     1: [[...weekdays]],

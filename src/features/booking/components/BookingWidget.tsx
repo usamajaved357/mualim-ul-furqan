@@ -138,7 +138,7 @@ export function BookingWidget({ booking }: { booking: BookingState }) {
             <div className="grid gap-8 md:grid-cols-[1fr_1.05fr] md:gap-0">
               <div className="md:pr-8">
                 <DayPicker
-                  weeks={booking.weeks}
+                  months={booking.months}
                   selected={booking.activeDay?.key ?? null}
                   onSelect={booking.selectDay}
                 />

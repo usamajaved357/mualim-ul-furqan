@@ -9,6 +9,8 @@ const weekday: [string, string][] = [['16:00', '21:00']];
 const weekend: [string, string][] = [['10:00', '18:00']];
 const schedule: Schedule = {
   ...liveSchedule,
+  minNoticeHours: 12,
+  daysAhead: 21,
   timeZone: 'Europe/London',
   weekly: { 0: weekend, 1: weekday, 2: weekday, 3: weekday, 4: weekday, 5: weekday, 6: weekend },
 };
