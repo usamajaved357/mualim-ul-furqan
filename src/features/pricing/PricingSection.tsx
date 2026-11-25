@@ -40,7 +40,7 @@ export function PricingSection() {
         />
       </div>
 
-      <ul className="grid items-stretch gap-5 lg:grid-cols-3">
+      <ul className="grid items-stretch gap-4 md:grid-cols-3 lg:gap-5">
         {plans.map((plan, i) => (
           <Reveal as="li" key={plan.id} delay={i * 100} className="flex flex-col">
             <PlanCard plan={plan} currency={currency} />
@@ -54,7 +54,7 @@ export function PricingSection() {
 
       <Reveal
         as="ul"
-        className="border-line shadow-card divide-line grid divide-y overflow-hidden rounded-[28px] border bg-white md:grid-cols-3 md:divide-x md:divide-y-0"
+        className="card divide-line grid divide-y overflow-hidden rounded-[28px] md:grid-cols-3 md:divide-x md:divide-y-0"
       >
         {pricingPerks.map((perk) => (
           <li key={perk.title} className="flex items-center gap-4 p-5 sm:px-6">

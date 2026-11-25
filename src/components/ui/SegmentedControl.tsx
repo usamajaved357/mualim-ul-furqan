@@ -10,8 +10,8 @@ const styles = {
   chips: {
     group: 'flex flex-wrap gap-2',
     item: 'min-h-10 rounded-full border px-4 text-sm',
-    on: 'border-brand bg-brand text-white font-bold shadow-[0_6px_14px_-8px_rgb(12_122_91/0.8)]',
-    off: 'border-line-strong bg-white text-ink font-semibold hover:border-brand/40',
+    on: 'border-transparent bg-[linear-gradient(180deg,#14916c,#0a6a4f)] text-white font-bold shadow-[inset_0_1px_0_rgb(255_255_255/0.28),0_8px_16px_-8px_rgb(12_122_91/0.85)]',
+    off: 'border-line-strong bg-white text-ink font-semibold hover:border-brand/40 hover:text-brand',
   },
   /** Joined track (learner / region): light tray, the selected option lifts out as a white tile. */
   track: {
@@ -19,6 +19,13 @@ const styles = {
     item: 'min-h-10 flex-1 rounded-xl px-3 text-sm',
     on: 'bg-white text-brand font-bold shadow-[inset_0_1px_0_white,0_0_0_1px_rgb(15_31_26/0.06),0_6px_16px_-10px_rgb(15_31_26/0.35)]',
     off: 'text-muted font-semibold hover:text-ink',
+  },
+  /** Joined track on a dark background: the selected option is a light tile. */
+  trackDark: {
+    group: 'flex gap-1 rounded-2xl border border-white/10 bg-black/20 p-1',
+    item: 'min-h-10 flex-1 rounded-xl px-3 text-sm',
+    on: 'bg-[linear-gradient(180deg,#fff,#f3ead7)] text-abyss font-bold shadow-[inset_0_1px_0_white,0_6px_16px_-8px_rgb(0_0_0/0.6)]',
+    off: 'text-mist font-semibold hover:text-white',
   },
   /** Track with a solid selected state. */
   solid: {

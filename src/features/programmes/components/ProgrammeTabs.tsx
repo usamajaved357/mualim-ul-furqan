@@ -2,6 +2,7 @@ import { useEffect, useRef, type KeyboardEvent } from 'react';
 import { cn } from '@/lib/cn';
 import { COURSE_ARABIC, COURSE_LABELS, type CourseId } from '@/types/domain';
 import { PANEL_ID, tabId } from '../lib/ids';
+import { withoutVowels } from '@/lib/arabic';
 
 interface ProgrammeTabsProps {
   ids: readonly CourseId[];
@@ -72,9 +73,12 @@ export function ProgrammeTabs({ ids, active, onSelect }: ProgrammeTabsProps) {
               aria-hidden
               lang="ar"
               dir="rtl"
-              className={cn('font-naskh text-[18px] leading-none', selected ? 'text-gold' : 'text-bronze')}
+              className={cn(
+                'font-calligraphy -my-2 text-[22px] leading-[1.9] font-bold',
+                selected ? 'text-gold' : 'text-bronze',
+              )}
             >
-              {COURSE_ARABIC[id]}
+              {withoutVowels(COURSE_ARABIC[id])}
             </span>
             {COURSE_LABELS[id]}
           </button>

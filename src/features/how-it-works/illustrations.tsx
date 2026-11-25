@@ -26,7 +26,7 @@ function Badge({ className, children }: { className: string; children: ReactNode
   return (
     <span
       className={cn(
-        'absolute flex items-center gap-2 rounded-full bg-white/90 py-1.5 pr-3 pl-1.5 text-[11px] font-bold whitespace-nowrap shadow-[0_14px_30px_-14px_rgb(15_31_26/0.5)] ring-1 ring-black/5 backdrop-blur',
+        'absolute flex items-center gap-2 rounded-full bg-white/90 py-1.5 pr-3 pl-1.5 text-[11px] font-bold whitespace-nowrap shadow-[0_14px_30px_-14px_rgb(15_31_26/0.5)] ring-1 ring-black/5',
         className,
       )}
     >

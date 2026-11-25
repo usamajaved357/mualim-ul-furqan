@@ -2,8 +2,6 @@ import type { IconName } from '@/components/ui';
 
 export interface ClassroomFeature {
   icon: IconName;
-  /** Gradient for the app-style icon tile. */
-  tint: string;
   title: string;
   body: string;
 }
@@ -11,19 +9,16 @@ export interface ClassroomFeature {
 export const leftFeatures: ClassroomFeature[] = [
   {
     icon: 'book',
-    tint: 'from-brand-light to-brand',
     title: 'Shared mushaf',
     body: "Each ayah highlighted as it's read.",
   },
   {
     icon: 'pen',
-    tint: 'from-amber to-gold-deep',
     title: 'Tajweed rules, colour-coded',
     body: 'Makharij and rules marked on the shared page.',
   },
   {
     icon: 'captions',
-    tint: 'from-brand-light to-brand',
     title: 'Live captions',
     body: 'Every correction written on screen as it is said.',
   },
@@ -32,19 +27,16 @@ export const leftFeatures: ClassroomFeature[] = [
 export const rightFeatures: ClassroomFeature[] = [
   {
     icon: 'video',
-    tint: 'from-brand-light to-brand',
     title: 'Private Google Meet',
     body: 'Your own link for every class, sent by email.',
   },
   {
     icon: 'whatsapp',
-    tint: 'from-live to-whatsapp',
     title: 'Homework on WhatsApp',
     body: 'Practice notes and audio after each class.',
   },
   {
     icon: 'record',
-    tint: 'from-amber to-gold-deep',
     title: 'Lesson recordings',
     body: 'On request, to practise along at home.',
   },

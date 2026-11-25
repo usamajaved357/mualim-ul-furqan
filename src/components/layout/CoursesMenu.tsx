@@ -3,6 +3,7 @@ import { cn } from '@/lib/cn';
 import { courseLinks } from '@/config/site';
 import { COURSE_ARABIC } from '@/types/domain';
 import { Icon } from '@/components/ui';
+import { withoutVowels } from '@/lib/arabic';
 
 /** One course row: Arabic tile, name and a one-line description. */
 export function CourseMenuLink({
@@ -22,9 +23,9 @@ export function CourseMenuLink({
         aria-hidden
         lang="ar"
         dir="rtl"
-        className="text-bronze font-naskh flex size-11 shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(160deg,#fff4dc,#fbe3b4)] text-[17px] font-bold"
+        className="text-bronze font-calligraphy flex size-11 shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(160deg,#fff4dc,#fbe3b4)] text-[20px] font-bold"
       >
-        {COURSE_ARABIC[link.id]}
+        {withoutVowels(COURSE_ARABIC[link.id])}
       </span>
       <span className="flex flex-col leading-tight">
         <span className="text-[15px] font-bold">{link.label}</span>
@@ -86,7 +87,7 @@ export function CoursesMenu({ dark = false }: { dark?: boolean }) {
           id="courses-menu"
           className="animate-scale-in absolute top-full left-1/2 z-50 w-[340px] -translate-x-1/2 pt-3 [animation-duration:0.35s]"
         >
-          <div className="glass rounded-[26px] p-2">
+          <div className="glass glass-float rounded-[26px] p-2">
             {courseLinks.map((link) => (
               <CourseMenuLink key={link.id} link={link} onNavigate={() => setOpen(false)} />
             ))}

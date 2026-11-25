@@ -4,6 +4,7 @@ export { Container } from './Container';
 export { CountUp } from './CountUp';
 export { Eyebrow, StarGlyph } from './Eyebrow';
 export { Icon, PlayGlyph, type IconName } from './Icon';
+export { IconSeal } from './IconSeal';
 export { Marquee } from './Marquee';
 export { Reveal } from './Reveal';
 export { Section } from './Section';

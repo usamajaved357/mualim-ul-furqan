@@ -1,3 +1,4 @@
+import { Rosette } from '@/components/decor/Rosette';
 import { ButtonLink, Icon } from '@/components/ui';
 import type { BookingResult } from '../lib/api';
 import { formatDayLong, formatTime, timeZoneCity } from '../lib/calendar';
@@ -13,11 +14,14 @@ export function BookingConfirmed({ result, email, timeZone, onReset }: BookingCo
   const start = new Date(result.start);
   return (
     <div className="flex flex-col items-center gap-5 py-4 text-center" role="status">
-      <span className="bg-brand animate-pulse-ring flex size-16 items-center justify-center rounded-full text-white">
-        <Icon name="check" size={32} strokeWidth={2.6} />
+      <span className="relative flex size-28 items-center justify-center">
+        <Rosette opacity={0.9} className="inset-0 size-full [&_g]:stroke-[#e2c07a]" />
+        <span className="animate-scale-in relative flex size-16 items-center justify-center rounded-full bg-[linear-gradient(180deg,#14916c,#0a6a4f)] text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3),0_16px_30px_-12px_rgb(12_122_91/0.9)]">
+          <Icon name="check" size={32} strokeWidth={2.6} />
+        </span>
       </span>
       <div className="flex flex-col gap-1.5">
-        <h3 className="text-[26px] font-extrabold tracking-[-0.02em]">Your free class is booked!</h3>
+        <h3 className="text-[30px] font-bold">Your free class is booked!</h3>
         <p className="text-muted">
           Your meeting is set on <strong className="text-ink">{formatDayLong(start, timeZone)}</strong> at{' '}
           <strong className="text-ink">
@@ -66,7 +70,7 @@ export function BookingConfirmed({ result, email, timeZone, onReset }: BookingCo
         <button
           type="button"
           onClick={onReset}
-          className="border-sage text-brand hover:bg-mint min-h-14 cursor-pointer rounded-full border-[1.5px] px-6 font-bold"
+          className="glass text-ink min-h-13 cursor-pointer rounded-full px-6 font-semibold transition hover:-translate-y-0.5"
         >
           Book another time
         </button>

@@ -17,17 +17,7 @@ describe('HomePage', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
       /quran lessons your child will look forward/i,
     );
-    for (const id of [
-      'how',
-      'courses',
-      'hifz',
-      'classroom',
-      'teachers',
-      'pricing',
-      'reviews',
-      'faq',
-      'book',
-    ]) {
+    for (const id of ['how', 'courses', 'hifz', 'classroom', 'teachers', 'pricing', 'reviews', 'faq']) {
       expect(document.getElementById(id)).not.toBeNull();
     }
   });

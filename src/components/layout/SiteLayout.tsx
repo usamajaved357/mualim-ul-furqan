@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
+import { usePauseOffscreen } from '@/hooks/usePauseOffscreen';
 import { useSpotlight } from '@/hooks/usePointerEffects';
 import { FloatingWhatsApp } from './FloatingWhatsApp';
 import { Footer } from './Footer';
@@ -28,6 +29,7 @@ function useScrollToTopOnNavigate() {
 export function SiteLayout() {
   useScrollToTopOnNavigate();
   useSpotlight();
+  usePauseOffscreen();
   return (
     <>
       <a

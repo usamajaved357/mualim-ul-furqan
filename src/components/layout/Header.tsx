@@ -34,7 +34,7 @@ export function Header() {
       <div
         className={cn(
           'relative mx-auto flex max-w-[1260px] items-center justify-between gap-4 rounded-full py-2 pr-2 pl-4 transition-[background,box-shadow] duration-500 sm:pl-5',
-          dark ? (scrolled ? 'glass-dark' : 'bg-transparent') : 'glass',
+          dark ? (scrolled ? 'glass-dark glass-float' : 'bg-transparent') : 'glass glass-float',
         )}
       >
         <Link to="/" aria-label={`${site.name} home`} className="no-underline">
@@ -105,7 +105,7 @@ export function Header() {
       {open && (
         <div
           id="mobile-menu"
-          className="glass animate-scale-in mx-auto mt-2 max-w-[1260px] rounded-[28px] p-3 [animation-duration:0.35s] xl:hidden"
+          className="glass glass-float animate-scale-in mx-auto mt-2 max-w-[1260px] rounded-[28px] p-3 [animation-duration:0.35s] xl:hidden"
         >
           <nav aria-label="Mobile" className="flex flex-col">
             <p className="text-muted px-4 pt-2 pb-1 text-xs font-bold tracking-wide uppercase">Courses</p>

@@ -12,7 +12,7 @@ export function Glow({ color = 'mint', className }: { color?: keyof typeof color
   return (
     <span
       aria-hidden
-      className={cn('pointer-events-none absolute rounded-full blur-3xl', className)}
+      className={cn('pointer-events-none absolute rounded-full', className)}
       style={{ background: `radial-gradient(circle, ${colors[color]} 0%, transparent 70%)` }}
     />
   );

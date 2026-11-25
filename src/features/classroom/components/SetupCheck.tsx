@@ -4,7 +4,7 @@ import { setupChecklist } from '../data';
 
 export function SetupCheck() {
   return (
-    <Reveal className="text-ink relative flex flex-wrap items-center justify-between gap-5 rounded-[28px] bg-white p-5 pl-6 sm:p-6 sm:pl-8">
+    <Reveal className="card text-ink flex flex-wrap items-center justify-between gap-5 rounded-[28px] p-5 pl-6 sm:p-6 sm:pl-8">
       <div className="flex flex-col gap-1">
         <h3 className="text-[22px] leading-tight">Ready for your first class?</h3>
         <p className="text-muted text-[15px]">A camera, a microphone and steady internet is all you need.</p>
@@ -21,7 +21,7 @@ export function SetupCheck() {
             </li>
           ))}
         </ul>
-        <ButtonLink href={site.links.meetTest} variant="dark">
+        <ButtonLink href={site.links.meetTest} variant="primary" iconRight="arrow-right">
           Test your setup
         </ButtonLink>
       </div>

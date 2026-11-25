@@ -32,8 +32,8 @@ export function Hero() {
   return (
     <section data-dark className="bg-abyss grain relative -mt-[76px] overflow-hidden pt-[76px] text-white">
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <span className="animate-aurora absolute -top-1/3 -left-1/4 size-[900px] rounded-full bg-[radial-gradient(circle,rgb(25_162_122/0.42),transparent_62%)] blur-2xl" />
-        <span className="animate-aurora absolute -right-1/4 -bottom-1/2 size-[1000px] rounded-full bg-[radial-gradient(circle,rgb(229_154_31/0.22),transparent_60%)] blur-2xl [animation-delay:-9s]" />
+        <span className="animate-aurora absolute -top-1/3 -left-1/4 size-[900px] rounded-full bg-[radial-gradient(circle,rgb(25_162_122/0.42),transparent_62%)]" />
+        <span className="animate-aurora absolute -right-1/4 -bottom-1/2 size-[1000px] rounded-full bg-[radial-gradient(circle,rgb(229_154_31/0.22),transparent_60%)] [animation-delay:-9s]" />
         <span className="absolute top-1/4 left-1/2 size-[700px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgb(12_122_91/0.25),transparent_65%)]" />
         <GirihPattern
           tone="dark"
@@ -72,7 +72,7 @@ export function Hero() {
           </div>
 
           <h1
-            className="split-play [&_em]:text-gold text-[clamp(46px,6.4vw,92px)] leading-[0.98] font-[380] tracking-[-0.035em] text-white"
+            className="split-play [&_em]:text-gold text-[clamp(44px,6vw,86px)] leading-[1] font-[600] tracking-[-0.045em] text-white"
             style={{ '--split-delay': '120ms' } as CSSProperties}
           >
             <SplitWords>

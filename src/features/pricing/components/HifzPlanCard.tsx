@@ -8,23 +8,23 @@ import { formatPrice, planPrice, pricePerClass } from '../lib/pricing';
 /** Wide card under the regular plans: Hifz is its own programme with longer daily lessons. */
 export function HifzPlanCard({ plan, currency }: { plan: Plan; currency: CurrencyCode }) {
   return (
-    <article className="lift spotlight border-line relative grid gap-7 overflow-hidden rounded-[32px] border bg-white p-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)_auto] lg:items-center lg:gap-10 [&>*]:relative [&>*]:z-10">
+    <article className="card lift spotlight grid gap-7 overflow-hidden rounded-[32px] p-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)_auto] lg:items-center lg:gap-10 [&>*]:relative [&>*]:z-10">
       <div className="flex flex-col gap-3">
         <div className="flex flex-wrap items-center gap-3">
-          <h3 className="text-[28px] leading-tight font-[460]">{plan.name}</h3>
+          <h3 className="text-[28px] leading-tight font-[600]">{plan.name}</h3>
           <span
             lang="ar"
             dir="rtl"
-            className="text-bronze font-naskh rounded-full bg-[#fdf0d5] px-3 py-0.5 text-[17px] font-bold"
+            className="text-bronze font-calligraphy rounded-full bg-[#fdf0d5] px-3.5 py-0 text-[21px] leading-[1.9] font-bold"
           >
-            حِفْظ
+            حفظ
           </span>
         </div>
         <p className="text-muted text-[15px] font-semibold">
           {plan.classesPerWeek} lessons a week · {plan.minutes} min each
         </p>
         <p className="font-display flex items-baseline gap-1.5 leading-none">
-          <span className="text-[54px] font-[340] tracking-[-0.045em]">
+          <span className="text-[54px] font-[500] tracking-[-0.045em]">
             {formatPrice(planPrice(plan, currency), currency)}
           </span>
           <span className="text-muted text-base font-semibold">/ month</span>

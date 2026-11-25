@@ -24,14 +24,14 @@ export function DetailsForm({ booking }: { booking: BookingState }) {
         void booking.submit();
       }}
     >
-      <div className="bg-mint flex flex-wrap items-center justify-between gap-3 rounded-[22px] px-4 py-3.5">
+      <div className="bg-abyss grain relative flex flex-wrap items-center justify-between gap-3 overflow-hidden rounded-[22px] px-4 py-3.5 text-white">
         <span className="flex items-center gap-3">
-          <span className="bg-brand flex size-10 items-center justify-center rounded-full text-white">
+          <span className="bg-gold text-abyss relative flex size-10 items-center justify-center rounded-full">
             <Icon name="calendar" size={20} />
           </span>
           <span className="flex flex-col leading-tight">
-            <span className="text-brand font-extrabold">{formatDayLong(slot, timeZone)}</span>
-            <span className="text-muted text-sm font-semibold">
+            <span className="font-display relative font-bold">{formatDayLong(slot, timeZone)}</span>
+            <span className="text-mist relative text-sm font-semibold">
               {formatTime(slot, timeZone)} ({timeZoneCity(timeZone)} time) · 30 min · Google Meet
             </span>
           </span>
@@ -39,7 +39,7 @@ export function DetailsForm({ booking }: { booking: BookingState }) {
         <button
           type="button"
           onClick={() => booking.selectSlot(null)}
-          className="text-brand cursor-pointer rounded-lg px-2 py-1 text-sm font-bold underline-offset-2 hover:underline"
+          className="glass-dark relative cursor-pointer rounded-full px-3.5 py-1.5 text-sm font-bold text-white transition hover:bg-white/15"
         >
           Change
         </button>
@@ -144,7 +144,7 @@ export function DetailsForm({ booking }: { booking: BookingState }) {
         <button
           type="submit"
           disabled={submitting}
-          className="bg-brand hover:bg-brand-dark inline-flex min-h-14 cursor-pointer items-center justify-center gap-2.5 rounded-full px-7 font-bold text-white transition hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-70"
+          className="shine inline-flex min-h-14 cursor-pointer items-center justify-center gap-2.5 rounded-full bg-[linear-gradient(180deg,#14916c,#0a6a4f)] px-7 font-bold text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.28),0_14px_30px_-14px_rgb(12_122_91/0.9)] transition hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-70"
         >
           {submitting ? (
             <>

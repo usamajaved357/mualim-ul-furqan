@@ -37,7 +37,7 @@ export function SectionHeading({
       {eyebrow && <Eyebrow tone={tone === 'dark' ? 'dark' : 'mint'}>{eyebrow}</Eyebrow>}
       <Tag
         className={cn(
-          'max-w-[860px] text-[clamp(36px,4.6vw,62px)] leading-[1.02] font-[480] text-balance',
+          'max-w-[860px] text-[clamp(36px,4.6vw,62px)] leading-[1.02] font-[600] text-balance',
           tone === 'dark' ? '[&_em]:text-gold text-white' : '[&_em]:text-brand',
         )}
       >

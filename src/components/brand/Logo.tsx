@@ -19,8 +19,8 @@ export function Logo({ tone = 'light', size = 'md', className }: LogoProps) {
           lang="ar"
           dir="rtl"
           className={cn(
-            'font-logo mb-0.5 text-center leading-[1.35] font-bold',
-            size === 'lg' ? 'text-[34px]' : 'text-[31px]',
+            'font-logo mb-0.5 text-center leading-[1.3] font-bold',
+            size === 'lg' ? 'text-[38px]' : 'text-[35px]',
             dark ? 'text-gold' : 'text-brand',
           )}
         >

@@ -55,7 +55,8 @@ Booking secrets are **server-side only** (no `VITE_` prefix, never sent to the b
 
 ## Booking with Google Meet
 
-The "Book" section is a custom booking flow backed by Cloudflare Pages Functions:
+The booking page (`/book`, where every "Book a free class" button leads) is a custom booking flow backed by
+Cloudflare Pages Functions:
 
 1. `GET /api/availability` builds 30-minute slots from the teaching hours in `server/schedule.ts`, removes
    anything already busy in the owner's Google Calendar, and the browser shows them in the visitor's time zone.
@@ -110,7 +111,7 @@ src/
 │   ├── pricing/            Plans, currency switch (auto-detects GBP/EUR/USD), per-class maths
 │   ├── reviews/            Track record until real reviews exist; then cards, filters, rating
 │   ├── faq/
-│   └── booking/            Google Meet booking: day picker, time slots, details form, confirmation
+│   └── booking/            /book page: day picker, time slots, details form, live summary, confirmation
 ├── components/
 │   ├── ui/                 Design-system primitives (ButtonLink, Section, SegmentedControl, Icon…)
 │   ├── layout/             Header (with mobile menu), Footer, AnnouncementBar, FloatingWhatsApp
@@ -168,6 +169,25 @@ Every push to `main` deploys automatically. Pull requests get preview URLs. `pub
 long-term caching headers. Client-side routes (`/privacy`, `/terms`) work because Pages falls back to `index.html`
 when no `404.html` exists.
 
+## Fonts
+
+| Role                       | Font              | Source                                    |
+| -------------------------- | ----------------- | ----------------------------------------- |
+| Headings, prices, numbers  | Manrope           | Google Fonts (OFL)                        |
+| Body text                  | Plus Jakarta Sans | Google Fonts (OFL)                        |
+| Logo and decorative Arabic | A Thuluth         | Self-hosted: `public/fonts/a-thuluth.ttf` |
+| Hadith, surah titles       | Amiri             | Google Fonts (OFL)                        |
+| Quranic text               | Amiri Quran       | Google Fonts (OFL)                        |
+
+**A Thuluth licence:** the file was supplied by the owner. Its embedding flag is "restricted" and its metadata
+names a commercial typeface, so **confirm you have the right to use it on a website** before launch. If not,
+delete `public/fonts/a-thuluth.ttf` and the `@font-face` block in `src/styles/globals.css`: Aref Ruqaa (OFL) is
+already the fallback and takes over with no other change.
+
+A Thuluth places lower vowel marks (kasra) away from their letters, so decorative words set in it are written
+without vowel marks (`withoutVowels` in `src/lib/arabic.ts`; the shadda is kept). Quranic text and the hadith
+keep full harakat in the Amiri fonts.
+
 ## Before launch checklist
 
 - [ ] `config/site.ts` filled in (name, mosque, languages, WhatsApp, email)
@@ -175,6 +195,7 @@ when no `404.html` exists.
 - [ ] Real photo + 60-second recitation video
 - [ ] Real reviews added to `features/reviews/data.ts` and `site.rating` set (both stay hidden until then)
 - [ ] Privacy policy & terms completed
+- [ ] Licence for the A Thuluth web font confirmed (see "Fonts"), or the font removed
 - [ ] Meta Pixel ID set; test with the Meta Pixel Helper extension
 - [ ] `VITE_SITE_URL` set, then paste the live URL into the
       [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) to check the share card preview

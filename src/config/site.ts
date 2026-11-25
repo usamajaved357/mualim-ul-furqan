@@ -72,7 +72,8 @@ export const navLinks = [
 
 /** In-page anchors used across sections. */
 export const anchors = {
-  book: '/#book',
+  /** The booking page (its own route, not a section of the homepage). */
+  book: '/book',
   hifz: '/#hifz',
   pricing: '/#pricing',
 } as const;

@@ -56,7 +56,7 @@ export function LegalPage({
 
         <aside className="flex flex-col gap-4 lg:sticky lg:top-24 lg:self-start">
           <div className="bg-mint flex flex-col gap-3 rounded-[28px] p-6">
-            <p className="font-display text-lg font-[500]">Questions about this page?</p>
+            <p className="font-display text-lg font-[700]">Questions about this page?</p>
             <p className="text-muted text-[15px]">
               We're happy to explain anything. Email{' '}
               <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.

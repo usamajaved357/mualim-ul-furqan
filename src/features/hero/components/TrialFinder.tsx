@@ -1,14 +1,18 @@
 import { anchors } from '@/config/site';
-import { ButtonLink, Icon, SegmentedControl } from '@/components/ui';
+import { ButtonLink, Icon, SegmentedControl, StarGlyph } from '@/components/ui';
 import { setBookingIntent } from '@/lib/bookingIntent';
 import { cn } from '@/lib/cn';
 import { COURSE_ARABIC, type CourseId } from '@/types/domain';
 import { courseOptions, learnerOptions } from '../data';
 import { useTrialFinder } from '../hooks/useTrialFinder';
+import { withoutVowels } from '@/lib/arabic';
 
-const label = 'text-muted text-[13px] font-bold';
+const label = 'text-mist text-[12px] font-bold tracking-[0.12em] uppercase';
 
-/** Course tiles: Arabic name over the English one. The Arabic is decorative, so the button name stays English. */
+/**
+ * Course tiles: the Arabic name in gold calligraphy over the English one. The selected tile lights up in
+ * emerald with a gold rim. The Arabic is decorative, so each button's name stays English.
+ */
 function CoursePicker({ value, onChange }: { value: CourseId; onChange: (course: CourseId) => void }) {
   return (
     <div role="group" aria-label="Course" className="grid grid-cols-6 gap-2 sm:grid-cols-5">
@@ -21,11 +25,11 @@ function CoursePicker({ value, onChange }: { value: CourseId; onChange: (course:
             aria-pressed={selected}
             onClick={() => onChange(option.value)}
             className={cn(
-              'relative col-span-2 flex min-h-[78px] cursor-pointer flex-col items-center justify-center gap-0.5 rounded-2xl border px-1.5 py-2 text-center transition duration-200 sm:col-span-1',
+              'group relative col-span-2 flex min-h-[92px] cursor-pointer flex-col items-center justify-center gap-0 overflow-hidden rounded-2xl border px-1.5 py-2 text-center transition duration-300 sm:col-span-1',
               i === 3 && 'col-start-2 sm:col-start-auto',
               selected
-                ? 'border-brand bg-mint -translate-y-0.5 shadow-[0_12px_24px_-14px_rgb(12_122_91/0.9)]'
-                : 'border-line hover:border-brand/40 hover:bg-parchment bg-white hover:-translate-y-0.5',
+                ? 'border-gold/70 bg-[linear-gradient(180deg,rgb(25_162_122/0.42),rgb(12_122_91/0.12))] shadow-[inset_0_1px_0_rgb(255_255_255/0.2),0_14px_30px_-14px_rgb(25_162_122/0.9)]'
+                : 'border-white/10 bg-white/[0.04] hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/[0.08]',
             )}
           >
             <span
@@ -33,23 +37,21 @@ function CoursePicker({ value, onChange }: { value: CourseId; onChange: (course:
               lang="ar"
               dir="rtl"
               className={cn(
-                'font-naskh text-[19px] leading-[1.5] font-bold',
-                selected ? 'text-brand' : 'text-bronze',
+                'font-calligraphy text-[26px] leading-[1.95] font-bold transition-colors',
+                selected ? 'text-gold' : 'text-gold/60 group-hover:text-gold/85',
               )}
             >
-              {COURSE_ARABIC[option.value]}
+              {withoutVowels(COURSE_ARABIC[option.value])}
             </span>
-            <span className={cn('text-[13px] leading-tight font-bold', selected ? 'text-brand' : 'text-ink')}>
+            <span
+              className={cn(
+                'text-[12.5px] leading-tight font-bold',
+                selected ? 'text-white' : 'text-white/75',
+              )}
+            >
               {option.label}
             </span>
-            {selected && (
-              <span
-                aria-hidden
-                className="bg-brand absolute top-1.5 right-1.5 flex size-4.5 items-center justify-center rounded-full text-white"
-              >
-                <Icon name="check" size={10} strokeWidth={3.2} />
-              </span>
-            )}
+            {selected && <StarGlyph className="text-gold absolute top-2 right-2 size-2.5" />}
           </button>
         );
       })}
@@ -57,20 +59,23 @@ function CoursePicker({ value, onChange }: { value: CourseId; onChange: (course:
   );
 }
 
-/** Three quick choices that personalise the free-class call to action. */
+/**
+ * Three quick choices that personalise the free-class call to action. A translucent "veil" card with a gold
+ * hairline frame, so it belongs to the night-sky hero instead of sitting on it like a white box.
+ */
 export function TrialFinder() {
   const finder = useTrialFinder();
   return (
-    <div className="border-glow text-ink max-w-[620px] overflow-hidden rounded-[30px] bg-white/[0.97] shadow-[0_40px_90px_-40px_rgb(0_0_0/0.85),inset_0_1px_0_white] backdrop-blur-xl">
+    <div className="card-veil max-w-[620px] overflow-hidden rounded-[30px]">
       <div className="flex flex-col gap-5 p-5 sm:p-6">
         <div className="flex items-start justify-between gap-3">
-          <div className="flex flex-col gap-0.5">
-            <p className="font-display text-[22px] leading-tight font-[520] tracking-[-0.02em]">
+          <div className="flex flex-col gap-1">
+            <p className="font-display text-[22px] leading-tight font-bold tracking-[-0.03em] text-white">
               Plan your free class
             </p>
-            <p className="text-muted text-[13px]">Three quick choices. No card, no commitment.</p>
+            <p className="text-mist text-[13.5px]">Three quick choices. No card, no commitment.</p>
           </div>
-          <span className="bg-mint text-brand inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold">
+          <span className="border-gold/30 text-gold inline-flex shrink-0 items-center gap-1.5 rounded-full border bg-black/20 px-3 py-1.5 text-xs font-bold">
             <Icon name="video" size={14} strokeWidth={2.2} />
             30 min
           </span>
@@ -86,7 +91,7 @@ export function TrialFinder() {
             <p className={label}>Who is learning?</p>
             <SegmentedControl
               label="Learner"
-              variant="track"
+              variant="trackDark"
               options={learnerOptions}
               value={finder.selection.learner}
               onChange={finder.setLearner}
@@ -94,22 +99,22 @@ export function TrialFinder() {
           </div>
           <div className="flex flex-col gap-2.5">
             <p className={label}>Your time zone</p>
-            <p className="border-line bg-parchment text-ink flex min-h-12 items-center gap-2 rounded-2xl border px-3.5 text-sm font-bold">
-              <Icon name="globe" size={16} strokeWidth={2.2} className="text-brand shrink-0" />
+            <p className="flex min-h-12 items-center gap-2 rounded-2xl border border-white/10 bg-black/20 px-3.5 text-sm font-bold text-white">
+              <Icon name="globe" size={16} strokeWidth={2.2} className="text-gold shrink-0" />
               <span className="truncate">{finder.zone}</span>
-              <span className="text-muted ml-auto shrink-0 text-xs font-semibold">Auto-detected</span>
+              <span className="text-mist ml-auto shrink-0 text-[11px] font-semibold">Auto</span>
             </p>
           </div>
         </div>
       </div>
 
-      <div className="border-line flex flex-col gap-4 border-t bg-[linear-gradient(180deg,#fffaf0,#fff4df)] p-5 sm:p-6">
+      <div className="flex flex-col gap-4 border-t border-white/10 bg-black/25 p-5 sm:p-6">
         <div className="flex flex-col gap-1" aria-live="polite">
-          <p className="font-display text-[19px] leading-snug font-[520] tracking-[-0.01em]">
+          <p className="font-display text-[18px] leading-snug font-bold tracking-[-0.02em] text-white">
             {finder.summary}
           </p>
-          <p className="text-muted flex items-start gap-1.5 text-[13px]">
-            <Icon name="clock" size={15} strokeWidth={2} className="text-brand mt-px shrink-0" />
+          <p className="text-mist flex items-start gap-1.5 text-[13px]">
+            <Icon name="clock" size={15} strokeWidth={2} className="text-gold mt-px shrink-0" />
             {finder.slots}
           </p>
         </div>
@@ -117,6 +122,7 @@ export function TrialFinder() {
           <ButtonLink
             href={anchors.book}
             size="lg"
+            variant="gold"
             iconRight="arrow-right"
             trackAs="Lead"
             onClick={() => setBookingIntent(finder.selection)}
@@ -126,10 +132,10 @@ export function TrialFinder() {
           <ButtonLink
             href={finder.whatsappHref}
             size="lg"
-            variant="outline"
+            variant="ghostDark"
             iconLeft="whatsapp"
             trackAs="Contact"
-            className="[&>svg]:text-whatsapp"
+            className="[&>svg]:text-live"
           >
             Ask on WhatsApp
           </ButtonLink>

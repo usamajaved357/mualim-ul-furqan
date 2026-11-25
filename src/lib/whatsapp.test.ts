@@ -11,7 +11,7 @@ describe('buildWhatsAppLink', () => {
     );
   });
 
-  it('falls back to the booking anchor without a number', () => {
-    expect(buildWhatsAppLink('hello', '')).toBe('/#book');
+  it('falls back to the booking page without a number', () => {
+    expect(buildWhatsAppLink('hello', '')).toBe('/book');
   });
 });

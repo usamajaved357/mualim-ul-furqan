@@ -38,7 +38,13 @@ export function useBooking() {
   const [reload, setReload] = useState(0);
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
   const [slot, setSlot] = useState<Date | null>(null);
-  const [form, setForm] = useState<BookingForm>(emptyForm);
+  // Pre-fill course and learner from choices made elsewhere (the hero trial finder, the Hifz plan), both when
+  // the visitor arrives from those buttons and if they change them while this page is open.
+  const intent = useSyncExternalStore(subscribeBookingIntent, getBookingIntent, () => null);
+  const [appliedIntent, setAppliedIntent] = useState(intent);
+  const [form, setForm] = useState<BookingForm>(() =>
+    intent ? { ...emptyForm, course: COURSE_LABELS[intent.course], learner: intent.learner } : emptyForm,
+  );
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -59,9 +65,6 @@ export function useBooking() {
     return () => controller.abort();
   }, [reload]);
 
-  // Pre-fill course and learner from choices made elsewhere on the page (hero trial finder).
-  const intent = useSyncExternalStore(subscribeBookingIntent, getBookingIntent, () => null);
-  const [appliedIntent, setAppliedIntent] = useState(intent);
   if (intent !== appliedIntent) {
     setAppliedIntent(intent);
     if (intent) setForm((f) => ({ ...f, course: COURSE_LABELS[intent.course], learner: intent.learner }));

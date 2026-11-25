@@ -1,6 +1,7 @@
 import { Container, CountUp, Marquee, Reveal, StarGlyph } from '@/components/ui';
 import { courseLinks, site } from '@/config/site';
 import { COURSE_ARABIC } from '@/types/domain';
+import { withoutVowels } from '@/lib/arabic';
 
 /** Numbers come from `site.teacher` in config/site.ts. */
 const stats = [
@@ -16,12 +17,10 @@ function RibbonItems() {
     <>
       {courseLinks.map((c) => (
         <span key={c.id} className="flex items-center gap-5 pr-5">
-          <span lang="ar" dir="rtl" className="font-naskh text-gold text-[26px] leading-none font-bold">
-            {COURSE_ARABIC[c.id]}
+          <span lang="ar" dir="rtl" className="font-calligraphy text-gold text-[32px] leading-none font-bold">
+            {withoutVowels(COURSE_ARABIC[c.id])}
           </span>
-          <span className="font-display text-[22px] font-[420] tracking-[-0.01em] text-white italic">
-            {c.label}
-          </span>
+          <span className="font-display text-[22px] font-[600] tracking-[-0.01em] text-white">{c.label}</span>
           <StarGlyph className="text-gold/50 size-3.5" />
         </span>
       ))}
@@ -46,7 +45,7 @@ export function StatsBar() {
               key={s.label}
               className={`flex flex-col items-center gap-2 px-4 text-center ${i % 2 ? 'border-line-strong border-l' : ''} ${i === 2 ? 'lg:border-line-strong lg:border-l' : ''}`}
             >
-              <span className="font-display text-ink text-[clamp(44px,5vw,68px)] leading-none font-[340] tracking-[-0.04em]">
+              <span className="font-display text-ink text-[clamp(44px,5vw,68px)] leading-none font-[500] tracking-[-0.04em]">
                 <CountUp value={s.value} />
               </span>
               <span className="text-muted text-[14px] font-semibold tracking-[0.12em] uppercase">

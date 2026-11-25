@@ -1,33 +1,49 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 
 /**
- * True while the part of the page behind a fixed/sticky bar at height `y` is a dark band
- * (any element marked `data-dark`), so the bar can switch to light text and dark glass.
+ * True while a dark band (any element marked `data-dark`) sits behind the top `y` pixels of the window, so a
+ * sticky header can switch to light text and dark glass. Uses an IntersectionObserver on a thin strip at that
+ * height instead of hit-testing on every scroll frame. Re-scans when the route changes.
  */
 export function useDarkBehind(y = 40) {
   const [dark, setDark] = useState(false);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     // Not available in jsdom (tests); the bar simply stays light there.
-    if (typeof document.elementsFromPoint !== 'function') return;
+    if (typeof IntersectionObserver === 'undefined') return;
+    const visible = new Set<Element>();
+    let observer: IntersectionObserver | null = null;
     let frame = 0;
-    const update = () => {
-      frame = 0;
-      const below = document.elementsFromPoint(window.innerWidth / 2, y).find((el) => !el.closest('header'));
-      setDark(Boolean(below?.closest('[data-dark]')));
+
+    const observe = () => {
+      observer?.disconnect();
+      visible.clear();
+      // A 2px strip at height `y`: everything above and below it is cut off by the negative margins.
+      const bottom = Math.max(window.innerHeight - y - 2, 0);
+      observer = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) visible.add(e.target);
+            else visible.delete(e.target);
+          }
+          setDark(visible.size > 0);
+        },
+        { rootMargin: `-${y}px 0px -${bottom}px 0px` },
+      );
+      document.querySelectorAll('[data-dark]').forEach((el) => observer!.observe(el));
     };
-    const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule);
+
+    // After the route's content has rendered.
+    frame = requestAnimationFrame(observe);
+    window.addEventListener('resize', observe);
     return () => {
-      window.removeEventListener('scroll', schedule);
-      window.removeEventListener('resize', schedule);
       cancelAnimationFrame(frame);
+      window.removeEventListener('resize', observe);
+      observer?.disconnect();
     };
-  }, [y]);
+  }, [y, pathname]);
 
   return dark;
 }

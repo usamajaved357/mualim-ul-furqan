@@ -1,147 +1,148 @@
-import { useEffect, useState } from 'react';
-import { AL_FATIHA, CallParticipant, MushafPanel } from '@/components/mockups';
-import { Icon, type IconName } from '@/components/ui';
+import { useEffect, useState, type CSSProperties } from 'react';
+import { AL_FATIHA } from '@/components/mockups';
+import { TeacherAvatar } from '@/components/brand/TeacherAvatar';
+import { Icon, StarGlyph } from '@/components/ui';
 import { site } from '@/config/site';
 import { useTilt } from '@/hooks/usePointerEffects';
 import { cn } from '@/lib/cn';
 
 const AYAT = AL_FATIHA.slice(0, 4);
-/** What the teacher says after each ayah, in step with the highlighted line. */
+const READ_MS = 3400;
+
+/** What the teacher says after each ayah, in step with the line being read. */
 const feedback = [
-  { title: 'Bismillah, beautiful start!', note: 'Clear and steady.' },
-  { title: 'Ayah 2, well done!', note: 'Makharij correct.' },
-  { title: 'Ayah 3, lovely madd.', note: 'Two counts, just right.' },
-  { title: 'Ayah 4, masha Allah!', note: 'Ready for the next page.' },
+  { title: 'Bismillah, beautiful start', note: 'Clear and steady.' },
+  { title: 'Ayah 2, well done', note: 'Makharij correct.' },
+  { title: 'Lovely madd on ayah 3', note: 'Two counts, just right.' },
+  { title: 'Ayah 4, masha Allah', note: 'Ready for the next page.' },
 ];
 
 /** Steps through the ayat like a student reading, one every few seconds (stays put with reduced motion). */
-function useReadingLine(count: number, ms = 3200) {
+function useReadingLine(count: number) {
   const [line, setLine] = useState(1);
   useEffect(() => {
     if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
-    const id = window.setInterval(() => setLine((l) => (l + 1) % count), ms);
+    const id = window.setInterval(() => setLine((l) => (l + 1) % count), READ_MS);
     return () => window.clearInterval(id);
-  }, [count, ms]);
+  }, [count]);
   return line;
 }
 
-const controls: IconName[] = ['mic', 'video', 'hand', 'present'];
-
-interface NotificationProps {
-  icon: IconName;
-  /** Gradient for the app-style icon tile. */
-  iconTint: string;
-  title: string;
-  time: string;
-  message: string;
-  className: string;
-}
-
-/** Phone-style notification: gradient app icon, title with a timestamp, and a one-line message. */
-function Notification({ icon, iconTint, title, time, message, className }: NotificationProps) {
+/** Three bars that bounce while someone is speaking. */
+function SpeakingBars({ className }: { className?: string }) {
   return (
-    <div
-      className={cn(
-        'absolute z-10 flex w-[230px] items-start gap-3 rounded-[22px] bg-white/[0.93] p-3 shadow-[inset_0_1px_0_white,0_30px_60px_-24px_rgb(0_0_0/0.7)] backdrop-blur-xl sm:w-[250px]',
-        className,
-      )}
-    >
-      <span
-        className={cn(
-          'flex size-10 shrink-0 items-center justify-center rounded-[13px] bg-gradient-to-br text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.35)]',
-          iconTint,
-        )}
-      >
-        <Icon name={icon} size={19} strokeWidth={2.2} />
-      </span>
-      <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-        <span className="flex items-baseline justify-between gap-2">
-          <span className="truncate text-[13px] font-bold">{title}</span>
-          <span className="text-muted shrink-0 text-[11px] font-medium">{time}</span>
-        </span>
-        <span className="text-muted text-[12.5px] leading-snug">{message}</span>
-      </span>
-    </div>
+    <span className={cn('flex h-3.5 items-end gap-[3px]', className)}>
+      {[0.5, 1, 0.7, 0.9].map((h, i) => (
+        <span
+          key={i}
+          className="animate-blink w-[3px] rounded-full bg-current"
+          style={{ height: `${h * 100}%`, animationDelay: `${i * 0.18}s` }}
+        />
+      ))}
+    </span>
   );
 }
 
+const corners = ['top-3 left-3', 'top-3 right-3', 'bottom-3 left-3', 'bottom-3 right-3'];
+
 /**
- * A live one-to-one lesson drawn as a light Google Meet window: the shared mushaf with the ayah being read,
- * in-call feedback and the two people in the class. Decorative, so hidden from assistive tech.
+ * The hero's picture of a lesson, drawn as an illuminated mushaf page rather than an app window: a parchment
+ * page in a double gold frame, the surah title in a cartouche, and a gold band that sweeps along each ayah as it
+ * is read (right to left, like the script). Around it: the teacher teaching live, the teacher's feedback for
+ * the current ayah, and a parent watching. Decorative, so hidden from assistive tech.
  */
 export function HeroVisual() {
-  const tilt = useTilt<HTMLDivElement>(5);
+  const tilt = useTilt<HTMLDivElement>(4);
   const line = useReadingLine(AYAT.length);
   const said = feedback[line] ?? feedback[0]!;
+
   return (
-    <div ref={tilt} className="tilt text-ink relative pt-16 pb-16 sm:px-5 sm:pt-10 sm:pb-12" aria-hidden>
-      <div className="from-brand-light/50 via-gold/25 absolute inset-x-6 top-16 bottom-8 rounded-[48px] bg-gradient-to-br to-transparent blur-3xl" />
+    <div ref={tilt} className="tilt relative mx-auto max-w-[580px] px-1 pt-16 pb-20 sm:px-8" aria-hidden>
+      <div className="absolute inset-x-0 top-10 bottom-6 rounded-full bg-[radial-gradient(closest-side,rgb(247_213_139/0.28),transparent)]" />
 
-      <div className="border-glow relative overflow-hidden rounded-[30px] bg-white shadow-[0_50px_100px_-40px_rgb(0_0_0/0.8),0_0_0_1px_rgb(255_255_255/0.08)]">
-        <div className="border-line flex items-center gap-3 border-b px-4 py-3 sm:px-5">
-          <span className="bg-mint text-brand flex size-9 shrink-0 items-center justify-center rounded-xl">
-            <Icon name="video" size={18} strokeWidth={2} />
-          </span>
-          <span className="flex min-w-0 flex-col leading-tight">
-            <span className="truncate text-[14px] font-bold">Nazra lesson</span>
-            <span className="text-muted inline-flex items-center gap-1.5 text-xs">
-              Google Meet ·
-              <span className="text-rose-ink inline-flex items-center gap-1 font-bold">
-                <span className="bg-rec animate-blink size-1.5 rounded-full" />
-                Live 12:40
-              </span>
-            </span>
-          </span>
-        </div>
+      {/* The page */}
+      <div className="relative rounded-[34px] bg-[linear-gradient(180deg,#fdf7e7,#f6e8c8)] p-2.5 shadow-[inset_0_1px_0_white,0_0_0_1px_#e6cf95,0_70px_120px_-50px_rgb(0_0_0/0.95)] sm:p-3">
+        <div className="rounded-[27px] border border-[#cfa955] p-1.5">
+          <div className="relative rounded-[22px] border border-[#e3c886] px-4 pt-7 pb-8 sm:px-8">
+            {corners.map((c) => (
+              <StarGlyph key={c} className={cn('absolute size-3 text-[#c99a45]', c)} />
+            ))}
 
-        <div className="flex flex-col gap-3 p-3 sm:p-4">
-          <MushafPanel title="سُورَةُ ٱلْفَاتِحَةِ" ayat={AYAT} activeIndex={line} />
-          <div className="bg-mint flex items-center gap-2.5 overflow-hidden rounded-2xl px-3 py-2.5">
-            <span className="bg-brand flex size-7 shrink-0 items-center justify-center rounded-full text-white">
-              <Icon name="check" size={14} strokeWidth={2.8} />
-            </span>
-            <p key={line} className="animate-fade-up text-[13px] leading-snug [animation-duration:0.6s]">
-              <span className="font-bold">{said.title}</span> <span className="text-muted">{said.note}</span>
-            </p>
+            <div className="mx-auto mb-4 flex w-fit items-center gap-3 rounded-full border border-[#d9b871] bg-[linear-gradient(180deg,#fff7e2,#f8e6bb)] px-5 shadow-[inset_0_1px_0_white]">
+              <StarGlyph className="size-2.5 text-[#c99a45]" />
+              <p lang="ar" dir="rtl" className="font-naskh text-bronze text-[17px] leading-[2] font-bold">
+                سُورَةُ ٱلْفَاتِحَةِ
+              </p>
+              <StarGlyph className="size-2.5 text-[#c99a45]" />
+            </div>
+
+            <ol lang="ar" dir="rtl" className="flex flex-col gap-1.5 text-center">
+              {AYAT.map((ayah, i) => {
+                const active = i === line;
+                return (
+                  <li
+                    key={ayah.number}
+                    className={cn(
+                      'font-quran relative rounded-2xl px-3 text-[20px] leading-[2.1] transition-colors duration-700 sm:text-[23px]',
+                      active ? 'text-[#13251f]' : 'text-[#13251f]/55',
+                    )}
+                  >
+                    {/* The reading band: grows from the right edge across the ayah while it is read. */}
+                    <span
+                      key={active ? `on-${line}` : 'off'}
+                      className={cn(
+                        'absolute inset-0 origin-right rounded-2xl bg-[linear-gradient(270deg,#f3d98f,#f8e7b8_70%,#fbefd0)] shadow-[inset_0_0_0_1px_#e2c071]',
+                        active
+                          ? 'animate-[grow-x_3.2s_cubic-bezier(0.4,0,0.2,1)_both]'
+                          : 'scale-x-0 opacity-0',
+                      )}
+                      style={{ transformOrigin: 'right center' } as CSSProperties}
+                    />
+                    <span className="relative">
+                      {ayah.text}
+                      <span className="ayah-mark">{`۝${ayah.number}`}</span>
+                    </span>
+                  </li>
+                );
+              })}
+            </ol>
           </div>
-          <div className="grid gap-2.5 sm:grid-cols-2">
-            <CallParticipant initial="Q" name={site.teacher.name} duty="Teacher" avatar="bg-brand" speaking />
-            <CallParticipant initial="A" name="Aisha" duty="Student" avatar="bg-gold-deep" />
-          </div>
-        </div>
-
-        <div className="border-line flex items-center justify-center gap-2 border-t px-4 py-3">
-          {controls.map((icon) => (
-            <span
-              key={icon}
-              className="bg-cream text-ink flex size-9 items-center justify-center rounded-full"
-            >
-              <Icon name={icon} size={17} />
-            </span>
-          ))}
-          <span className="bg-hangup ml-1 flex h-9 w-14 items-center justify-center rounded-full text-white">
-            <Icon name="hangup" size={18} />
-          </span>
         </div>
       </div>
 
-      <Notification
-        className="animate-float top-0 right-0"
-        icon="eye"
-        iconTint="from-brand-light to-brand"
-        title="Parents welcome"
-        time="now"
-        message="Join from anywhere and watch the lesson live."
-      />
+      {/* Teacher, live */}
+      <div className="card-night absolute top-0 left-0 flex items-center gap-3 rounded-[22px] py-3 pr-4 pl-3 sm:-left-2">
+        <TeacherAvatar className="size-14 rounded-full ring-2 ring-[#e9c77a] ring-offset-2 ring-offset-[#072a20]" />
+        <span className="flex flex-col leading-tight">
+          <span className="text-[14px] font-bold">{site.teacher.name}</span>
+          <span className="text-live inline-flex items-center gap-2 text-[12px] font-semibold">
+            <SpeakingBars />
+            Teaching live · Google Meet
+          </span>
+        </span>
+      </div>
 
-      <Notification
-        className="animate-float-alt bottom-0 left-0 [animation-delay:1.2s]"
-        icon="calendar"
-        iconTint="from-amber to-gold-deep"
-        title="Next class"
-        time="in 2h"
-        message="Nazra · today at 5:30 PM"
-      />
+      {/* Parent watching */}
+      <div className="card-night absolute top-[38%] -right-2 hidden items-center gap-2.5 rounded-full py-2 pr-4 pl-2 sm:flex">
+        <span className="bg-gold/15 text-gold flex size-8 items-center justify-center rounded-full">
+          <Icon name="eye" size={16} strokeWidth={2.2} />
+        </span>
+        <span className="text-[12.5px] leading-tight font-semibold">
+          Mum is watching
+          <span className="text-mist block text-[11px] font-medium">from work</span>
+        </span>
+      </div>
+
+      {/* Feedback for the current ayah */}
+      <div className="card absolute right-0 bottom-0 flex w-[260px] items-center gap-3 rounded-[22px] p-3 sm:right-2">
+        <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(180deg,#14916c,#0a6a4f)] text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3)]">
+          <Icon name="check" size={18} strokeWidth={2.8} />
+        </span>
+        <p key={line} className="animate-fade-up text-ink text-[13px] leading-snug [animation-duration:0.6s]">
+          <span className="block font-bold">{said.title}</span>
+          <span className="text-muted">{said.note}</span>
+        </p>
+      </div>
     </div>
   );
 }

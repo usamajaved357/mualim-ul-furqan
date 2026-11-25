@@ -6,7 +6,7 @@ import { site } from '@/config/site';
  */
 export function buildWhatsAppLink(message?: string, number: string = site.contact.whatsappNumber): string {
   const digits = number.replace(/\D/g, '');
-  if (!digits) return '/#book';
+  if (!digits) return '/book';
   const base = `https://wa.me/${digits}`;
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }

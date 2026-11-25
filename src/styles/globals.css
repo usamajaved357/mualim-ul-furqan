@@ -1,20 +1,36 @@
 @import 'tailwindcss';
 
+/* A Thuluth, self-hosted (public/fonts). Supplied by the site owner, who chose to use it; its embedding flag
+   is "restricted", so confirm the licence before relying on it long term (see README). One regular face,
+   declared for every weight so bold text uses it as drawn instead of a synthesised faux-bold. Arabic only. */
+@font-face {
+  font-family: 'A Thuluth';
+  src: url('/fonts/a-thuluth.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+}
+
 /* ------------------------------------------------------------------
    Design tokens — Mualim Ul Furqan brand (modern bright)
    ------------------------------------------------------------------ */
 @theme {
   --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
-  /* Display: a warm, high-contrast serif with a soft italic for accent words (headings, prices, numbers). */
-  --font-display: 'Fraunces', Georgia, ui-serif, serif;
+  /* Display: Manrope, a clean modern grotesk for headings, prices and numbers. */
+  --font-display: 'Manrope', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
   /* Compact geometric sans for UI labels inside mockups and badges. */
   --font-ui: 'Outfit', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
   /* System serif, only for decorative quote marks (no web font download). */
   --font-serif: Georgia, 'Times New Roman', ui-serif, serif;
   --font-quran: 'Amiri Quran', 'Amiri', serif;
+  /* Classical Naskh for longer Arabic that is read, not just seen (the hadith, surah titles). */
   --font-naskh: 'Amiri', serif;
-  /* Brand wordmark: classic calligraphic Naskh (logo, footer, booking card). */
-  --font-logo: 'Scheherazade New', 'Amiri', serif;
+  /* Calligraphy: A Thuluth (self-hosted) for the logo and every decorative Arabic word: course names, lesson
+     terms, labels. Aref Ruqaa (Google Fonts, OFL) stays as the fallback while it loads or if it is removed. */
+  --font-calligraphy: 'A Thuluth', 'Aref Ruqaa', 'Amiri', serif;
+  /* Brand wordmark: the same calligraphy as the decorative Arabic. */
+  --font-logo: 'A Thuluth', 'Aref Ruqaa', 'Amiri', serif;
 
   /* Dark surfaces (classroom panel, footer) */
   --color-night: #0b2a23;
@@ -131,13 +147,11 @@
   @keyframes scale-in {
     from {
       opacity: 0;
-      transform: scale(0.94) translateY(18px);
-      filter: blur(8px);
+      transform: scale(0.96) translateY(18px);
     }
     to {
       opacity: 1;
       transform: none;
-      filter: none;
     }
   }
   @keyframes word-rise {
@@ -236,24 +250,19 @@
   body {
     @apply text-ink bg-parchment font-sans text-[17px] leading-[1.65] antialiased;
   }
-  :where(h1, h2, h3) {
+  /* Plain selectors (not :where) so these beat Tailwind's preflight reset of heading weights. */
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
-    font-weight: 520;
-    letter-spacing: -0.025em;
-    font-optical-sizing: auto;
-    font-variation-settings:
-      'SOFT' 50,
-      'WONK' 0;
+    font-weight: 700;
+    letter-spacing: -0.035em;
   }
-  /* Accent words in headings: Fraunces' soft italic, in brand colour (SectionHeading switches to gold on dark). */
+  /* Accent words in headings: same font, upright, in brand colour (SectionHeading switches to gold on dark). */
   :where(h1, h2, h3, blockquote) em {
-    font-style: italic;
-    font-weight: 480;
-    font-variation-settings:
-      'SOFT' 100,
-      'WONK' 1;
+    font-style: normal;
     color: var(--color-brand);
-    padding-right: 0.04em;
   }
   ::selection {
     background: var(--color-gold);
@@ -325,18 +334,15 @@
 /* Scroll reveal (driven by the <Reveal> component) */
 .reveal {
   opacity: 0;
-  transform: translateY(32px) scale(0.985);
-  filter: blur(6px);
+  transform: translateY(28px);
   transition:
-    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform 1s cubic-bezier(0.2, 0.7, 0.2, 1),
-    filter 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
   transition-delay: var(--reveal-delay, 0ms);
 }
 .reveal.is-visible {
   opacity: 1;
   transform: none;
-  filter: none;
 }
 
 /* Word-by-word heading reveal (SplitWords). Runs on load for the hero, or when a parent .reveal shows. */
@@ -409,25 +415,70 @@
 }
 
 /* Apple-style liquid glass: frosted, saturated, with a bright top rim and a soft inner sheen. */
+/* Glass surfaces never blur what is behind them while content scrolls under them: that re-renders the
+   backdrop every frame. `glass-float` (header, menus) is the only variant with a real backdrop blur. */
 @utility glass {
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.78), rgb(255 255 255 / 0.58));
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.92), rgb(255 255 255 / 0.74));
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.9),
     inset 0 -1px 0 rgb(255 255 255 / 0.25),
     0 0 0 1px rgb(15 31 26 / 0.06),
     0 18px 44px -22px rgb(15 31 26 / 0.28);
 }
+@utility glass-float {
+  backdrop-filter: blur(20px) saturate(170%);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+}
 @utility glass-dark {
   background: linear-gradient(180deg, rgb(255 255 255 / 0.11), rgb(255 255 255 / 0.04));
-  backdrop-filter: blur(24px) saturate(170%);
-  -webkit-backdrop-filter: blur(24px) saturate(170%);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.22),
     inset 0 -1px 0 rgb(255 255 255 / 0.04),
     0 0 0 1px rgb(255 255 255 / 0.08),
     0 24px 50px -24px rgb(0 0 0 / 0.6);
+}
+
+/* ------------------------------------------------------------------
+   Card system. Every card carries an inner gold hairline frame (an inset outline, which follows the
+   radius), like the ruled border of a manuscript page.
+   card        light surface on parchment
+   card-night  deep emerald surface with a glow from the top
+   card-veil   translucent surface for cards sitting on the dark hero / dark bands
+   ------------------------------------------------------------------ */
+@utility card {
+  position: relative;
+  background: linear-gradient(180deg, #ffffff, #fffcf5);
+  border: 1px solid rgb(15 31 26 / 0.07);
+  outline: 1px solid rgb(201 162 75 / 0.2);
+  outline-offset: -7px;
+  box-shadow:
+    inset 0 1px 0 #ffffff,
+    0 1px 2px rgb(15 31 26 / 0.04),
+    0 28px 56px -32px rgb(15 31 26 / 0.3);
+}
+@utility card-night {
+  position: relative;
+  color: #ffffff;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgb(25 162 122 / 0.34), transparent 62%),
+    linear-gradient(180deg, #0a3127, #04150f);
+  border: 1px solid rgb(255 255 255 / 0.07);
+  outline: 1px solid rgb(247 213 139 / 0.22);
+  outline-offset: -7px;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.12),
+    0 40px 80px -40px rgb(4 21 15 / 0.75);
+}
+@utility card-veil {
+  position: relative;
+  color: #ffffff;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.035));
+  border: 1px solid rgb(255 255 255 / 0.12);
+  outline: 1px solid rgb(247 213 139 / 0.16);
+  outline-offset: -7px;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.18),
+    0 30px 60px -30px rgb(0 0 0 / 0.6);
 }
 
 /* Film-grain overlay for dark bands: adds depth to flat gradients. */
@@ -437,8 +488,7 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.08;
-    mix-blend-mode: overlay;
+    opacity: 0.05;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 }
@@ -450,14 +500,13 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: var(--animate-shimmer);
-  animation-duration: 9s;
 }
 
 /* A light sweep across a button on hover. */
 @utility shine {
   position: relative;
-  overflow: hidden;
+  /* clip, not hidden: a hidden overflow lets flex rows squeeze the button below its label width. */
+  overflow: clip;
   isolation: isolate;
   &::after {
     content: '';
@@ -473,29 +522,18 @@
   }
 }
 
-/* Hairline gradient border (gold → transparent) for premium cards. */
-@utility border-glow {
-  position: relative;
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 1px;
-    border-radius: inherit;
-    pointer-events: none;
-    background: linear-gradient(
-      160deg,
-      rgb(247 213 139 / 0.7),
-      rgb(247 213 139 / 0.05) 40%,
-      rgb(25 162 122 / 0.05) 60%,
-      rgb(25 162 122 / 0.5)
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-  }
+/* Looping decoration (aurora, rosettes, marquee, stars) stops while its section is off screen
+   (usePauseOffscreen sets data-offscreen), so only what is visible costs anything. */
+[data-offscreen] *,
+[data-offscreen] *::before,
+[data-offscreen] *::after {
+  animation-play-state: paused !important;
+}
+.animate-aurora,
+.animate-spin-slow,
+.animate-spin-reverse,
+.animate-marquee {
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {

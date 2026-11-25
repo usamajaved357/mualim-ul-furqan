@@ -19,7 +19,7 @@ export function ClassroomSection() {
           />
           <span
             aria-hidden
-            className="animate-aurora pointer-events-none absolute -bottom-1/3 -left-1/4 size-[800px] rounded-full bg-[radial-gradient(circle,rgb(229_154_31/0.16),transparent_62%)]"
+            className="pointer-events-none absolute -bottom-1/3 -left-1/4 size-[800px] rounded-full bg-[radial-gradient(circle,rgb(229_154_31/0.16),transparent_62%)]"
           />
           <GirihPattern
             tone="dark"

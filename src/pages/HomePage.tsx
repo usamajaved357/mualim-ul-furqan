@@ -1,4 +1,3 @@
-import { BookingSection } from '@/features/booking';
 import { ClassroomSection } from '@/features/classroom';
 import { FaqSection, faqs } from '@/features/faq';
 import { HadithBand } from '@/features/hadith';
@@ -42,7 +41,6 @@ export function HomePage() {
       <PricingSection />
       <ReviewsSection />
       <FaqSection />
-      <BookingSection />
     </>
   );
 }

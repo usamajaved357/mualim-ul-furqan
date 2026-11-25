@@ -1,4 +1,5 @@
-import type { AnchorHTMLAttributes, ReactNode } from 'react';
+import type { AnchorHTMLAttributes, MouseEvent, ReactNode } from 'react';
+import { Link } from 'react-router';
 import { cn } from '@/lib/cn';
 import { track, type TrackedEvent } from '@/lib/analytics';
 import { Icon, type IconName } from './Icon';
@@ -46,23 +47,24 @@ export function ButtonLink({
   ...rest
 }: ButtonLinkProps) {
   const external = /^https?:\/\//.test(href);
-  return (
-    <a
-      href={href}
-      target={external ? '_blank' : undefined}
-      rel={external ? 'noopener noreferrer' : undefined}
-      onClick={(event) => {
-        if (trackAs) track(trackAs);
-        onClick?.(event);
-      }}
-      className={cn(
-        'group/button inline-flex items-center justify-center gap-2 rounded-full font-semibold whitespace-nowrap no-underline transition duration-300 ease-[cubic-bezier(0.2,0.7,0.2,1)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]',
-        variants[variant],
-        sizes[size],
-        className,
-      )}
-      {...rest}
-    >
+  // Routes inside the app (e.g. /book) navigate client-side, so in-page state such as the course picked in the
+  // hero carries over. Section links (/#pricing) stay plain anchors so the browser scrolls to them.
+  const route = href.startsWith('/') && !href.includes('#');
+  const props = {
+    onClick: (event: MouseEvent<HTMLAnchorElement>) => {
+      if (trackAs) track(trackAs);
+      onClick?.(event);
+    },
+    className: cn(
+      'group/button inline-flex items-center justify-center gap-2 rounded-full font-semibold whitespace-nowrap no-underline transition duration-300 ease-[cubic-bezier(0.2,0.7,0.2,1)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]',
+      variants[variant],
+      sizes[size],
+      className,
+    ),
+    ...rest,
+  };
+  const content = (
+    <>
       {iconLeft && <Icon name={iconLeft} size={19} />}
       {children}
       {iconRight && (
@@ -73,6 +75,23 @@ export function ButtonLink({
           className="transition-transform duration-300 group-hover/button:translate-x-1"
         />
       )}
+    </>
+  );
+  if (route) {
+    return (
+      <Link to={href} {...props}>
+        {content}
+      </Link>
+    );
+  }
+  return (
+    <a
+      href={href}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
+      {...props}
+    >
+      {content}
     </a>
   );
 }

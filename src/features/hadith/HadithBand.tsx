@@ -56,7 +56,7 @@ export function HadithBand() {
               <Star className="text-gold-deep size-3.5" />
               <span className="to-gold-deep/50 h-px w-14 bg-gradient-to-l from-transparent sm:w-20" />
             </span>
-            <blockquote className="font-display m-0 max-w-[760px] text-[clamp(26px,3vw,40px)] leading-[1.22] font-[400] tracking-[-0.02em] text-balance [&_em]:italic">
+            <blockquote className="font-display m-0 max-w-[760px] text-[clamp(26px,3vw,40px)] leading-[1.22] font-[600] tracking-[-0.02em] text-balance">
               “The best of you are those who learn the Quran <em className="text-brand">and teach it.</em>”
             </blockquote>
             <figcaption className="flex flex-col items-center gap-1">
