@@ -52,7 +52,7 @@ export function MushafPanel({ title, ayat, activeIndex, footer, className }: Mus
               <li
                 key={ayah.number}
                 className={cn(
-                  'font-quran relative rounded-xl px-3 text-[18px] leading-[2.05] transition-[background-color,box-shadow,color] duration-700 sm:text-[20px]',
+                  'font-calligraphy relative rounded-xl px-3 text-[24px] leading-[2.2] transition-[background-color,box-shadow,color] duration-700 sm:text-[27px]',
                   active
                     ? 'bg-[#f7e7bd] text-[#1e2a26] shadow-[inset_0_0_0_1px_#ebcd83]'
                     : 'text-[#1e2a26]/75 shadow-[inset_0_0_0_1px_transparent]',

@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
 import { GirihPattern } from '@/components/decor/GirihPattern';
+import { BISMILLAH } from '@/components/mockups';
 import { Rosette } from '@/components/decor/Rosette';
 import { Container, Eyebrow, SplitWords, StarGlyph } from '@/components/ui';
 import { site } from '@/config/site';
@@ -64,9 +65,9 @@ export function Hero() {
             <p
               lang="ar"
               dir="rtl"
-              className="font-quran text-gold-leaf w-fit text-[clamp(26px,2.6vw,34px)] leading-[1.9]"
+              className="font-calligraphy text-gold-leaf w-fit text-[clamp(32px,3.2vw,42px)] leading-[1.9]"
             >
-              بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+              {BISMILLAH}
             </p>
             <Eyebrow tone="dark">Live 1-on-1 classes on Google Meet</Eyebrow>
           </div>
