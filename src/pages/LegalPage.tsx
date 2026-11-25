@@ -54,7 +54,7 @@ export function LegalPage({
         </div>
         <Container className="relative flex flex-col items-start gap-5 pt-14 pb-32 sm:pt-16">
           <nav aria-label="Breadcrumb" className="text-mist text-sm font-semibold">
-            <Link to="/" className="text-mist no-underline hover:text-white">
+            <Link viewTransition to="/" className="text-mist no-underline hover:text-white">
               Home
             </Link>{' '}
             <span aria-hidden>/</span> <span className="text-gold">{title}</span>
@@ -137,6 +137,7 @@ export function LegalPage({
           <nav aria-label="Legal" className="card flex flex-col rounded-[28px] p-2">
             {legalLinks.map((l) => (
               <Link
+                viewTransition
                 key={l.to}
                 to={l.to}
                 aria-current={pathname === l.to ? 'page' : undefined}

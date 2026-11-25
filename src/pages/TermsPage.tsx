@@ -175,7 +175,11 @@ const sections: LegalSection[] = [
       <p>
         Classes are only recorded if you ask, and recordings are shared privately with you for practice at
         home. Please do not post recordings or our teaching materials publicly or share them outside your
-        family. See our <Link to="/privacy">privacy policy</Link> for how we handle personal information.
+        family. See our{' '}
+        <Link viewTransition to="/privacy">
+          privacy policy
+        </Link>{' '}
+        for how we handle personal information.
       </p>
     ),
   },

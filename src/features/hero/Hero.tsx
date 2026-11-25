@@ -5,6 +5,7 @@ import { Rosette } from '@/components/decor/Rosette';
 import { Container, Eyebrow, SplitWords, StarGlyph } from '@/components/ui';
 import { site } from '@/config/site';
 import { HeroVisual } from './components/HeroVisual';
+import { HijriDate } from './components/HijriDate';
 import { RatingBadge } from './components/RatingBadge';
 import { TrialFinder } from './components/TrialFinder';
 
@@ -62,13 +63,16 @@ export function Hero() {
       <Container className="relative grid items-center gap-14 pt-14 pb-20 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,1fr)] lg:gap-12 lg:pt-20 lg:pb-24">
         <div className="flex min-w-0 flex-col gap-7">
           <div className="animate-fade-up flex flex-col gap-3">
-            <p
-              lang="ar"
-              dir="rtl"
-              className="font-calligraphy text-gold-leaf w-fit text-[clamp(32px,3.2vw,42px)] leading-[1.9]"
-            >
-              {BISMILLAH}
-            </p>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+              <p
+                lang="ar"
+                dir="rtl"
+                className="font-calligraphy text-gold-leaf w-fit text-[clamp(32px,3.2vw,42px)] leading-[1.9]"
+              >
+                {BISMILLAH}
+              </p>
+              <HijriDate />
+            </div>
             <Eyebrow tone="dark">Live 1-on-1 classes on Google Meet</Eyebrow>
           </div>
 

@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router';
 import { usePauseOffscreen } from '@/hooks/usePauseOffscreen';
 import { useSpotlight } from '@/hooks/usePointerEffects';
 import { FloatingWhatsApp } from './FloatingWhatsApp';
+import { MobileBookBar } from './MobileBookBar';
 import { Footer } from './Footer';
 import { Header } from './Header';
 
@@ -43,6 +44,7 @@ export function SiteLayout() {
         <Outlet />
       </main>
       <Footer />
+      <MobileBookBar />
       <FloatingWhatsApp />
     </>
   );

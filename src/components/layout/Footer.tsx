@@ -113,10 +113,10 @@ export function Footer() {
             © {new Date().getFullYear()} {site.name}
           </span>
           <span className="flex gap-5">
-            <Link to="/privacy" className="text-mist no-underline hover:text-white">
+            <Link viewTransition to="/privacy" className="text-mist no-underline hover:text-white">
               Privacy policy
             </Link>
-            <Link to="/terms" className="text-mist no-underline hover:text-white">
+            <Link viewTransition to="/terms" className="text-mist no-underline hover:text-white">
               Terms
             </Link>
           </span>

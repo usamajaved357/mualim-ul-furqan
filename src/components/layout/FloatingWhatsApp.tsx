@@ -12,7 +12,7 @@ export function FloatingWhatsApp() {
       rel={external ? 'noopener noreferrer' : undefined}
       aria-label="Chat with us on WhatsApp"
       onClick={() => track('Contact')}
-      className="animate-pulse-ring bg-whatsapp fixed right-5 bottom-5 z-50 flex size-15 items-center justify-center rounded-full text-white shadow-[0_14px_30px_-10px_rgb(0_0_0/0.45)] transition hover:scale-105 sm:right-6 sm:bottom-6"
+      className="animate-pulse-ring bg-whatsapp fixed right-5 bottom-5 z-50 flex size-15 items-center justify-center rounded-full text-white shadow-[0_14px_30px_-10px_rgb(0_0_0/0.45)] transition-[bottom,transform] duration-500 hover:scale-105 max-md:in-data-[bookbar=on]:bottom-[92px] sm:right-6 sm:bottom-6"
     >
       <Icon name="whatsapp" size={28} />
     </a>

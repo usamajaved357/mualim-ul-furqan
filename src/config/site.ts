@@ -3,7 +3,6 @@ import { env } from './env';
 
 /**
  * Single source of truth for brand and contact details.
- * Replace every value in [brackets] before going live.
  */
 export const site = {
   name: 'Mualim Ul Furqan',
@@ -24,8 +23,8 @@ export const site = {
     yearsTeaching: 7,
     studentsTaught: '100+',
     lecturesDelivered: '2,000+',
-    mosque: '[Your Mosque, City]',
-    languages: '[English · Urdu]',
+    /** Languages lessons are explained in. */
+    languages: 'English and Urdu',
   },
 
   contact: {

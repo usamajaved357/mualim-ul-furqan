@@ -238,7 +238,10 @@ const sections: LegalSection[] = [
       <p>
         If we change how we use personal information, we will update this page and the date at the top. If the
         change is significant, we will also let current families know by email or WhatsApp. See also our{' '}
-        <Link to="/terms">terms of service</Link>.
+        <Link viewTransition to="/terms">
+          terms of service
+        </Link>
+        .
       </p>
     ),
   },

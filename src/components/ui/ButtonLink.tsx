@@ -79,7 +79,7 @@ export function ButtonLink({
   );
   if (route) {
     return (
-      <Link to={href} {...props}>
+      <Link viewTransition to={href} {...props}>
         {content}
       </Link>
     );

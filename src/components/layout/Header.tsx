@@ -37,7 +37,7 @@ export function Header() {
           dark ? (scrolled ? 'glass-dark glass-float' : 'bg-transparent') : 'glass glass-float',
         )}
       >
-        <Link to="/" aria-label={`${site.name} home`} className="no-underline">
+        <Link viewTransition to="/" aria-label={`${site.name} home`} className="no-underline">
           <Logo tone={dark ? 'dark' : 'light'} />
         </Link>
 
