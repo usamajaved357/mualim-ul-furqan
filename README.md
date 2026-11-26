@@ -199,6 +199,8 @@ keep full harakat in the Amiri fonts.
 - [ ] Meta Pixel ID set; test with the Meta Pixel Helper extension
 - [ ] `VITE_SITE_URL` set, then paste the live URL into the
       [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) to check the share card preview
+- [ ] Google Search Console: submit `sitemap.xml`. It and `robots.txt` are generated on build from
+      `VITE_SITE_URL` and the `indexablePages` list in `vite.config.ts`; add new routes there
 
 ## Roadmap ideas
 

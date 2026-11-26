@@ -9,7 +9,7 @@ import { ReviewsSection } from '@/features/reviews';
 import { StatsBar } from '@/features/stats';
 import { TeachersSection } from '@/features/teachers';
 import { WhyUsSection } from '@/features/why-us';
-import { site } from '@/config/site';
+import { pageUrl, site } from '@/config/site';
 
 /** FAQ structured data for Google rich results. */
 const faqJsonLd = JSON.stringify({
@@ -27,7 +27,7 @@ export function HomePage() {
     <>
       <title>{`${site.name} · Live One-on-One Online Quran Classes`}</title>
       <meta name="description" content={site.description} />
-      <link rel="canonical" href={site.url} />
+      <link rel="canonical" href={pageUrl('/')} />
       <script type="application/ld+json">{faqJsonLd}</script>
 
       <Hero />

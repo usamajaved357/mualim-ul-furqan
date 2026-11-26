@@ -50,6 +50,9 @@ export const site = {
   },
 } as const;
 
+/** Absolute URL of a page on the live site, for canonical links: pageUrl('/book'). */
+export const pageUrl = (path: string) => `${site.url.replace(/\/+$/, '')}${path}`;
+
 /** One link per programme tab in the Courses section (header menu, footer). */
 export const courseLinks = [
   { id: 'qaida', label: 'Noorani Qaida', note: 'Letters and sounds, from zero', href: '/#qaida' },

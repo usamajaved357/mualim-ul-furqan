@@ -14,6 +14,54 @@ function siteUrlInHtml(siteUrl: string): Plugin {
 }
 
 /**
+ * Pages Google should index, in sitemap order. Section links on the home page (/#courses…) are not separate
+ * pages, and the 404 page is noindex. Add a path here when you add a route to src/app/router.tsx.
+ */
+const indexablePages = ['/', '/book', '/privacy', '/terms'];
+
+/**
+ * Builds /sitemap.xml and /robots.txt from VITE_SITE_URL, so both carry the live domain. Written into dist/
+ * on build, and served by the dev server too.
+ */
+function seoFiles(siteUrl: string): Plugin {
+  const base = siteUrl || 'https://www.example.com';
+  const files: Record<string, { type: string; body: string }> = {
+    'sitemap.xml': {
+      type: 'application/xml',
+      body: [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+        ...indexablePages.map((path) => `  <url><loc>${base}${path}</loc></url>`),
+        '</urlset>',
+        '',
+      ].join('\n'),
+    },
+    'robots.txt': {
+      type: 'text/plain',
+      body: ['User-agent: *', 'Allow: /', 'Disallow: /api/', '', `Sitemap: ${base}/sitemap.xml`, ''].join(
+        '\n',
+      ),
+    },
+  };
+  return {
+    name: 'seo-files',
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        const file = files[(req.url ?? '').split('?')[0]!.slice(1)];
+        if (!file) return next();
+        res.setHeader('Content-Type', `${file.type}; charset=utf-8`);
+        res.end(file.body);
+      });
+    },
+    generateBundle() {
+      for (const [fileName, { body }] of Object.entries(files)) {
+        this.emitFile({ type: 'asset', fileName, source: body });
+      }
+    },
+  };
+}
+
+/**
  * Serves functions/api/*.ts at /api/* during `npm run dev`, the same way Cloudflare Pages Functions do in
  * production. Server secrets (GOOGLE_*, RESEND_API_KEY…) are read from .env and never reach the browser.
  */
@@ -66,7 +114,13 @@ export default defineConfig(({ mode }) => {
   const siteUrl = (env.VITE_SITE_URL ?? '').trim().replace(/\/+$/, '');
 
   return {
-    plugins: [react(), tailwindcss(), siteUrlInHtml(siteUrl), pagesFunctionsInDev(serverEnv)],
+    plugins: [
+      react(),
+      tailwindcss(),
+      siteUrlInHtml(siteUrl),
+      seoFiles(siteUrl),
+      pagesFunctionsInDev(serverEnv),
+    ],
     resolve: {
       alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
     },

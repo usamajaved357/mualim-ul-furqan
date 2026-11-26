@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router';
 import { GirihPattern } from '@/components/decor/GirihPattern';
 import { Rosette } from '@/components/decor/Rosette';
 import { ButtonLink, Container, Eyebrow, Icon } from '@/components/ui';
-import { anchors, site } from '@/config/site';
+import { anchors, pageUrl, site } from '@/config/site';
 import { buildWhatsAppLink, whatsappMessages } from '@/lib/whatsapp';
 
 export interface LegalSection {
@@ -38,6 +38,7 @@ export function LegalPage({
     <>
       <title>{`${title} · ${site.name}`}</title>
       <meta name="description" content={intro} />
+      <link rel="canonical" href={pageUrl(pathname)} />
 
       <section
         data-dark

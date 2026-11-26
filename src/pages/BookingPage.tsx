@@ -1,5 +1,5 @@
 import { BookingExperience } from '@/features/booking';
-import { site } from '@/config/site';
+import { pageUrl, site } from '@/config/site';
 
 /** /book: the free-class booking flow on its own page, reached from every "Book" button. */
 export function BookingPage() {
@@ -10,7 +10,7 @@ export function BookingPage() {
         name="description"
         content={`Book a free 30-minute Quran class on Google Meet with ${site.teacher.name}. Pick a time in your own time zone. No payment or card needed.`}
       />
-      <link rel="canonical" href={`${site.url.replace(/\/+$/, '')}/book`} />
+      <link rel="canonical" href={pageUrl('/book')} />
       <BookingExperience />
     </>
   );
