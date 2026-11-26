@@ -1,6 +1,5 @@
 import { cn } from '@/lib/cn';
 import type { ProgrammePart } from '../data';
-import { withoutVowels } from '@/lib/arabic';
 
 /** One soft tint per lesson part, in order. */
 const tints = [
@@ -9,7 +8,7 @@ const tints = [
   { panel: 'bg-[linear-gradient(160deg,#e3f5ec,#c4e8d6)]', ink: 'text-brand-dark' },
 ];
 
-/** The three parts of every lesson, each with its Arabic term. */
+/** The three parts of every lesson, each with its Arabic term in calligraphy with full harakat. */
 export function MethodCards({ parts }: { parts: ProgrammePart[] }) {
   return (
     <div className="flex flex-col gap-5">
@@ -33,7 +32,7 @@ export function MethodCards({ parts }: { parts: ProgrammePart[] }) {
                   tint.ink,
                 )}
               >
-                {withoutVowels(part.arabic)}
+                {part.arabic.normalize('NFC')}
               </span>
               <div className="flex flex-col gap-2 px-3">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
