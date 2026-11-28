@@ -39,13 +39,19 @@ describe('HomePage', () => {
     expect(screen.getByText('Free 30-min Tajweed trial for you')).toBeInTheDocument();
   });
 
-  it('switches pricing currency', async () => {
+  it('shows prices in the currency of the country picked from the menu', async () => {
     renderHome();
     const user = userEvent.setup();
     await user.click(
-      within(screen.getByRole('group', { name: 'Currency' })).getByRole('button', { name: 'GBP' }),
+      screen.getByRole('button', { expanded: false, name: /Choose your country|United|Pakistan/ }),
     );
-    expect(screen.getByText('£51.99')).toBeInTheDocument();
+    await user.type(
+      screen.getByRole('combobox', { name: 'Search countries or currencies' }),
+      'United Kingdom',
+    );
+    await user.click(screen.getByRole('option', { name: /United Kingdom/ }));
+    expect(screen.getAllByText(/^£\d/).length).toBeGreaterThanOrEqual(4);
+    expect(screen.getByText(/billed as \$49\.99 USD/)).toBeInTheDocument();
   });
 
   it('switches programme tabs', async () => {

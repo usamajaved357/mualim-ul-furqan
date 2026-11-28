@@ -108,7 +108,7 @@ src/
 │   │   └── index.ts        Public API of the feature
 │   ├── stats/  how-it-works/  programmes/  why-us/  classroom/
 │   ├── hadith/  teachers/
-│   ├── pricing/            Plans, currency switch (auto-detects GBP/EUR/USD), per-class maths
+│   ├── pricing/            Plans, country/currency menu (any currency, from the visitor’s country via /api/geo, live rates via /api/rates), per-class maths
 │   ├── reviews/            Track record until real reviews exist; then cards, filters, rating
 │   ├── faq/
 │   └── booking/            /book page: day picker, time slots, details form, live summary, confirmation

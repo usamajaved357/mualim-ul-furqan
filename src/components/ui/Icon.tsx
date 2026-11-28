@@ -107,6 +107,13 @@ const paths = {
   close: <path d="M6 6l12 12M18 6L6 18" />,
   'chevron-left': <path d="M15 5l-7 7 7 7" />,
   'chevron-right': <path d="M9 5l7 7-7 7" />,
+  'chevron-down': <path d="M5 9l7 7 7-7" />,
+  search: (
+    <>
+      <circle cx="11" cy="11" r="7" />
+      <path d="M20 20l-4-4" />
+    </>
+  ),
   mail: (
     <>
       <rect x="3" y="5" width="18" height="14" rx="2" />

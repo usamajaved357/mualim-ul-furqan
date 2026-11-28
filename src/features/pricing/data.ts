@@ -1,5 +1,3 @@
-import type { CurrencyCode } from '@/types/domain';
-
 export interface Plan {
   id: 'starter' | 'regular' | 'intensive' | 'hifz';
   name: string;
@@ -7,27 +5,11 @@ export interface Plan {
   classesPerMonth: number;
   /** Length of each lesson. */
   minutes: number;
-  /** Monthly price in US dollars. Other currencies are converted from it (see exchangeRates). */
+  /** Monthly price in US dollars, the billing currency. Other currencies are a guide, converted at live rates. */
   usd: number;
   perks: string[];
   featured?: boolean;
 }
-
-/**
- * How many units of each currency one US dollar buys: ECB reference rates (frankfurter.dev), 30 October 2026.
- * Update these now and then; every plan price follows automatically.
- */
-export const exchangeRates: Record<CurrencyCode, number> = {
-  USD: 1,
-  GBP: 0.74633,
-  EUR: 0.89509,
-};
-
-export const currencies: { value: CurrencyCode; label: string; symbol: string }[] = [
-  { value: 'USD', label: 'USD', symbol: '$' },
-  { value: 'GBP', label: 'GBP', symbol: '£' },
-  { value: 'EUR', label: 'EUR', symbol: '€' },
-];
 
 export const plans: Plan[] = [
   {

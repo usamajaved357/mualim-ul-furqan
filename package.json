@@ -15,11 +15,13 @@
     "test:watch": "vitest",
     "format:check": "prettier --check .",
     "og:render": "node scripts/og-image/render.mjs",
+    "rates:snapshot": "node scripts/rates/snapshot.mjs",
     "check": "npm run format:check && npm run typecheck && npm run lint && npm run test && npm run build",
     "google:auth": "node scripts/google-auth/get-refresh-token.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "country-to-currency": "^3.0.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-router": "^7.18.4"

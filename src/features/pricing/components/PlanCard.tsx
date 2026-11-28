@@ -1,12 +1,25 @@
 import { ButtonLink, Icon } from '@/components/ui';
 import { anchors } from '@/config/site';
 import { cn } from '@/lib/cn';
-import type { CurrencyCode } from '@/types/domain';
 import type { Plan } from '../data';
-import { formatPrice, planPrice, pricePerClass } from '../lib/pricing';
+import {
+  BASE_CURRENCY,
+  formatPrice,
+  planPrice,
+  priceLength,
+  pricePerClass,
+  type LocalCurrency,
+} from '../lib/pricing';
 
-export function PlanCard({ plan, currency }: { plan: Plan; currency: CurrencyCode }) {
+const priceSize = {
+  short: 'text-[62px] max-sm:text-[52px] md:max-lg:text-[40px]',
+  long: 'text-[52px] max-sm:text-[46px] md:max-lg:text-[34px]',
+  longer: 'text-[40px] max-sm:text-[36px] md:max-lg:text-[27px]',
+};
+
+export function PlanCard({ plan, currency }: { plan: Plan; currency: LocalCurrency }) {
   const featured = Boolean(plan.featured);
+  const price = formatPrice(planPrice(plan, currency), currency.code);
   return (
     <article
       className={cn(
@@ -34,10 +47,8 @@ export function PlanCard({ plan, currency }: { plan: Plan; currency: CurrencyCod
         )}
       </div>
       <div className="relative">
-        <p className="font-display flex items-baseline gap-1.5 leading-none">
-          <span className="text-[62px] font-[500] tracking-[-0.045em] md:max-lg:text-[40px]">
-            {formatPrice(planPrice(plan, currency), currency)}
-          </span>
+        <p className="font-display flex flex-wrap items-baseline gap-x-1.5 gap-y-1 leading-none">
+          <span className={cn('font-[500] tracking-[-0.045em]', priceSize[priceLength(price)])}>{price}</span>
           <span className={cn('text-base font-semibold', featured ? 'text-sage' : 'text-muted')}>
             / month
           </span>
@@ -50,6 +61,11 @@ export function PlanCard({ plan, currency }: { plan: Plan; currency: CurrencyCod
         >
           {plan.classesPerMonth} classes · about {pricePerClass(plan, currency)} each
         </p>
+        {currency.code !== BASE_CURRENCY && (
+          <p className={cn('mt-2 text-[13px] font-semibold', featured ? 'text-sage' : 'text-muted')}>
+            Guide price · billed as {formatPrice(plan.usd, BASE_CURRENCY)} USD
+          </p>
+        )}
       </div>
       <ul className="relative flex flex-col gap-3 text-[15px]">
         {plan.perks.map((perk) => (

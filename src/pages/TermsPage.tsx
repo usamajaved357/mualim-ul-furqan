@@ -82,9 +82,9 @@ const sections: LegalSection[] = [
           before each month starts, and your weekly class times are confirmed once it is paid.
         </li>
         <li>
-          Prices are set in US dollars. The pounds and euros shown on the website are a guide at recent
-          exchange rates; the amount on your Payoneer request is the amount due. Any fees your bank or card
-          provider charges are yours.
+          Prices are set and billed in US dollars. Prices shown in other currencies on the website are a guide
+          at recent exchange rates; the amount on your Payoneer request is the amount due. Any fees your bank
+          or card provider charges are yours.
         </li>
         <li>
           <strong>Sibling discount:</strong> {SIBLING_DISCOUNT} off the plan for the second and each

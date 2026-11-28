@@ -1,10 +1,12 @@
-import { Icon, Reveal, Section, SectionHeading, SegmentedControl, type IconName } from '@/components/ui';
+import { Icon, Reveal, Section, SectionHeading, type IconName } from '@/components/ui';
 import { track } from '@/lib/analytics';
 import { buildWhatsAppLink, whatsappMessages } from '@/lib/whatsapp';
 import { HifzPlanCard } from './components/HifzPlanCard';
 import { PlanCard } from './components/PlanCard';
-import { currencies, hifzPlan, plans, pricingPerks } from './data';
-import { useCurrency } from './hooks/useCurrency';
+import { CurrencyMenu } from './components/CurrencyMenu';
+import { hifzPlan, plans, pricingPerks } from './data';
+import { useLocalCurrency } from './hooks/useLocalCurrency';
+import { BASE_CURRENCY } from './lib/pricing';
 
 /** App-style icon tile with a colour gradient. */
 function PerkIcon({ icon, tint }: { icon: IconName; tint: string }) {
@@ -18,10 +20,10 @@ function PerkIcon({ icon, tint }: { icon: IconName; tint: string }) {
 }
 
 export function PricingSection() {
-  const [currency, setCurrency] = useCurrency();
+  const { country, currency, rates, setCountry, auto } = useLocalCurrency();
   return (
     <Section id="pricing" tone="white" containerClassName="flex flex-col gap-14">
-      <div className="flex flex-col items-center gap-5">
+      <div className="relative z-20 flex flex-col items-center gap-5">
         <SectionHeading
           eyebrow="Pricing"
           title={
@@ -31,13 +33,30 @@ export function PricingSection() {
           }
           description="Lessons are 30 minutes (45 for Hifz), live and one-on-one. You only choose a plan after your free class."
         />
-        <SegmentedControl
-          label="Currency"
-          variant="solid"
-          options={currencies}
-          value={currency}
-          onChange={setCurrency}
-        />
+        <div className="flex flex-col items-center gap-2.5">
+          <CurrencyMenu country={country} currency={currency.code} rates={rates} onSelect={setCountry} />
+          <p
+            className="text-muted max-w-[460px] text-center text-[13px] font-semibold text-balance"
+            aria-live="polite"
+          >
+            {auto && country ? 'Shown for your location. ' : ''}
+            {currency.code === BASE_CURRENCY ? (
+              'Prices in US dollars, billed monthly.'
+            ) : (
+              <>
+                {currency.code} prices are a guide at today&rsquo;s rate; you&rsquo;re billed in US dollars.{' '}
+                <a
+                  href="https://www.exchangerate-api.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted hover:text-brand underline decoration-dotted underline-offset-2"
+                >
+                  Rates by Exchange Rate API
+                </a>
+              </>
+            )}
+          </p>
+        </div>
       </div>
 
       <ul className="grid items-stretch gap-4 md:grid-cols-3 lg:gap-5">

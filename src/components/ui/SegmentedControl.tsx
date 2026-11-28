@@ -30,7 +30,7 @@ const styles = {
   /** Track with a solid selected state. */
   solid: {
     group: 'glass inline-flex gap-1 rounded-full p-1',
-    item: 'min-h-10 rounded-full px-5 text-[15px]',
+    item: 'min-h-10 rounded-full px-3.5 text-[14px] sm:px-5 sm:text-[15px]',
     on: 'bg-[linear-gradient(180deg,#14916c,#0a6a4f)] text-white font-bold shadow-[inset_0_1px_0_rgb(255_255_255/0.28),0_8px_18px_-10px_rgb(12_122_91/0.9)]',
     off: 'text-ink font-semibold hover:bg-white/70',
   },

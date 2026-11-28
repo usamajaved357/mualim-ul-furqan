@@ -18,6 +18,17 @@ export interface Context {
   env: Env;
 }
 
+/**
+ * GET /api/geo → { country: "GB" }: the visitor's country from Cloudflare's IP lookup, so prices open in their
+ * currency. Never cached, since the answer differs per visitor. null when unknown (local dev, Tor, …).
+ */
+export function handleGeo({ request }: Context): Response {
+  const cf = (request as Request & { cf?: { country?: string } }).cf;
+  const raw = (cf?.country ?? request.headers.get('CF-IPCountry') ?? '').toUpperCase();
+  const known = /^[A-Z]{2}$/.test(raw) && raw !== 'XX' && raw !== 'T1';
+  return json({ country: known ? raw : null });
+}
+
 /** GET /api/availability?from=ISO&to=ISO → open slots in that range. */
 export async function handleAvailability({ request, env }: Context): Promise<Response> {
   const url = new URL(request.url);
