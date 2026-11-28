@@ -5,12 +5,12 @@
  */
 export const openingHours = {
   timeZone: 'Asia/Karachi',
-  /** Where the teacher's clock is, as in "9 AM – 9 PM Pakistan time". */
+  /** Where the teacher's clock is, as in "7 AM – 11 PM Pakistan time". */
   place: 'Pakistan',
   /** Monday to Friday. */
-  weekdays: ['09:00', '21:00'],
+  weekdays: ['07:00', '23:00'],
   /** Saturday and Sunday. */
-  weekends: ['09:00', '21:00'],
+  weekends: ['07:00', '23:00'],
 } as const satisfies {
   timeZone: string;
   place: string;

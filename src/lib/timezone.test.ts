@@ -73,11 +73,11 @@ describe('timezone', () => {
       { days: 'Mon–Fri', time: '4 – 9 PM' },
       { days: 'Sat–Sun', time: '10 AM – 6 PM' },
     ]);
-    expect(describeHours(openingHours, 'Asia/Karachi', winter)).toBe('every day, 9 AM – 9 PM');
+    expect(describeHours(openingHours, 'Asia/Karachi', winter)).toBe('every day, 7 AM – 11 PM');
     expect(hoursList(openingHours, 'Europe/London', winter)).toEqual([
-      { days: 'Every day', time: '4 AM – 4 PM' },
+      { days: 'Every day', time: '2 AM – 6 PM' },
     ]);
-    expect(describeHours(openingHours, 'Europe/London', summer)).toBe('every day, 5 AM – 5 PM');
+    expect(describeHours(openingHours, 'Europe/London', summer)).toBe('every day, 3 AM – 7 PM');
   });
 
   it('knows when two zones share a clock', () => {

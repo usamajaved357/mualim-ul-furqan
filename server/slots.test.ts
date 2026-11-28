@@ -61,13 +61,13 @@ describe('availableSlots', () => {
     expect(availableSlots(schedule, { ...day('2026-03-01'), now })).toEqual([]);
   });
 
-  it('offers the live hours: 9 AM to 9 PM Pakistan time, every day', () => {
-    // Pakistan is GMT+5 all year: 09:00–21:00 → 04:00–16:00 UTC, 24 slots.
+  it('offers the live hours: 7 AM to 11 PM Pakistan time, every day', () => {
+    // Pakistan is GMT+5 all year: 07:00–23:00 → 02:00–18:00 UTC, 32 slots.
     for (const date of ['2026-01-15', '2026-01-17']) {
       const slots = availableSlots(liveSchedule, { ...day(date), now });
-      expect(slots).toHaveLength(24);
-      expect(slots[0]!.start.toISOString()).toBe(`${date}T04:00:00.000Z`);
-      expect(slots.at(-1)!.end.toISOString()).toBe(`${date}T16:00:00.000Z`);
+      expect(slots).toHaveLength(32);
+      expect(slots[0]!.start.toISOString()).toBe(`${date}T02:00:00.000Z`);
+      expect(slots.at(-1)!.end.toISOString()).toBe(`${date}T18:00:00.000Z`);
     }
   });
 });
