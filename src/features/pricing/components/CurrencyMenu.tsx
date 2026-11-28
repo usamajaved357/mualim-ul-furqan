@@ -175,7 +175,8 @@ export function CurrencyMenu({
         {current ? <Flag code={current.code} /> : <Icon name="globe" size={18} className="text-brand" />}
         <span className="font-bold">{current?.name ?? 'Choose your country'}</span>
         <span className="bg-mint text-brand rounded-full px-2.5 py-0.5 text-[13px] font-bold">
-          {currency} {current && current.currency === currency ? current.symbol : ''}
+          {currency}
+          {current?.currency === currency && current.symbol !== currency ? ` ${current.symbol}` : ''}
         </span>
         <Icon
           name="chevron-down"
